@@ -1,0 +1,16 @@
+
+
+@import "./customTheme";
+@import "~bootstrap/scss/bootstrap";
+
+#userPage{
+  height: 100vh;
+  padding-top: 55px;
+}
+
+@include media-breakpoint-down(xs) {
+  #userPage{
+    height: auto;
+    border-bottom: 1px solid lightgrey;
+  }
+}

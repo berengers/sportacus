@@ -1,0 +1,10 @@
+
+
+@import "./customTheme";
+@import "~bootstrap/scss/bootstrap";
+
+#navbar{
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+}

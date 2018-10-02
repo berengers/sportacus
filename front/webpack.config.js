@@ -1,11 +1,17 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
-  template: "./src/index.html",
+  template: "./src/html/index.html",
   filename: "./index.html"
 });
 
 module.exports = {
+  devServer: {
+    historyApiFallback: true
+  },
+  entry: {
+    main: './src/js/index.js'
+  },
   module: {
     rules: [
       {
@@ -14,6 +20,27 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.(scss)$/,
+        use: [{
+          loader: 'style-loader', // inject CSS to page
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS modules
+        }, {
+          loader: 'postcss-loader', // Run post css actions
+          options: {
+            plugins: function () { // post css plugins, can be exported to postcss.config.js
+              return [
+                require('precss'),
+                require('autoprefixer')
+              ];
+            }
+          }
+        },
+        {
+          loader: 'sass-loader' // compiles Sass to CSS
+        }]
       },
       {
         test: /\.css$/,
