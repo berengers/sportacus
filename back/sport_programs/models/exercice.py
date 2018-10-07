@@ -1,7 +1,6 @@
 from sport_programs import db, ma
 from datetime import datetime
 
-
 class Exercice(db.Model):
     __tablename__ = 'exercice'
 

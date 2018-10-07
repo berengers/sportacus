@@ -8,13 +8,13 @@ from sport_programs.models import *
 
 users = [
     User(
-        mail = 'roberto@gmail.com',
-        username = 'roberto',
+        mail = 'robert@gmail.com',
+        username = 'robert',
         password = 'robert_pass'
     ),
     User(
-        mail = 'tomo@gmail.com',
-        username = 'tomo',
+        mail = 'tom@gmail.com',
+        username = 'tom',
         password = 'tom_pass'
     )
 ]
@@ -172,13 +172,20 @@ class FixturesCommand(Command):
 
             for user in users:
                 for exercice in exercices:
-                    user.exercices_relation.append(exercice)
+                    user.exercice_relation.append(exercice)
                     db.session.add(user)
 
             db.session.commit()
 
             for program in programs:
                 db.session.add(program)
+
+            db.session.commit()
+
+            for user in users:
+                for program in programs:
+                    user.program_relation.append(program)
+                    db.session.add(user)
 
             db.session.commit()
 
