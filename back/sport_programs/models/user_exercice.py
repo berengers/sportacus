@@ -1,7 +1,16 @@
-from sport_programs import db
+from sport_programs import db, ma
 
 
-user_exercice_join = db.Table('user_exercice',
-    db.Column('exercice_id', db.Integer, db.ForeignKey('exercice.id'), primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
-)
+class UserExercice(db.Model):
+    __tablename__ = 'user_exercice'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    exercice_id = db.Column(db.Integer, db.ForeignKey('exercice.id'), nullable=False)
+
+class UserExerciceSchema(ma.ModelSchema):
+    class Meta:
+        model = UserExercice
+
+userExercice_schema = UserExerciceSchema()
+userExercices_schema = UserExerciceSchema(many=True)

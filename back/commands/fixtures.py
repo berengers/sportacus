@@ -8,6 +8,11 @@ from sport_programs.models import *
 
 users = [
     User(
+        mail = 'public@gmail.com',
+        username = 'public',
+        password = 'public_pass'
+    ),
+    User(
         mail = 'robert@gmail.com',
         username = 'robert',
         password = 'robert_pass'
@@ -27,6 +32,25 @@ programs = [
     Program(
         name = 'Jambes',
         visibility = 'PUBLIC'
+    ),
+    Program(
+        name = 'Biceps - Dos',
+        visibility = 'PRIVATE'
+    )
+]
+
+user_programs = [
+    UserProgram(
+        user_id = 1,
+        program_id = 1
+    ),
+    UserProgram(
+        user_id = 1,
+        program_id = 2
+    ),
+    UserProgram(
+        user_id = 2,
+        program_id = 3
     )
 ]
 
@@ -37,8 +61,7 @@ exercices = [
     ),
     Exercice(
         name = 'Ecarte incline avec halteres',
-        image = 'https://julienquaglierini.com/wp-content/uploads/2017/07/exercise-296-1-300x400.png',
-        visibility = 'PUBLIC',
+        image = 'https://julienquaglierini.com/wp-content/uploads/2017/07/exercise-296-1-300x400.png'
     ),
     Exercice(
         name = 'dips pour pecs',
@@ -69,6 +92,41 @@ exercices = [
         name = 'Fentes avant halteres unilaterale',
         image = '',
         visibility = 'PUBLIC',
+    )
+]
+
+user_exercices = [
+    UserExercice(
+        user_id = 2,
+        exercice_id = 1
+    ),
+    UserExercice(
+        user_id = 2,
+        exercice_id = 2
+    ),
+    UserExercice(
+        user_id = 1,
+        exercice_id = 3
+    ),
+    UserExercice(
+        user_id = 1,
+        exercice_id = 4
+    ),
+    UserExercice(
+        user_id = 1,
+        exercice_id = 5
+    ),
+    UserExercice(
+        user_id = 1,
+        exercice_id = 6
+    ),
+    UserExercice(
+        user_id = 1,
+        exercice_id = 7
+    ),
+    UserExercice(
+        user_id = 1,
+        exercice_id = 8
     )
 ]
 
@@ -162,35 +220,24 @@ class FixturesCommand(Command):
 
             for user in users:
                 db.session.add(user)
-
-            db.session.commit()
-
-            for exercice in exercices:
-                db.session.add(exercice)
-
-            db.session.commit()
-
-            for user in users:
-                for exercice in exercices:
-                    user.exercice_relation.append(exercice)
-                    db.session.add(user)
-
             db.session.commit()
 
             for program in programs:
                 db.session.add(program)
-
             db.session.commit()
 
-            for user in users:
-                for program in programs:
-                    user.program_relation.append(program)
-                    db.session.add(user)
-
+            for user_program in user_programs:
+                db.session.add(user_program)
             db.session.commit()
 
+            for exercice in exercices:
+                db.session.add(exercice)
+            db.session.commit()
+
+            for user_exercice in user_exercices:
+                db.session.add(user_exercice)
+            db.session.commit()
 
             for program_step in program_steps:
                 db.session.add(program_step)
-
             db.session.commit()

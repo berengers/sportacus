@@ -4,8 +4,8 @@ class ProgramStep(db.Model):
     __tablename__ = 'program_step'
 
     id = db.Column(db.Integer, primary_key=True)
-    program_id = db.Column(db.Integer, nullable=False)
-    exercice_id = db.Column(db.Integer, nullable=False)
+    program_id = db.Column(db.Integer, db.ForeignKey('program.id'), nullable=False)
+    exercice_id = db.Column(db.Integer, db.ForeignKey('exercice.id'), nullable=False)
     series = db.Column(db.Integer, nullable=False)
     repetitions = db.Column(db.Integer, nullable=False)
     weight = db.Column(db.Integer, nullable=False)
