@@ -11,6 +11,7 @@ class UserProgram(db.Model):
 class UserProgramSchema(ma.ModelSchema):
     class Meta:
         model = UserProgram
+        fields = ('user_id', 'program_id', 'id')
 
 userProgram_schema = UserProgramSchema()
 userPrograms_schema = UserProgramSchema(many=True)

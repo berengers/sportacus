@@ -11,6 +11,7 @@ class UserExercice(db.Model):
 class UserExerciceSchema(ma.ModelSchema):
     class Meta:
         model = UserExercice
+        fields = ('exercice_id',)
 
 userExercice_schema = UserExerciceSchema()
 userExercices_schema = UserExerciceSchema(many=True)
