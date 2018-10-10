@@ -1,14 +1,6 @@
 import { combineReducers } from 'redux'
-
-function firstReducer(state='ddd', action) {
-  switch (action.type) {
-
-    default:
-      return state
-  }
-}
-
+import { programs } from './program'
 
 export default combineReducers({
-  firstReducer
+  programs
 })

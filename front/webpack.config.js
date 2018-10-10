@@ -7,7 +7,16 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 
 module.exports = {
   devServer: {
-    historyApiFallback: true
+        watchOptions: {
+            poll: true
+        }
+  },
+  devtool : 'source-map',
+  stats : {
+    errorDetails : true
+  },
+  performance: {
+    hints: false
   },
   entry: {
     main: './src/js/index.js'
