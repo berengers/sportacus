@@ -1,17 +1,13 @@
 from sport_programs import db, ma
 
+from .user import *
+from .program import *
 
 class UserProgram(db.Model):
     __tablename__ = 'user_program'
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    program_id = db.Column(db.Integer, db.ForeignKey('program.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    program_id = db.Column(db.Integer, db.ForeignKey('program.id'), primary_key=True)
 
-class UserProgramSchema(ma.ModelSchema):
-    class Meta:
-        model = UserProgram
-        fields = ('user_id', 'program_id', 'id')
-
-userProgram_schema = UserProgramSchema()
-userPrograms_schema = UserProgramSchema(many=True)
+    program = db.relationship("Program", backref='program_associations')
+    user = db.relationship("User", backref='user_associations')

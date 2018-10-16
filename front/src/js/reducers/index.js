@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux'
-import { programs } from './program'
+
+import { selectedProgram, programs } from './program'
+import { program_steps } from './program_step'
+import { exercices } from './exercice'
 
 export default combineReducers({
-  programs
+  selectedProgram,
+  programs,
+  program_steps,
+  exercices
 })

@@ -1,30 +1,53 @@
 import React from 'react'
-// import bstyle from 'bootstrap/dist/css/bootstrap.css'
-// console.log ("bstyle ---> ", bstyle)
+import { connect } from 'react-redux'
+
 import '../../css/login.scss'
+import { fetchToken } from '../actions/login'
 
 
-export default class Login extends React.Component{
+class Login extends React.Component{
+  constructor(props){
+    super(props)
+
+    this.state = { email : '', password : '' }
+    this.handleClick = this.handleClick.bind(this)
+  }
+  changeInput(e){
+    this.setState({ [e.target.name] : e.target.value })
+  }
+  handleClick(){
+    const { email, password } = this.state
+    console.log ("email, password ---> ", email, password)
+    this.props.login(email, password)
+  }
   render(){
     return (
       <div className='mx-auto' id='login'>
         <div className='container-fluid mt-5'>
-          <form className='border rounded bg-light p-3'>
+          <div className='border rounded bg-light p-3'>
             <div className='form-group'>
               <label>Email Adress</label>
-              <input type='email' className='form-control' placeholder='email'/>
+              <input onChange={this.changeInput.bind(this)} name='email' type='email' className='form-control' placeholder='email'/>
               <div className='valid-feedback'>
                 Looks good
               </div>
             </div>
             <div className='form-group'>
               <label>Password</label>
-              <input type='password' className='form-control' placeholder='password' />
+              <input onChange={this.changeInput.bind(this)} name='password' className='form-control' placeholder='password' />
             </div>
-            <button type='submit' className='btn btn-info'>Submit</button>
-          </form>
+            <button onClick={this.handleClick.bind(this)} className='btn btn-info'>Submit</button>
+          </div>
         </div>
       </div>
     )
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login : (username, password) => {dispatch(fetchToken(username, password))}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login)

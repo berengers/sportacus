@@ -3,17 +3,22 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import '../../css/navbar.scss'
+import { logout } from '../actions/login'
 
 class NavBar extends React.Component{
   constructor(props){
     super(props)
+  }
+  logOut(){
+    console.log ("3 ---> ", 3)
+    this.props.logout()
   }
   render(){
     const { pathname } = this.props
 
     return (
       <nav className='navbar navbar-expand-sm navbar-dark bg-dark' id='navbar'>
-        <a className='navbar-brand' href='#'>SportPrograms</a>
+        <a className='navbar-brand text-info' href='#'>SportPrograms</a>
         <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navBarSupportedContent'>
           <span className='navbar-toggler-icon'></span>
         </button>
@@ -27,7 +32,7 @@ class NavBar extends React.Component{
               <Link className='nav-link' to='/program_editor'>Program Editor</Link>
             </li>
           </ul>
-          <Link className='btn btn-info mr-3' to='/logout'>Logout</Link>
+          <div onClick={this.logOut.bind(this)} className='btn btn-info mr-3'>Logout</div>
         </div>
       </nav>
     )
@@ -40,4 +45,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(NavBar)
+const mapDispatchToProps = dispatch => {
+  return  {
+    logout : () => {dispatch(logout())}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

@@ -50,6 +50,81 @@ class DB{
     .then(this._status)
     .then(this._json)
   }
+  fetchCreateProgram(name, visibility){
+    return fetch(
+      this.url + '/programs',
+      {
+        method: 'POST',
+        headers: this._headers(),
+        body: JSON.stringify({ 'name': name, 'visibility': visibility })
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchProgramSteps(program_id){
+    return fetch(
+      this.url + '/program_steps/' + program_id,
+      {
+        method: 'GET',
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchToken(email, password){
+    return fetch(
+      this.url + '/login',
+      {
+        method: 'POST',
+        headers: this._headers(),
+        body: JSON.stringify({
+          'email': email,
+          'password': password
+        })
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  logout(){
+    return fetch(
+      this.url + '/logout',
+      {
+        method: 'DELETE',
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+  }
+  fetchExercices(){
+    return fetch(
+      this.url + '/exercices',
+      {
+        method: 'GET',
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchCreateExercice(name, image, visibility){
+    return fetch(
+      this.url + '/exercices',
+      {
+        method: 'POST',
+        headers: this._headers(),
+        body: JSON.stringify({
+          'name': name,
+          'image': image,
+          'visibility': visibility
+        })
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
 }
 
 export const db = new DB()

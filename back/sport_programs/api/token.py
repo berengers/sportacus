@@ -10,7 +10,7 @@ def auth(fn):
         t = Token.query.filter(Token.token == t_string).first()
 
         if not t:
-            return 'Bad Authenticate - Maybe wrong token', 401
+            return jsonify({"error":'Bad Authenticate - Maybe wrong token'}), 401
 
         g.user = t.user
         return fn(**kwargs)
@@ -22,10 +22,10 @@ def auth(fn):
 @app.route("/login", methods=["POST"])
 def log_user():
     datas = request.json
-    user = User.query.filter_by(username = datas['username']).first()
+    user = User.query.filter_by(email = datas['email']).first()
 
     if not user:
-        return 'User dont exist', 401
+        return 'Email dont exist', 401
 
     if user.password != datas['password']:
         return 'Wrong password', 401

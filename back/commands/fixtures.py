@@ -6,19 +6,26 @@ from sport_programs.models import *
 # db.reflect()
 # db.drop_all()
 
+tokens = [
+    Token(
+        user_id = 1,
+        token = 123456789
+    )
+]
+
 users = [
     User(
-        mail = 'public@gmail.com',
+        email = 'public@gmail.com',
         username = 'public',
         password = 'public_pass'
     ),
     User(
-        mail = 'robert@gmail.com',
+        email = 'robert@gmail.com',
         username = 'robert',
         password = 'robert_pass'
     ),
     User(
-        mail = 'tom@gmail.com',
+        email = 'tom@gmail.com',
         username = 'tom',
         password = 'tom_pass'
     )
@@ -210,6 +217,36 @@ program_steps = [
         rest_duration_between_series = 60,
         rest_end_duration = 120,
         position = 3
+    ),
+    ProgramStep(
+        program_id = 3,
+        exercice_id = 5,
+        series = 4,
+        repetitions = 9,
+        weight = 0,
+        rest_duration_between_series = 60,
+        rest_end_duration = 120,
+        position = 3
+    ),
+    ProgramStep(
+        program_id = 3,
+        exercice_id = 6,
+        series = 3,
+        repetitions = 20,
+        weight = 0,
+        rest_duration_between_series = 30,
+        rest_end_duration = 60,
+        position = 2
+    ),
+    ProgramStep(
+        program_id = 3,
+        exercice_id = 7,
+        series = 4,
+        repetitions = 11,
+        weight = 16,
+        rest_duration_between_series = 45,
+        rest_end_duration = 90,
+        position = 1
     )
 ]
 
@@ -221,6 +258,10 @@ class FixturesCommand(Command):
             for user in users:
                 db.session.add(user)
             db.session.commit()
+
+            for token in tokens:
+                db.session.add(token)
+                db.session.commit()
 
             for program in programs:
                 db.session.add(program)
