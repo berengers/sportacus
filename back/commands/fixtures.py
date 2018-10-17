@@ -220,7 +220,7 @@ program_steps = [
     ),
     ProgramStep(
         program_id = 3,
-        exercice_id = 5,
+        exercice_id = 1,
         series = 4,
         repetitions = 9,
         weight = 0,
@@ -230,7 +230,7 @@ program_steps = [
     ),
     ProgramStep(
         program_id = 3,
-        exercice_id = 6,
+        exercice_id = 2,
         series = 3,
         repetitions = 20,
         weight = 0,
@@ -240,7 +240,7 @@ program_steps = [
     ),
     ProgramStep(
         program_id = 3,
-        exercice_id = 7,
+        exercice_id = 1,
         series = 4,
         repetitions = 11,
         weight = 16,

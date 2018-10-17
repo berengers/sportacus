@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 1cb1a14639cd
+Revision ID: eff976def0e1
 Revises: 
-Create Date: 2018-10-15 12:34:18.540935
+Create Date: 2018-10-17 17:39:29.248604
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1cb1a14639cd'
+revision = 'eff976def0e1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,8 +37,8 @@ def upgrade():
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('email', sa.Text(), nullable=False),
-    sa.Column('username', sa.Text(), nullable=False),
+    sa.Column('email', sa.String(length=120), nullable=False),
+    sa.Column('username', sa.String(length=80), nullable=False),
     sa.Column('password', sa.Text(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
@@ -68,18 +68,17 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user_exercice',
-    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('exercice_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['exercice_id'], ['exercice.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.ForeignKeyConstraint(['exercice_id'], ['exercice.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('user_id', 'exercice_id')
     )
     op.create_table('user_program',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('program_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['program_id'], ['program.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['program_id'], ['program.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('user_id', 'program_id')
     )
     # ### end Alembic commands ###

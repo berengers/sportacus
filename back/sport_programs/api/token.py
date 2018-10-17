@@ -25,7 +25,7 @@ def log_user():
     user = User.query.filter_by(email = datas['email']).first()
 
     if not user:
-        return 'Email dont exist', 401
+        return "Email don't exist", 401
 
     if user.password != datas['password']:
         return 'Wrong password', 401
