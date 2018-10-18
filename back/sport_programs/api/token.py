@@ -3,6 +3,7 @@ import uuid
 
 from sport_programs import app, db
 from sport_programs.models import *
+from .tools import error
 
 def auth(fn):
     def f(**kwargs):
@@ -10,7 +11,7 @@ def auth(fn):
         t = Token.query.filter(Token.token == t_string).first()
 
         if not t:
-            return jsonify({"error":'Bad Authenticate - Maybe wrong token'}), 401
+            return error('Bad Authenticate - Maybe wrong token'), 401
 
         g.user = t.user
         return fn(**kwargs)
@@ -24,11 +25,8 @@ def log_user():
     datas = request.json
     user = User.query.filter_by(email = datas['email']).first()
 
-    if not user:
-        return "Email don't exist", 401
-
-    if user.password != datas['password']:
-        return 'Wrong password', 401
+    if not user or user.password != datas['password']:
+        return error("Email don't exist or wrong password"), 401
 
     newToken = uuid.uuid4()
 
@@ -39,6 +37,7 @@ def log_user():
 
     db.session.add(token)
     db.session.commit()
+
     return jsonify(newToken)
 
 
@@ -48,4 +47,4 @@ def logout_user():
     token = Token.query.filter(Token.user_id == g.user.id).first()
     db.session.delete(token)
     db.session.commit()
-    return 'Token deleted'
+    return ''

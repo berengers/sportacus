@@ -4,18 +4,19 @@ from datetime import datetime
 from .token import auth
 from sport_programs import app, db
 from sport_programs.models import *
-from sport_programs.schemas import program_schema, programs_schema
+from sport_programs.schemas import program_schema, programs_schema, simple_programs_schema, simple_program_schema
 
 @app.route("/programs", methods=["GET"])
 @auth
 def list_programs():
     programs = Program.query\
         .join(UserProgram, Program.id == UserProgram.program_id)\
-        .filter((UserProgram.user_id == g.user.id) | (Program.visibility == 'PUBLIC'))
+        .filter((UserProgram.user_id == g.user.id) | (Program.visibility == 'PUBLIC'))\
+        .order_by(Program.created_at)
 
-    return programs_schema.jsonify(programs)
+    return simple_programs_schema.jsonify(programs)
 
-@app.route("/programs", methods=['POST'])
+@app.route("/programs", methods=["POST"])
 @auth
 def new_program():
     res = program_schema.load(request.json, session=db.session)
@@ -24,12 +25,12 @@ def new_program():
         return jsonify(res.errors)
 
     user = User.query.filter_by(id = g.user.id).first()
-    user.programs.append(res)
+    user.programs.append(res.data)
 
-    db.session.add(res)
+    db.session.add(res.data)
     db.session.commit()
 
-    return program_schema.jsonify(program)
+    return program_schema.jsonify(res.data)
 
 @app.route("/programs/<id>", methods=["DELETE"])
 @auth

@@ -1,6 +1,6 @@
 from sport_programs import db, ma
 from datetime import datetime
-from marshmallow import fields
+from marshmallow import fields, Schema
 
 from sport_programs.models import User
 
@@ -18,3 +18,9 @@ class ValidateUserSchema(ma.ModelSchema):
     email = fields.Email()
 
 validate_user_schema = ValidateUserSchema()
+
+class UserUpdate(Schema):
+    password = fields.Str(required=True)
+    new_password = fields.Str(required=True)
+
+user_update_schema = UserUpdate()

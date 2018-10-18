@@ -5,7 +5,7 @@ from datetime import datetime
 from .token import auth
 from sport_programs import app, db
 from sport_programs.models import Exercice, User, UserExercice
-from sport_programs.schemas import exercice_schema, newExercice_schema, exercices_schema
+from sport_programs.schemas import exercice_schema, newExercice_schema, exercices_schema, simple_exercice_schema, simple_exercices_schema
 
 @app.route("/exercices", methods=["GET"])
 @auth
@@ -15,7 +15,7 @@ def list_exercices():
         .filter((UserExercice.user_id == g.user.id) | (Exercice.visibility == 'PUBLIC'))\
         .order_by(Exercice.created_at)
 
-    return exercices_schema.jsonify(exercices)
+    return simple_exercices_schema.jsonify(exercices)
 
 @app.route("/exercices", methods=["POST"])
 @auth
@@ -42,7 +42,7 @@ def create_exercice():
     db.session.add(exercice)
     db.session.commit()
 
-    return exercice_schema.jsonify(req.data)
+    return simple_exercice_schema.jsonify(req.data)
 
 
 @app.route("/exercices/<id>", methods=["DELETE"])
@@ -99,4 +99,4 @@ def update_exercice(id):
     db.session.add(exercice)
     db.session.commit()
 
-    return exercice_schema.jsonify(exercice)
+    return simple_exercice_schema.jsonify(exercice)
