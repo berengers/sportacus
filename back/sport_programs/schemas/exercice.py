@@ -1,4 +1,4 @@
-from sport_programs import db, ma
+from sport_programs import ma
 from datetime import datetime
 from marshmallow import Schema, fields
 

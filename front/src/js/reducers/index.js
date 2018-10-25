@@ -1,12 +1,4 @@
-import { combineReducers } from 'redux'
-
-import { selectedProgram, programs } from './program'
-import { program_steps } from './program_step'
-import { exercices } from './exercice'
-
-export default combineReducers({
-  selectedProgram,
-  programs,
-  program_steps,
-  exercices
-})
+// export { default as page } from './page'
+// export { default as userId } from './userId'
+export { selectedProgram, programs } from './program'
+export { program_steps } from './program_step'

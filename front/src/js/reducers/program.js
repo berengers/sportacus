@@ -4,7 +4,7 @@ export function selectedProgram(state='', action){
   switch (action.type) {
     case SELECT_PROGRAM:
       console.log ("action ---> ", action)
-      return action.program_id
+      return action.payload.program_id
     default:
       return state
   }

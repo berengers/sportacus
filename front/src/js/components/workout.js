@@ -11,7 +11,6 @@ class Workout extends React.Component{
   constructor(props){
     super(props)
 
-    this.props.loadPrograms()
     this.state = { sidebar : 'programs' }
   }
   handleClick(program_id, e){
@@ -88,7 +87,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadPrograms : () => {dispatch(fetchPrograms())},
     loadProgramSteps : (program_id) => {dispatch(fetchProgramSteps(program_id))}
   }
 }

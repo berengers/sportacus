@@ -1,17 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'redux-first-router-link'
 import { connect } from 'react-redux'
 
 import '../../css/navbar.scss'
 import { logout } from '../actions/login'
 
-class NavBar extends React.Component{
+export default class NavBar extends React.Component{
   constructor(props){
     super(props)
-  }
-  logOut(){
-    console.log ("3 ---> ", 3)
-    this.props.logout()
   }
   render(){
     const { pathname } = this.props
@@ -29,26 +25,26 @@ class NavBar extends React.Component{
               <Link className='nav-link' to='/workout'>Workout</Link>
             </li>
             <li className={'nav-item' + ' ' + (pathname=='/program_editor'?'active':'')}>
-              <Link className='nav-link' to='/program_editor'>Program Editor</Link>
+              <Link className='nav-link' to='/workout'>Program Editor</Link>
             </li>
           </ul>
-          <div onClick={this.logOut.bind(this)} className='btn btn-info mr-3'>Logout</div>
+          <Link to='/login' className='btn btn-info mr-3'>Logout</Link>
         </div>
       </nav>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    pathname : state.router.location.pathname
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return  {
-    logout : () => {dispatch(logout())}
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+// const mapStateToProps = (state) => {
+//   return {
+//     pathname : state.location.pathname
+//   }
+// }
+//
+// const mapDispatchToProps = dispatch => {
+//   return  {
+//     logout : () => {dispatch(logout())}
+//   }
+// }
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

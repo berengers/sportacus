@@ -80,6 +80,7 @@ class ProgramEditor extends React.Component{
           }
 
           {screen == 'programs' &&
+            console.table(program_steps),
             <div>
               <div className='btn btn-info mr-auto my-3 ml-3' onClick={this.changeScreen.bind(this, 'programs_list')}>back to programs</div>
               {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Link from 'redux-first-router-link'
 
 import '../../css/login.scss'
 import { fetchToken } from '../actions/login'
@@ -17,7 +18,6 @@ class Login extends React.Component{
   }
   handleClick(){
     const { email, password } = this.state
-    console.log ("email, password ---> ", email, password)
     this.props.login(email, password)
   }
   render(){
@@ -36,7 +36,7 @@ class Login extends React.Component{
               <label>Password</label>
               <input onChange={this.changeInput.bind(this)} name='password' className='form-control' placeholder='password' />
             </div>
-            <button onClick={this.handleClick.bind(this)} className='btn btn-info'>Submit</button>
+            <Link to='/login' onClick={this.handleClick.bind(this)} className='btn btn-info'>Submit</Link>
           </div>
         </div>
       </div>
