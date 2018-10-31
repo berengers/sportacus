@@ -1,4 +1,4 @@
-from .exercice import *
+from .exercise import *
 from .program_step import *
 from .program import *
 from .token import *

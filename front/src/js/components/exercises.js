@@ -3,24 +3,24 @@ import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 
 import '../../css/app.scss'
-import Program from './program'
-import ProgramList from './programList'
+import ExerciseList from './exerciseList'
+import Exercise from './exercise'
 
-class Workout extends React.Component{
+class Exercises extends React.Component{
   constructor(props){
     super(props)
 
     this.scenes = {
-      'WORKOUT': <ProgramList />,
-      'PROGRAM': <Program />
+      'EXERCISES':    <ExerciseList />,
+      'EXERCISE':     <Exercise mode="edit"/>,
+      'NEW_EXERCISE': <Exercise mode="add"/>
     }
   }
   render(){
     const { location } = this.props
-    console.log ("this.scenes[location.type] ---> ", this.scenes[location.type])
 
     return(
-      <div className='row no-gutters p-3' id="workout">
+      <div className='row no-gutters p-3 col-md-10 col-xl-8 mx-auto' id="workout">
         {
           this.scenes[location.type]
         }
@@ -31,9 +31,8 @@ class Workout extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    programs : state.programs,
     location: state.location
   }
 }
 
-export default connect(mapStateToProps)(Workout)
+export default connect(mapStateToProps)(Exercises)

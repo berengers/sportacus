@@ -3,23 +3,23 @@ import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
 import NavBar from './navbar'
-import UserPage from './userPage'
 import Login from './login'
 import Workout from './workout'
-import Home from './home'
+import Exercises from './exercises'
 
 class App extends React.Component{
   constructor(props){
     super(props)
 
     this.pages = {
-      HOME:     <Home />,
-      LOGIN:    <Login />,
-      WORKOUT:  <Workout />
+      'Login':      <Login />,
+      'Workout':    <Workout />,
+      'Exercises':  <Exercises />,
+      'Not-Found':  <h2 className='mx-auto mt-5 p-3 bg-warning text-center'>Sorry, this page dont exist</h2>
     }
   }
   render(){
-    let { location, page } = this.props
+    const { location, page } = this.props
 
     return (
       <React.Fragment>
@@ -27,7 +27,7 @@ class App extends React.Component{
           <NavBar />
         }
         {
-          this.pages[location.type]
+          this.pages[page]
         }
       </React.Fragment>
     )

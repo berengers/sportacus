@@ -3,7 +3,7 @@ from sqlalchemy import desc
 
 from .token import auth
 from sport_programs import app, db
-from sport_programs.models import ProgramStep, UserProgram, UserExercice
+from sport_programs.models import ProgramStep, UserProgram, UserExercise
 from sport_programs.schemas import program_steps_schema, program_step_schema, program_step_user_schema, simple_program_steps_schema, simple_program_step_schema
 from tools import error
 
@@ -29,17 +29,17 @@ def add_program_step(id):
         return jsonify(req.errors)
 
     userP = UserProgram.query.filter_by(program_id = id).first()
-    userE = UserExercice.query.filter_by(exercice_id = req.data.exercice_id).first()
+    userE = UserExercise.query.filter_by(exercise_id = req.data.exercise_id).first()
 
     if not userP or not userE:
-        return error("Program_id or/and exercice_id are wrong"), 404
+        return error("Program_id or/and exercise_id are wrong"), 404
 
     if userP.user_id != g.user.id or userE.user_id != g.user.id:
         return error("You don't have permission to do that"), 403
 
     step = ProgramStep(
         program_id = id,
-        exercice_id = req.data.exercice_id,
+        exercise_id = req.data.exercise_id,
         position = req.data.position
     )
 

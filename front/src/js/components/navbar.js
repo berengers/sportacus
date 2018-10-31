@@ -1,8 +1,7 @@
 import React from 'react'
-import Link from 'redux-first-router-link'
+import Link, { NavLink } from 'redux-first-router-link'
 import { connect } from 'react-redux'
 
-import '../../css/navbar.scss'
 import { logout } from '../actions/login'
 
 export default class NavBar extends React.Component{
@@ -13,7 +12,7 @@ export default class NavBar extends React.Component{
     const { pathname } = this.props
 
     return (
-      <nav className='navbar navbar-expand-sm navbar-dark bg-dark' id='navbar'>
+      <nav className='navbar navbar-expand-sm navbar-dark bg-dark'>
         <a className='navbar-brand text-info' href='#'>SportPrograms</a>
         <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navBarSupportedContent'>
           <span className='navbar-toggler-icon'></span>
@@ -21,30 +20,16 @@ export default class NavBar extends React.Component{
 
         <div className='collapse navbar-collapse' id='navBarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
-            <li className={'nav-item' + ' ' + (pathname=='/workout'|| pathname=='/'?'active':'')}>
-              <Link className='nav-link' to='/workout'>Workout</Link>
+            <li className={'nav-item' + ' ' + (pathname=='/'|| pathname=='/'?'active':'')}>
+              <NavLink activeClassName='active' className='nav-link' to='/workout'>WORKOUTS</NavLink>
             </li>
             <li className={'nav-item' + ' ' + (pathname=='/program_editor'?'active':'')}>
-              <Link className='nav-link' to='/workout'>Program Editor</Link>
+              <NavLink activeClassName='active' className='nav-link' to='/exercises'>EXERCISES</NavLink>
             </li>
           </ul>
-          <Link to='/login' className='btn btn-info mr-3'>Logout</Link>
+          <Link to='/logout' className='btn btn-info mr-3'>Logout</Link>
         </div>
       </nav>
     )
   }
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     pathname : state.location.pathname
-//   }
-// }
-//
-// const mapDispatchToProps = dispatch => {
-//   return  {
-//     logout : () => {dispatch(logout())}
-//   }
-// }
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

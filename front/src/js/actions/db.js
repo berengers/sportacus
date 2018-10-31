@@ -98,9 +98,9 @@ class DB{
     )
     .then(this._status)
   }
-  fetchExercices(){
+  fetchExercises(){
     return fetch(
-      this.url + '/exercices',
+      this.url + '/exercises',
       {
         method: 'GET',
         headers: this._headers()
@@ -109,9 +109,20 @@ class DB{
     .then(this._status)
     .then(this._json)
   }
-  fetchCreateExercice(name, image, visibility){
+  fetchExercise(id){
     return fetch(
-      this.url + '/exercices',
+      this.url + '/exercises/' + id,
+      {
+        methods: "GET",
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchCreateExercise(name, image, visibility){
+    return fetch(
+      this.url + '/exercises',
       {
         method: 'POST',
         headers: this._headers(),
@@ -119,6 +130,32 @@ class DB{
           'name': name,
           'image': image,
           'visibility': visibility
+        })
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchDeleteExercise(id){
+    return fetch(
+      this.url + '/exercises/' + id,
+      {
+        method: "DELETE",
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+  }
+  fetchEditExercise(id, name, image, visibility){
+    return fetch(
+      this.url + '/exercises/' + id,
+      {
+        method: 'PUT',
+        headers: this._headers(),
+        body: JSON.stringify({
+          "name": name,
+          "image": image,
+          "visibility": visibility
         })
       }
     )

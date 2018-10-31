@@ -1,25 +1,29 @@
-// import { NOT_FOUND } from 'redux-first-router'
-//
-// export default function page(state = "HOME", action){
-//   switch (action.type) {
-//     case "LOGIN":
-//       return "LOGIN"
-//     case NOT_FOUND:
-//       return "HOME"
-//     default:
-//       return state
-//   }
-// }
 
-
-// router/pageReducer.js
 import { NOT_FOUND } from 'redux-first-router'
 
 const components = {
-  LOGIN:          'Login',
   WORKOUT:        'Workout',
-  PROGRAM_EDITOR: 'Program_Editor',
+  EXERCISES:      'Exercises',
+  EXERCISE:       'Exercises',
+  NEW_EXERCISE:   'Exercises',
+  LOGIN:          'Login',
   [NOT_FOUND]:    'NotFound'
 }
 
-export default (state = 'Home', action = {}) => components[action.type] || state
+// export default (state = 'Home', action = {}) => components[action.type] || state
+
+export default function(state = 'Workout', action = {}){
+  switch (action.type) {
+    case NOT_FOUND:
+      return 'Not-Found'
+    case "CHANGE_PAGE":
+      return action.payload.page
+    case "WORKOUT":
+    case "EXERCISES":
+    case "EXERCISE":
+    case "NEW_EXERCISE":
+      return components[action.type]
+    default:
+      return state
+  }
+}

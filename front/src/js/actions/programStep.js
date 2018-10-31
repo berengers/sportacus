@@ -14,6 +14,8 @@ export function receiveProgramSteps(program_steps){
 }
 
 export function fetchProgramSteps(program_id){
+  console.log ("11111111111 ---> ", 11111111111)
+  console.log ("program_id ---> ", program_id)
   return dispatch => {
     dispatch(selectProgram(program_id))
     authorized(dispatch, db.fetchProgramSteps(program_id))
