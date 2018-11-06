@@ -1,4 +1,4 @@
 export { default as page } from './page'
-export { selectedProgram, programs } from './program'
-export { program_steps } from './program_step'
+export { currentProgram, programs } from './program'
+export { currentStep, steps } from './step'
 export { exercises, currentExercise } from './exercise'

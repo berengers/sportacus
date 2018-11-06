@@ -4,7 +4,7 @@ import Link from 'redux-first-router-link'
 
 import NavBar from './navbar'
 import Login from './login'
-import Workout from './workout'
+import Programs from './programs'
 import Exercises from './exercises'
 
 class App extends React.Component{
@@ -13,7 +13,7 @@ class App extends React.Component{
 
     this.pages = {
       'Login':      <Login />,
-      'Workout':    <Workout />,
+      'Programs':   <Programs />,
       'Exercises':  <Exercises />,
       'Not-Found':  <h2 className='mx-auto mt-5 p-3 bg-warning text-center'>Sorry, this page dont exist</h2>
     }

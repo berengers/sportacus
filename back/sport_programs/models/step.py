@@ -1,7 +1,7 @@
 from sport_programs import db, ma
 
-class ProgramStep(db.Model):
-    __tablename__ = 'program_step'
+class Step(db.Model):
+    __tablename__ = 'step'
 
     id = db.Column(db.Integer, primary_key=True)
     program_id = db.Column(db.Integer, db.ForeignKey('program.id'), nullable=False)

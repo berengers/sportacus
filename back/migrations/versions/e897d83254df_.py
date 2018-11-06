@@ -46,7 +46,7 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-    op.create_table('program_step',
+    op.create_table('step',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('program_id', sa.Integer(), nullable=False),
     sa.Column('exercise_id', sa.Integer(), nullable=False),
@@ -89,7 +89,7 @@ def downgrade():
     op.drop_table('user_program')
     op.drop_table('user_exercise')
     op.drop_table('token')
-    op.drop_table('program_step')
+    op.drop_table('step')
     op.drop_table('user')
     op.drop_table('program')
     op.drop_table('exercise')

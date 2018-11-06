@@ -22,17 +22,19 @@ class ExerciseList extends React.Component{
     this.setState({ mode: "add", currentExercise: 0 })
   }
   render(){
-    const { exercises } = this.props
+    const { location, exercises } = this.props
 
     return (
       <React.Fragment>
-        <h4 className='text-center text-light bg-info p-2 col-12'>Exercises</h4>
+        <h4 className='text-center text-light bg-info p-2 col-12'>{location.type === "CHOOSE_EXERCISE"?"Choose an exercise" : "Edit an exercise"}</h4>
         <div className='btn-group-vertical d-block mt-2 col-12' id='exercises'>
           {
             exercises.map(exercise => (
-              <Link to={`/exercises/exercise/${exercise.id}`} key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' >
+              <Link to={
+                location.type === "CHOOSE_EXERCISE"? `/programs/program/${location.payload.program_id}/exercise/${exercise.id}` : `/exercises/exercise/${exercise.id}`
+              } key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' >
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
-                {exercise.image? <img className='item-exercise' src={exercise.image} />:''}
+                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={exercise.image} />:''}
               </Link>
             ))
           }
@@ -47,6 +49,7 @@ class ExerciseList extends React.Component{
 
 const mapStateToProps = state => {
   return {
+    location: state.location,
     exercises: state.exercises
   }
 }

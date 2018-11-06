@@ -3,32 +3,43 @@ from sqlalchemy import desc
 
 from .token import auth
 from sport_programs import app, db
-from sport_programs.models import ProgramStep, UserProgram, UserExercise
-from sport_programs.schemas import program_steps_schema, program_step_schema, program_step_user_schema, simple_program_steps_schema, simple_program_step_schema
+from sport_programs.models import Program, Step, UserProgram, UserExercise
+from sport_programs.schemas import steps_schema, step_schema, simple_steps_schema, simple_step_schema, program_nested_schema
 from tools import error
 
-@app.route('/program_steps/<program_id>', methods=['GET'])
+@app.route('/steps/<id>', methods=['GET'])
 @auth
-def get_program_steps(program_id):
-    steps = ProgramStep.query.filter(ProgramStep.program_id==program_id)\
-    .order_by(ProgramStep.position)\
-    .all()
+def get_step(id):
+    step = Step.query.filter_by(id=id).first()
 
-    if not steps:
-        return error("Not program_steps at this id"), 404
+    if not step:
+        return error("Not step at this id"), 404
 
-    return simple_program_steps_schema.jsonify(steps)
+    return simple_step_schema.jsonify(step)
 
-
-@app.route('/program_steps/<id>', methods=['POST'])
+@app.route('/programs/<program_id>/steps', methods=['GET'])
 @auth
-def add_program_step(id):
-    req = program_step_schema.load(request.json, session=db.session)
+def get_steps(program_id):
+
+    program = Program.query.filter_by(id=program_id).first()
+
+    if not program:
+        return error("Not steps at this id"), 404
+
+    program.steps = sorted(program.steps, key=lambda k: k.position)
+
+    return program_nested_schema.jsonify(program)
+
+
+@app.route('/steps', methods=['POST'])
+@auth
+def add_step():
+    req = step_schema.load(request.json, session=db.session)
 
     if len(req.errors) > 0:
         return jsonify(req.errors)
 
-    userP = UserProgram.query.filter_by(program_id = id).first()
+    userP = UserProgram.query.filter_by(program_id = req.data.program_id).first()
     userE = UserExercise.query.filter_by(exercise_id = req.data.exercise_id).first()
 
     if not userP or not userE:
@@ -37,22 +48,19 @@ def add_program_step(id):
     if userP.user_id != g.user.id or userE.user_id != g.user.id:
         return error("You don't have permission to do that"), 403
 
-    step = ProgramStep(
-        program_id = id,
-        exercise_id = req.data.exercise_id,
-        position = req.data.position
-    )
+    steps = Step.query.filter_by(program_id=req.data.program_id).all()
+    req.data.position = len(steps)+1
 
-    db.session.add(step)
+    db.session.add(req.data)
     db.session.commit()
 
-    return simple_program_step_schema.jsonify(step)
+    return simple_step_schema.jsonify(req.data)
 
 
-@app.route('/program_steps/<id>', methods=['DELETE'])
+@app.route('/steps/<id>', methods=['DELETE'])
 @auth
-def delete_program_step(id):
-    req = ProgramStep.query.filter_by(id = id).first()
+def delete_step(id):
+    req = Step.query.filter_by(id = id).first()
 
     if not req:
         return error("No Program Step with this ID"), 404
@@ -68,15 +76,15 @@ def delete_program_step(id):
     return ''
 
 
-@app.route('/program_steps/<id>', methods=['PUT'])
+@app.route('/steps/<id>', methods=['PUT'])
 @auth
-def update_program_step(id):
-    program = ProgramStep.query.filter_by(id = id).first()
+def update_step(id):
+    program = Step.query.filter_by(id = id).first()
 
     if not program:
         return error("No program with this id"), 404
 
-    req = program_step_schema.load(request.json, partial=True)
+    req = step_schema.load(request.json, partial=True)
 
     if len(req.errors) > 0:
         return jsonify(req.errors), 400
@@ -109,4 +117,4 @@ def update_program_step(id):
     db.session.add(program)
     db.session.commit()
 
-    return simple_program_step_schema.jsonify(program)
+    return simple_step_schema.jsonify(program)

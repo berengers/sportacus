@@ -1,10 +1,19 @@
-import { SELECT_PROGRAM, RECEIVE_PROGRAMS, ADD_PROGRAM } from '../actions/program'
 
-export function selectedProgram(state='', action){
+const initialState = {
+  id: "",
+  name: "",
+  visibility: ""
+}
+
+export function currentProgram(state=initialState, action){
   switch (action.type) {
-    case SELECT_PROGRAM:
-      console.log ("action ---> ", action)
-      return action.payload.program_id
+    case "CURRENT_PROGRAM":
+      const program = {
+        id: action.payload.program.id,
+        name: action.payload.program.name,
+        visibility: action.payload.program.visibility
+      }
+      return program
     default:
       return state
   }
@@ -12,10 +21,10 @@ export function selectedProgram(state='', action){
 
 export function programs(state=[], action){
   switch (action.type) {
-    case RECEIVE_PROGRAMS:
-      return action.programs
-    case ADD_PROGRAM:
-      return [...state, action.program]
+    case "RECEIVE_PROGRAMS":
+      return action.payload.programs
+    case "ADD_PROGRAM":
+      return [...state, action.payload.program]
     default:
       return state
   }

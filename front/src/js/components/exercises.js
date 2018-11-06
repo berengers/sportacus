@@ -20,7 +20,7 @@ class Exercises extends React.Component{
     const { location } = this.props
 
     return(
-      <div className='row no-gutters p-3 col-md-10 col-xl-8 mx-auto' id="workout">
+      <div className='row no-gutters p-3 col-md-10 col-xl-8 mx-auto'>
         {
           this.scenes[location.type]
         }

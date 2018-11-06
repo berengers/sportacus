@@ -2,53 +2,53 @@
 @import "./customTheme";
 @import "~bootstrap/scss/bootstrap";
 
-#program_editor, #workout{
-  // height: 100vh;
-  padding-top: 55px;
-}
-
-.100vh{
-  height: 100vh;
-}
-
-.add-button{
-  position: fixed;
-  bottom: 5%;
-  right: 5%;
-}
-
-@include media-breakpoint-down(xs) {
-  #userPage{
-    height: auto;
-    border-bottom: 1px solid lightgrey;
-  }
-}
-
-.programStep-title{
-  font-size: 2rem;
-}
-
-.title-h3{
-  white-space: normal;
-}
-
-.item_steps{
-  max-height: 20em;
-  max-width: 100%;
-}
-.item-exercise{
-  max-height: 150px;
-  max-width: 100%;
-}
-
-.program-bar{
-  position: relative;
-  left: 0;
-}
-.program-bar-moveleft{
-  left: -400px;
-  transition: all 0.5s ease-in-out;
-}
-.workout-bar{
-  position: relative;
-}
+// #program_editor, #workout{
+//   // height: 100vh;
+//   padding-top: 55px;
+// }
+//
+// .100vh{
+//   height: 100vh;
+// }
+//
+// .add-button{
+//   position: fixed;
+//   bottom: 5%;
+//   right: 5%;
+// }
+//
+// @include media-breakpoint-down(xs) {
+//   #userPage{
+//     height: auto;
+//     border-bottom: 1px solid lightgrey;
+//   }
+// }
+//
+// .step-title{
+//   font-size: 2rem;
+// }
+//
+// .title-h3{
+//   white-space: normal;
+// }
+//
+// .item_steps{
+//   max-height: 20em;
+//   max-width: 100%;
+// }
+// .item-exercise{
+//   max-height: 150px;
+//   max-width: 100%;
+// }
+//
+// .program-bar{
+//   position: relative;
+//   left: 0;
+// }
+// .program-bar-moveleft{
+//   left: -400px;
+//   transition: all 0.5s ease-in-out;
+// }
+// .workout-bar{
+//   position: relative;
+// }

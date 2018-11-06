@@ -21,7 +21,7 @@ export default class NavBar extends React.Component{
         <div className='collapse navbar-collapse' id='navBarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
             <li className={'nav-item' + ' ' + (pathname=='/'|| pathname=='/'?'active':'')}>
-              <NavLink activeClassName='active' className='nav-link' to='/workout'>WORKOUTS</NavLink>
+              <NavLink activeClassName='active' className='nav-link' to='/programs'>PROGRAMS</NavLink>
             </li>
             <li className={'nav-item' + ' ' + (pathname=='/program_editor'?'active':'')}>
               <NavLink activeClassName='active' className='nav-link' to='/exercises'>EXERCISES</NavLink>

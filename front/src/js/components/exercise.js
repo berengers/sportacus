@@ -61,7 +61,7 @@ class Exercise extends React.Component{
           <label className="d-block">Image (url)</label>
           {
             image.length > 0?
-                <img name="image" src={image} className="border mw-100" />
+                <img name="image" src={image} className="border mw-100" style={{maxHeight: "25rem"}} />
               :
               ""
           }

@@ -2,7 +2,7 @@
 import { NOT_FOUND } from 'redux-first-router'
 
 const components = {
-  WORKOUT:        'Workout',
+  PROGRAMS:       'Programs',
   EXERCISES:      'Exercises',
   EXERCISE:       'Exercises',
   NEW_EXERCISE:   'Exercises',
@@ -12,13 +12,13 @@ const components = {
 
 // export default (state = 'Home', action = {}) => components[action.type] || state
 
-export default function(state = 'Workout', action = {}){
+export default function(state = 'Programs', action = {}){
   switch (action.type) {
     case NOT_FOUND:
       return 'Not-Found'
     case "CHANGE_PAGE":
       return action.payload.page
-    case "WORKOUT":
+    case "PROGRAMS":
     case "EXERCISES":
     case "EXERCISE":
     case "NEW_EXERCISE":

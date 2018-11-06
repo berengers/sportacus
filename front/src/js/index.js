@@ -19,7 +19,15 @@ const options = {
 }
 
 const { reducer, middleware, enhancer } = connectRoutes(routesMap, options)
-const rootReducer = combineReducers({ ...reducers, location: reducer  })
+
+const appReducer = combineReducers({ ...reducers, location: reducer  })
+const rootReducer = (state, action) => {
+  if (action.type === "LOGOUT") {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
+
 const middlewares = applyMiddleware(middleware, thunkMiddleware)
 const enhancers = compose(
   enhancer,
@@ -27,7 +35,7 @@ const enhancers = compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-const store = createStore(rootReducer, {}, enhancers)
+export const store = createStore(rootReducer, {}, enhancers)
 
 
 ReactDOM.render(

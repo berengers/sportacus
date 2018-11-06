@@ -137,8 +137,8 @@ user_exercises = [
     )
 ]
 
-program_steps = [
-    ProgramStep(
+steps = [
+    Step(
         program_id = 1,
         exercise_id = 1,
         series = 4,
@@ -148,7 +148,7 @@ program_steps = [
         rest_end_duration = 120,
         position = 1
     ),
-    ProgramStep(
+    Step(
         program_id = 1,
         exercise_id = 2,
         series = 4,
@@ -158,7 +158,7 @@ program_steps = [
         rest_end_duration = 120,
         position = 2
     ),
-    ProgramStep(
+    Step(
         program_id = 1,
         exercise_id = 3,
         series = 4,
@@ -168,7 +168,7 @@ program_steps = [
         rest_end_duration = 120,
         position = 3
     ),
-    ProgramStep(
+    Step(
         program_id = 1,
         exercise_id = 4,
         series = 4,
@@ -178,7 +178,7 @@ program_steps = [
         rest_end_duration = 120,
         position = 4
     ),
-    ProgramStep(
+    Step(
         program_id = 1,
         exercise_id = 5,
         series = 4,
@@ -188,7 +188,7 @@ program_steps = [
         rest_end_duration = 120,
         position = 5
     ),
-    ProgramStep(
+    Step(
         program_id = 2,
         exercise_id = 6,
         series = 3,
@@ -198,7 +198,7 @@ program_steps = [
         rest_end_duration = 60,
         position = 1
     ),
-    ProgramStep(
+    Step(
         program_id = 2,
         exercise_id = 7,
         series = 4,
@@ -208,7 +208,7 @@ program_steps = [
         rest_end_duration = 90,
         position = 2
     ),
-    ProgramStep(
+    Step(
         program_id = 2,
         exercise_id = 8,
         series = 4,
@@ -218,7 +218,7 @@ program_steps = [
         rest_end_duration = 120,
         position = 3
     ),
-    ProgramStep(
+    Step(
         program_id = 3,
         exercise_id = 1,
         series = 4,
@@ -228,7 +228,7 @@ program_steps = [
         rest_end_duration = 120,
         position = 3
     ),
-    ProgramStep(
+    Step(
         program_id = 3,
         exercise_id = 2,
         series = 3,
@@ -238,7 +238,7 @@ program_steps = [
         rest_end_duration = 60,
         position = 2
     ),
-    ProgramStep(
+    Step(
         program_id = 3,
         exercise_id = 1,
         series = 4,
@@ -279,6 +279,6 @@ class FixturesCommand(Command):
                 db.session.add(user_exercise)
             db.session.commit()
 
-            for program_step in program_steps:
-                db.session.add(program_step)
+            for step in steps:
+                db.session.add(step)
             db.session.commit()

@@ -1,34 +1,56 @@
 import { redirect, NOT_FOUND } from 'redux-first-router'
 
-import { fetchPrograms } from '../actions/program'
-import { fetchProgramSteps } from '../actions/programStep'
-import { fetchExercises, fetchExercise } from '../actions/exercise'
 import { authorized } from '../actions/tools'
 import { db } from '../actions/db'
+import { fetchPrograms } from '../actions/program'
+import { fetchSteps, fetchStep } from '../actions/step'
+import { fetchExercises, fetchExercise } from '../actions/exercise'
 import { selectProgram } from '../actions/program'
+import { logout } from '../actions/login'
 
 export const routesMap = {
   HOME: {
     path: '/',
     thunk: async (dispatch) => {
-      dispatch(redirect({ type: "WORKOUT" }))
+      dispatch(redirect({ type: "PROGRAMS" }))
     }
   },
-  WORKOUT: {
-    path: '/workout',
+  PROGRAMS: {
+    path: '/programs',
     thunk: fetchPrograms()
   },
   PROGRAM: {
-    path: '/workout/program/:program_id/:program_name',
+    path: '/programs/program/:program_id',
     thunk: async (dispatch, getState) => {
-      const { location: { payload: { program_id } } } = getState()
-      dispatch({ type: "CHANGE_PAGE", payload: { page: 'Workout' } })
-      // dispatch({ type: "SELECT_PROGRAM", payload: { program_id } })
-      authorized(dispatch, db.fetchProgramSteps(program_id))
-      .then((program_steps) => {
-        console.log ("--- GOT PROGRAM_STEPS ---")
-        dispatch({ type: "RECEIVE_PROGRAM_STEPS", payload: { program_steps } })
-      })
+      const { location: { payload: { program_id } }, programs } = getState()
+      dispatch({ type: "CHANGE_PAGE", payload: { page: 'Programs' } })
+      dispatch({ type: "INITIAL_CURRENT_STEP" })
+      dispatch(fetchSteps(program_id))
+    }
+  },
+  RUN_PROGRAM: {
+    path: '/programs/program/:program_id/run',
+    thunk: async (dispatch, getState) => {
+      const { location: { payload: { program_id } }, programs } = getState()
+      dispatch(fetchSteps(program_id))
+    }
+  },
+  FORM_STEP: {
+    path: '/programs/program/:program_id/step/:step_id',
+    thunk: async (dispatch, getState) => {
+      const { location: { payload: {step_id} } } = getState()
+      dispatch(fetchStep(step_id))
+    }
+  },
+  CHOOSE_EXERCISE: {
+    path: '/programs/program/:program_id/choose_exercise',
+    thunk: fetchExercises()
+  },
+  NEW_STEP: {
+    path: '/programs/program/:program_id/exercise/:exercise_id',
+    thunk: async (dispatch, getState) => {
+      const { location: { payload: {exercise_id} } } = getState()
+      dispatch(fetchExercise(exercise_id))
     }
   },
   EXERCISES: {
@@ -63,7 +85,7 @@ export const routesMap = {
   LOGOUT: {
     path: '/logout',
     thunk: async (dispatch) => {
-      localStorage.removeItem("token")
+      dispatch(logout())
       dispatch(redirect({ type: "LOGIN" }))
     }
   }
