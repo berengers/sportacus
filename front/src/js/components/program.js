@@ -10,7 +10,7 @@ class Program extends React.Component{
     super(props)
   }
   render(){
-    const { location, program, steps } = this.props
+    const { location, program, steps, charging } = this.props
     // console.log ("this.props ---> ", this.props)
     // console.log ("program ---> ", program)
 
@@ -23,6 +23,9 @@ class Program extends React.Component{
         </div>
         <h4 className='text-center text-light bg-dark p-2 text-capitalize' data-toggle='collapse' data-target='#programs'>{program.name}</h4>
         <div className='row no-gutters w-100 mt-2' id='programs'>
+          {charging &&
+            <h2 className="col-12 text-center p-3">Charging...</h2>
+          }
           {
             steps.map( step => (
               <Step key={uuidv4()} step={step}/>
@@ -39,7 +42,8 @@ const mapStateToprops = state => {
   return {
     location: state.location,
     program: state.currentProgram,
-    steps: state.steps
+    steps: state.steps,
+    charging: state.charging
   }
 }
 

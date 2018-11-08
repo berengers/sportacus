@@ -25,6 +25,7 @@ export const routesMap = {
       const { location: { payload: { program_id } }, programs } = getState()
       dispatch({ type: "CHANGE_PAGE", payload: { page: 'Programs' } })
       dispatch({ type: "INITIAL_CURRENT_STEP" })
+      dispatch({ type: "CHARGING_STEPS" })
       dispatch(fetchSteps(program_id))
     }
   },

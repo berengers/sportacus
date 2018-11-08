@@ -105,10 +105,10 @@ def update_step(id):
     if body.weight:
         program.weight = body.weight
 
-    if body.rest_duration_between_series:
+    if body.rest_duration_between_series or body.rest_duration_between_series == 0:
         program.rest_duration_between_series = body.rest_duration_between_series
 
-    if body.rest_end_duration:
+    if body.rest_end_duration or body.rest_end_duration == 0:
         program.rest_end_duration = body.rest_end_duration
 
     if body.position:

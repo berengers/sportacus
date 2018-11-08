@@ -10,6 +10,7 @@ export function fetchSteps(program_id){
     .then((program) => {
       console.log ("--- GOT STEPS ---")
       dispatch({ type: "CURRENT_PROGRAM", payload: { program } })
+      dispatch({ type: "CHARGED" })
     })
   }
 }
