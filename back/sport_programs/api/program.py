@@ -16,6 +16,20 @@ def list_programs():
 
     return simple_programs_schema.jsonify(programs)
 
+@app.route("/programs/<program_id>", methods=["GET"])
+@auth
+def get_program_nested(program_id):
+    program = Program.query.filter_by(id=program_id).first()
+
+    # program = Program.query\
+    # .join(Step, Program.id == Step.program_id )\
+    # .filter_by(id=program_id).first()
+
+    if not program:
+        return jsonify({ "error": "No program to this id" })
+
+    return simple_program_schema.jsonify(program)
+
 @app.route("/programs", methods=["POST"])
 @auth
 def new_program():
@@ -30,7 +44,7 @@ def new_program():
     db.session.add(res.data)
     db.session.commit()
 
-    return program_schema.jsonify(res.data)
+    return simple_program_schema.jsonify(res.data)
 
 @app.route("/programs/<id>", methods=["DELETE"])
 @auth

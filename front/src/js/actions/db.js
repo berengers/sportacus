@@ -62,12 +62,73 @@ class DB{
     .then(this._status)
     .then(this._json)
   }
-  fetchProgramSteps(program_id){
+  fetchSteps(program_id){
     return fetch(
-      this.url + '/program_steps/' + program_id,
+      this.url + '/programs/' + program_id + '/steps',
       {
         method: 'GET',
         headers: this._headers()
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchStep(id){
+    return fetch(
+      this.url + '/steps/' + id,
+      {
+        method: 'GET',
+        headers: this._headers(),
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchCreateStep(repetitions, series, weight, rest_bs, rest_be, program_id, exercise_id){
+    return fetch(
+      this.url + '/steps',
+      {
+        method: 'POST',
+        headers: this._headers(),
+        body: JSON.stringify({
+          'repetitions': repetitions,
+          'series': series,
+          'weight': weight,
+          'rest_duration_between_series': rest_bs,
+          'rest_end_duration': rest_be,
+          'program_id': program_id,
+          'exercise_id': exercise_id
+        })
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchDeleteStep(id){
+    return fetch(
+      this.url + '/steps/' + id,
+      {
+        method: 'DELETE',
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+  }
+  fetchEditStep(id, repetitions, series, weight, rest_bs, rest_be, program_id, exercise_id){
+    return fetch(
+      this.url + '/steps/' + id,
+      {
+        method: 'PUT',
+        headers: this._headers(),
+        body: JSON.stringify({
+          'repetitions': repetitions,
+          'series': series,
+          'weight': weight,
+          'rest_duration_between_series': rest_bs,
+          'rest_end_duration': rest_be,
+          'program_id': program_id,
+          'exercise_id': exercise_id
+        })
       }
     )
     .then(this._status)
@@ -88,19 +149,9 @@ class DB{
     .then(this._status)
     .then(this._json)
   }
-  logout(){
+  fetchExercises(){
     return fetch(
-      this.url + '/logout',
-      {
-        method: 'DELETE',
-        headers: this._headers()
-      }
-    )
-    .then(this._status)
-  }
-  fetchExercices(){
-    return fetch(
-      this.url + '/exercices',
+      this.url + '/exercises',
       {
         method: 'GET',
         headers: this._headers()
@@ -109,9 +160,20 @@ class DB{
     .then(this._status)
     .then(this._json)
   }
-  fetchCreateExercice(name, image, visibility){
+  fetchExercise(id){
     return fetch(
-      this.url + '/exercices',
+      this.url + '/exercises/' + id,
+      {
+        methods: "GET",
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchCreateExercise(name, image, visibility){
+    return fetch(
+      this.url + '/exercises',
       {
         method: 'POST',
         headers: this._headers(),
@@ -124,6 +186,42 @@ class DB{
     )
     .then(this._status)
     .then(this._json)
+  }
+  fetchDeleteExercise(id){
+    return fetch(
+      this.url + '/exercises/' + id,
+      {
+        method: "DELETE",
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+  }
+  fetchEditExercise(id, name, image, visibility){
+    return fetch(
+      this.url + '/exercises/' + id,
+      {
+        method: 'PUT',
+        headers: this._headers(),
+        body: JSON.stringify({
+          "name": name,
+          "image": image,
+          "visibility": visibility
+        })
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  logout(){
+    return fetch(
+      this.url + '/logout',
+      {
+        method: "DELETE",
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
   }
 }
 

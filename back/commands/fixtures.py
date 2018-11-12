@@ -61,86 +61,86 @@ user_programs = [
     )
 ]
 
-exercices = [
-    Exercice(
+exercises = [
+    Exercise(
         name = 'Developpe couche',
         image = 'https://www.affairesdegars.com/webroot/usr_img/97554958/Flat-Barbell-Bench-Press1.jpg',
     ),
-    Exercice(
+    Exercise(
         name = 'Ecarte incline avec halteres',
         image = 'https://julienquaglierini.com/wp-content/uploads/2017/07/exercise-296-1-300x400.png'
     ),
-    Exercice(
+    Exercise(
         name = 'dips pour pecs',
         image = '',
         visibility = 'PUBLIC',
     ),
-    Exercice(
+    Exercise(
         name = 'elevations laterales avec halteres',
         image = '',
         visibility = 'PUBLIC',
     ),
-    Exercice(
+    Exercise(
         name = 'Pompes',
         image = 'https://www.complementsetproteines.com/img/cms/blog/2015/pompes-triceps-2.jpg',
         visibility = 'PUBLIC',
     ),
-    Exercice(
+    Exercise(
         name = 'Squats',
         image = 'https://img-4.linternaute.com/lmnzTepR8kztnMRrVsGj1c3bXX0=/1240x/smart/6cb68a39a9e04f249f5f07494f722e96/ccmcms-linternaute/10763352.jpg',
         visibility = 'PUBLIC',
     ),
-    Exercice(
+    Exercise(
         name = 'Squat avec halteres',
         image = '',
         visibility = 'PUBLIC',
     ),
-    Exercice(
+    Exercise(
         name = 'Fentes avant halteres unilaterale',
         image = '',
         visibility = 'PUBLIC',
     )
 ]
 
-user_exercices = [
-    UserExercice(
+user_exercises = [
+    UserExercise(
         user_id = 2,
-        exercice_id = 1
+        exercise_id = 1
     ),
-    UserExercice(
+    UserExercise(
         user_id = 2,
-        exercice_id = 2
+        exercise_id = 2
     ),
-    UserExercice(
+    UserExercise(
         user_id = 1,
-        exercice_id = 3
+        exercise_id = 3
     ),
-    UserExercice(
+    UserExercise(
         user_id = 1,
-        exercice_id = 4
+        exercise_id = 4
     ),
-    UserExercice(
+    UserExercise(
         user_id = 1,
-        exercice_id = 5
+        exercise_id = 5
     ),
-    UserExercice(
+    UserExercise(
         user_id = 1,
-        exercice_id = 6
+        exercise_id = 6
     ),
-    UserExercice(
+    UserExercise(
         user_id = 1,
-        exercice_id = 7
+        exercise_id = 7
     ),
-    UserExercice(
+    UserExercise(
         user_id = 1,
-        exercice_id = 8
+        exercise_id = 8
     )
 ]
 
-program_steps = [
-    ProgramStep(
+steps = [
+    Step(
         program_id = 1,
-        exercice_id = 1,
+        exercise_id = 1,
         series = 4,
         repetitions = 8,
         weight = 50,
@@ -148,9 +148,9 @@ program_steps = [
         rest_end_duration = 120,
         position = 1
     ),
-    ProgramStep(
+    Step(
         program_id = 1,
-        exercice_id = 2,
+        exercise_id = 2,
         series = 4,
         repetitions = 11,
         weight = 14,
@@ -158,9 +158,9 @@ program_steps = [
         rest_end_duration = 120,
         position = 2
     ),
-    ProgramStep(
+    Step(
         program_id = 1,
-        exercice_id = 3,
+        exercise_id = 3,
         series = 4,
         repetitions = 11,
         weight = 14,
@@ -168,9 +168,9 @@ program_steps = [
         rest_end_duration = 120,
         position = 3
     ),
-    ProgramStep(
+    Step(
         program_id = 1,
-        exercice_id = 4,
+        exercise_id = 4,
         series = 4,
         repetitions = 9,
         weight = 6,
@@ -178,9 +178,9 @@ program_steps = [
         rest_end_duration = 120,
         position = 4
     ),
-    ProgramStep(
+    Step(
         program_id = 1,
-        exercice_id = 5,
+        exercise_id = 5,
         series = 4,
         repetitions = 9,
         weight = 0,
@@ -188,9 +188,9 @@ program_steps = [
         rest_end_duration = 120,
         position = 5
     ),
-    ProgramStep(
+    Step(
         program_id = 2,
-        exercice_id = 6,
+        exercise_id = 6,
         series = 3,
         repetitions = 20,
         weight = 0,
@@ -198,9 +198,9 @@ program_steps = [
         rest_end_duration = 60,
         position = 1
     ),
-    ProgramStep(
+    Step(
         program_id = 2,
-        exercice_id = 7,
+        exercise_id = 7,
         series = 4,
         repetitions = 11,
         weight = 16,
@@ -208,9 +208,9 @@ program_steps = [
         rest_end_duration = 90,
         position = 2
     ),
-    ProgramStep(
+    Step(
         program_id = 2,
-        exercice_id = 8,
+        exercise_id = 8,
         series = 4,
         repetitions = 10,
         weight = 12,
@@ -218,9 +218,9 @@ program_steps = [
         rest_end_duration = 120,
         position = 3
     ),
-    ProgramStep(
+    Step(
         program_id = 3,
-        exercice_id = 1,
+        exercise_id = 1,
         series = 4,
         repetitions = 9,
         weight = 0,
@@ -228,9 +228,9 @@ program_steps = [
         rest_end_duration = 120,
         position = 3
     ),
-    ProgramStep(
+    Step(
         program_id = 3,
-        exercice_id = 2,
+        exercise_id = 2,
         series = 3,
         repetitions = 20,
         weight = 0,
@@ -238,9 +238,9 @@ program_steps = [
         rest_end_duration = 60,
         position = 2
     ),
-    ProgramStep(
+    Step(
         program_id = 3,
-        exercice_id = 1,
+        exercise_id = 1,
         series = 4,
         repetitions = 11,
         weight = 16,
@@ -271,14 +271,14 @@ class FixturesCommand(Command):
                 db.session.add(user_program)
             db.session.commit()
 
-            for exercice in exercices:
-                db.session.add(exercice)
+            for exercise in exercises:
+                db.session.add(exercise)
             db.session.commit()
 
-            for user_exercice in user_exercices:
-                db.session.add(user_exercice)
+            for user_exercise in user_exercises:
+                db.session.add(user_exercise)
             db.session.commit()
 
-            for program_step in program_steps:
-                db.session.add(program_step)
+            for step in steps:
+                db.session.add(step)
             db.session.commit()

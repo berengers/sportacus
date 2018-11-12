@@ -2,28 +2,14 @@ import 'whatwg-fetch'
 
 import { db } from './db'
 import { authorized } from './tools'
-import { fetchProgramSteps } from './programStep'
+import { fetchSteps } from './step'
 
 export const SELECT_PROGRAM = 'SELECT_PROGRAM'
-export const RECEIVE_PROGRAMS = 'RECEIVE_PROGRAMS'
-export const ADD_PROGRAM = 'ADD_PROGRAM'
 
 export function selectProgram(program_id){
   return {
     type: SELECT_PROGRAM,
     program_id
-  }
-}
-export function receivePrograms(programs){
-  return {
-    type: RECEIVE_PROGRAMS,
-    programs
-  }
-}
-export function addProgram(program){
-  return {
-    type: ADD_PROGRAM,
-    program
   }
 }
 
@@ -32,17 +18,28 @@ export function fetchPrograms() {
     authorized(dispatch, db.fetchPrograms())
     .then((programs) => {
       console.log ("--- GOT PROGRAMS ---")
-      dispatch(receivePrograms(programs))
+      dispatch({ type: "RECEIVE_PROGRAMS", payload: { programs } })
     })
   }
 }
+
+// export function fetchSteps(program_id) {
+//   return dispatch => {
+//     authorized(dispatch, db.fetchSteps(program_id))
+//     .then((steps) => {
+//       console.log ("--- GOT STEPS ---")
+//       dispatch({ type: "RECEIVE_STEPS", payload: { steps } })
+//     })
+//   }
+// }
 
 export function fetchCreateProgram(name, visibility) {
   return dispatch => {
     authorized(dispatch, db.fetchCreateProgram(name, visibility))
     .then((program) => {
       console.log ("--- GOT NEW PROGRAM ---")
-      dispatch(addProgram(program))
+      dispatch({ type: "ADD_PROGRAM", payload: { program } })
+      dispatch({ type: "PROGRAM", payload: { program_id: program.id, program_name: program.name } })
     })
   }
 }

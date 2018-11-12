@@ -9,4 +9,4 @@ class Program(db.Model):
     visibility = db.Column(db.Text, default='PRIVATE', nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False)
-    program_steps = db.relationship('ProgramStep', backref='program', lazy=True, cascade='all, delete-orphan')
+    steps = db.relationship('Step', backref='program', lazy=True, cascade='all, delete-orphan')

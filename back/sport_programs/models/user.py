@@ -14,4 +14,4 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow(), nullable=False)
     token_relation = db.relationship('Token', backref='user', cascade='all, delete-orphan')
     programs = db.relationship('Program', secondary='user_program')
-    exercices = db.relationship('Exercice', secondary='user_exercice')
+    exercises = db.relationship('Exercise', secondary='user_exercise')

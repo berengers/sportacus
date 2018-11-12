@@ -2,7 +2,7 @@ from flask import request, g, jsonify
 
 from sport_programs import app, db
 from .token import auth
-from sport_programs.models import User, UserProgram, Program, UserExercice
+from sport_programs.models import User, UserProgram, Program, UserExercise
 from sport_programs.schemas import user_schema, validate_user_schema, user_update_schema
 from .tools import error
 
@@ -36,13 +36,13 @@ def delete_user():
     id = g.user.id
     user = User.query.filter_by(id = id).first()
     programss = UserProgram.query.filter_by(user_id = id).all()
-    exercicess = UserExercice.query.filter_by(user_id = id).all()
+    exercisess = UserExercise.query.filter_by(user_id = id).all()
 
     # if not user:
     #     return error("This user don't exist"), 404
 
-    for exercice in exercicess:
-        db.session.delete(exercice)
+    for exercise in exercisess:
+        db.session.delete(exercise)
 
     for program in programss:
         db.session.delete(program)
