@@ -13,10 +13,12 @@ class Step extends React.Component{
   }
   render(){
     const { id, exercise, repetitions, rest_duration_between_series, rest_end_duration, series, weight } = this.props.step
-    const { location } = this.props
+    const { location, step } = this.props
+    // console.log ("step ---> ", step)
 
     return (
-      <div className='bg-info text-center col-12 mb-4 p-4'>
+      <React.Fragment>
+      <div className='bg-info text-center col-12 p-4'>
         <div onClick={this.deleteStep.bind(this, id)} className="btn btn-danger btn-sm col-6 col-sm-2 float-none float-sm-left rounded-0">delete</div>
         <Link to={`${location.pathname}/step/${id}`} className='btn btn-dark btn-sm col-6 col-sm-2 float-none float-sm-right rounded-0'>edit</Link>
         <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{exercise.name}</p>
@@ -29,6 +31,7 @@ class Step extends React.Component{
           <div className="col-12 col-md">Rest end  <span className="d-block badge badge-secondary p-1">{rest_end_duration}s</span></div>
         </div>
       </div>
+      </React.Fragment>
     )
   }
 }

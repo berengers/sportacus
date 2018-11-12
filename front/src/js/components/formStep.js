@@ -9,6 +9,7 @@ class FormStep extends React.Component{
     super(props)
     this.inputChange = this.inputChange.bind(this)
     this.state = {
+      exercise: this.props.exercise,
       mode: this.props.mode,
       repetitions: this.props.step.repetitions,
       series: this.props.step.series,
@@ -16,8 +17,6 @@ class FormStep extends React.Component{
       rest_bs: this.props.step.rest_duration_between_series,
       rest_be: this.props.step.rest_end_duration
     }
-    // console.log ("this.state ---> ", this.state)
-    // console.log ("this.props ---> ", this.props)
   }
   inputChange(e){
     this.setState({ [e.target.name]: e.target.value })
@@ -40,6 +39,7 @@ class FormStep extends React.Component{
     const { step } = this.props
     if (prevStep.id == 0 && step.id > 0) {
       this.setState({
+        exercise: step.exercise,
         repetitions: step.repetitions,
         series: step.series,
         weight: step.weight,
@@ -49,9 +49,8 @@ class FormStep extends React.Component{
     }
   }
   render(){
-    const { location, step, exercise } = this.props
-    const { mode, repetitions, series, weight, rest_bs, rest_be } = this.state
-    // console.table(exercise)
+    const { location, step } = this.props
+    const { mode, exercise, repetitions, series, weight, rest_bs, rest_be } = this.state
 
     return (
       <React.Fragment>
