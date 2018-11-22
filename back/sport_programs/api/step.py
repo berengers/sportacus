@@ -4,7 +4,7 @@ from sqlalchemy import desc
 from .token import auth
 from sport_programs import app, db
 from sport_programs.models import Program, Step, UserProgram, UserExercise
-from sport_programs.schemas import steps_schema, step_schema, simple_steps_schema, simple_step_schema, program_nested_schema
+from sport_programs.schemas import steps_schema, step_schema, simple_steps_schema, simple_step_schema
 from tools import error
 
 @app.route('/steps/<id>', methods=['GET'])
@@ -17,24 +17,11 @@ def get_step(id):
 
     return simple_step_schema.jsonify(step)
 
-@app.route('/programs/<program_id>/steps', methods=['GET'])
-@auth
-def get_steps(program_id):
-
-    program = Program.query.filter_by(id=program_id).first()
-
-    if not program:
-        return error("Not steps at this id"), 404
-
-    program.steps = sorted(program.steps, key=lambda k: k.position)
-
-    return program_nested_schema.jsonify(program)
-
 
 @app.route('/steps', methods=['POST'])
 @auth
 def add_step():
-    req = step_schema.load(request.json, session=db.session)
+    req = step_schema.load(request.json, session=db.session, partial=True)
 
     if len(req.errors) > 0:
         return jsonify(req.errors)
@@ -45,7 +32,7 @@ def add_step():
     if not userP or not userE:
         return error("Program_id or/and exercise_id are wrong"), 404
 
-    if userP.user_id != g.user.id or userE.user_id != g.user.id:
+    if userP.user_id != g.user.id:
         return error("You don't have permission to do that"), 403
 
     steps = Step.query.filter_by(program_id=req.data.program_id).all()
@@ -105,11 +92,11 @@ def update_step(id):
     if body.weight:
         program.weight = body.weight
 
-    if body.rest_duration_between_series or body.rest_duration_between_series == 0:
-        program.rest_duration_between_series = body.rest_duration_between_series
+    if body.rest or body.rest == 0:
+        program.rest = body.rest
 
-    if body.rest_end_duration or body.rest_end_duration == 0:
-        program.rest_end_duration = body.rest_end_duration
+    if body.rest_end or body.rest_end == 0:
+        program.rest_end = body.rest_end
 
     if body.position:
         program.position = body.position

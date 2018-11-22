@@ -2,7 +2,6 @@ import 'whatwg-fetch'
 
 import { db } from './db'
 import { authorized } from './tools'
-import { fetchSteps } from './step'
 
 export const SELECT_PROGRAM = 'SELECT_PROGRAM'
 
@@ -23,15 +22,19 @@ export function fetchPrograms() {
   }
 }
 
-// export function fetchSteps(program_id) {
-//   return dispatch => {
-//     authorized(dispatch, db.fetchSteps(program_id))
-//     .then((steps) => {
-//       console.log ("--- GOT STEPS ---")
-//       dispatch({ type: "RECEIVE_STEPS", payload: { steps } })
-//     })
-//   }
-// }
+
+export function fetchProgram(program_id){
+  return dispatch => {
+    // dispatch({ type: "SELECT_PROGRAM", payload: { program_id } })
+    authorized(dispatch, db.fetchProgram(program_id))
+    .then((program) => {
+      console.log ("--- GOT PROGRAM ---")
+      dispatch({ type: "CURRENT_PROGRAM", payload: { program } })
+      dispatch({ type: "CHARGED" })
+    })
+  }
+}
+
 
 export function fetchCreateProgram(name, visibility) {
   return dispatch => {
@@ -40,6 +43,15 @@ export function fetchCreateProgram(name, visibility) {
       console.log ("--- GOT NEW PROGRAM ---")
       dispatch({ type: "ADD_PROGRAM", payload: { program } })
       dispatch({ type: "PROGRAM", payload: { program_id: program.id, program_name: program.name } })
+    })
+  }
+}
+
+export function fetchUpdateProgram(program){
+  return disabled => {
+    authorized(dispatch, db.fetchUpdateProgram(program))
+    .then((resp) => {
+      console.log ("--- UPDATE PROGRAM ---")
     })
   }
 }

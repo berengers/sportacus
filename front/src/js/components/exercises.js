@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 
-import '../../css/app.scss'
+// import '../../css/app.scss'
 import ExerciseList from './exerciseList'
-import Exercise from './exercise'
+import FormExercise from './formExercise'
 
 class Exercises extends React.Component{
   constructor(props){
@@ -12,8 +12,8 @@ class Exercises extends React.Component{
 
     this.scenes = {
       'EXERCISES':    <ExerciseList />,
-      'EXERCISE':     <Exercise mode="edit"/>,
-      'NEW_EXERCISE': <Exercise mode="add"/>
+      'EXERCISE':     <FormExercise mode="edit"/>,
+      'NEW_EXERCISE': <FormExercise mode="add"/>
     }
   }
   render(){

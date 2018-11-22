@@ -1,5 +1,6 @@
 export { default as page } from './page'
 export { currentProgram, programs } from './program'
-export { currentStep, steps } from './step'
+export { currentStep, steps, editStep } from './step'
 export { exercises, currentExercise } from './exercise'
 export { charging } from './charging'
+export { error } from './error'

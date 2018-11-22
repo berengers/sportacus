@@ -11,6 +11,7 @@ export function fetchToken(email, password){
       localStorage.setItem('token', token)
       dispatch({ type: "HOME" })
     })
+    .catch((error) => console.log ("error ---> ", error))
   }
 }
 

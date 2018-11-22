@@ -8,7 +8,7 @@ export function authorized(dispatch, promise){
       localStorage.removeItem('token')
       dispatch(redirect({ type: "LOGIN" }))
     } else {
-      console.log ("Probleme but not AuthorizationError ---> ", err)
+      console.log ("Probleme but not authorization error ---> ", err)
       throw err
     }
   })

@@ -33,7 +33,7 @@ users = [
 
 programs = [
     Program(
-        name = 'Pec - Triceps',
+        name = 'Pecs - Triceps',
         visibility = 'PUBLIC'
     ),
     Program(
@@ -144,8 +144,8 @@ steps = [
         series = 4,
         repetitions = 8,
         weight = 50,
-        rest_duration_between_series = 90,
-        rest_end_duration = 120,
+        rest = 90,
+        rest_end = 120,
         position = 1
     ),
     Step(
@@ -154,8 +154,8 @@ steps = [
         series = 4,
         repetitions = 11,
         weight = 14,
-        rest_duration_between_series = 90,
-        rest_end_duration = 120,
+        rest = 90,
+        rest_end = 120,
         position = 2
     ),
     Step(
@@ -164,8 +164,8 @@ steps = [
         series = 4,
         repetitions = 11,
         weight = 14,
-        rest_duration_between_series = 90,
-        rest_end_duration = 120,
+        rest = 90,
+        rest_end = 120,
         position = 3
     ),
     Step(
@@ -174,8 +174,8 @@ steps = [
         series = 4,
         repetitions = 9,
         weight = 6,
-        rest_duration_between_series = 90,
-        rest_end_duration = 120,
+        rest = 90,
+        rest_end = 120,
         position = 4
     ),
     Step(
@@ -184,8 +184,8 @@ steps = [
         series = 4,
         repetitions = 9,
         weight = 0,
-        rest_duration_between_series = 60,
-        rest_end_duration = 120,
+        rest = 60,
+        rest_end = 120,
         position = 5
     ),
     Step(
@@ -194,8 +194,8 @@ steps = [
         series = 3,
         repetitions = 20,
         weight = 0,
-        rest_duration_between_series = 30,
-        rest_end_duration = 60,
+        rest = 30,
+        rest_end = 60,
         position = 1
     ),
     Step(
@@ -204,8 +204,8 @@ steps = [
         series = 4,
         repetitions = 11,
         weight = 16,
-        rest_duration_between_series = 45,
-        rest_end_duration = 90,
+        rest = 45,
+        rest_end = 90,
         position = 2
     ),
     Step(
@@ -214,8 +214,8 @@ steps = [
         series = 4,
         repetitions = 10,
         weight = 12,
-        rest_duration_between_series = 60,
-        rest_end_duration = 120,
+        rest = 60,
+        rest_end = 120,
         position = 3
     ),
     Step(
@@ -224,8 +224,8 @@ steps = [
         series = 4,
         repetitions = 9,
         weight = 0,
-        rest_duration_between_series = 60,
-        rest_end_duration = 120,
+        rest = 60,
+        rest_end = 120,
         position = 3
     ),
     Step(
@@ -234,8 +234,8 @@ steps = [
         series = 3,
         repetitions = 20,
         weight = 0,
-        rest_duration_between_series = 30,
-        rest_end_duration = 60,
+        rest = 30,
+        rest_end = 60,
         position = 2
     ),
     Step(
@@ -244,8 +244,8 @@ steps = [
         series = 4,
         repetitions = 11,
         weight = 16,
-        rest_duration_between_series = 45,
-        rest_end_duration = 90,
+        rest = 45,
+        rest_end = 90,
         position = 1
     )
 ]

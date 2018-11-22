@@ -6,6 +6,7 @@ import NavBar from './navbar'
 import Login from './login'
 import Programs from './programs'
 import Exercises from './exercises'
+import '../../css/app.scss'
 
 class App extends React.Component{
   constructor(props){
@@ -34,11 +35,11 @@ class App extends React.Component{
   }
 }
 
-const mapStateToprops = state => {
+const mapStateToProps = state => {
   return {
     location: state.location,
     page: state.page
   }
 }
 
-export default connect(mapStateToprops)(App)
+export default connect(mapStateToProps)(App)

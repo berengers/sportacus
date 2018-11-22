@@ -3,9 +3,9 @@ import { redirect, NOT_FOUND } from 'redux-first-router'
 import { authorized } from '../actions/tools'
 import { db } from '../actions/db'
 import { fetchPrograms } from '../actions/program'
-import { fetchSteps, fetchStep } from '../actions/step'
+import { fetchStep } from '../actions/step'
 import { fetchExercises, fetchExercise } from '../actions/exercise'
-import { selectProgram } from '../actions/program'
+import { selectProgram, fetchProgram } from '../actions/program'
 import { logout } from '../actions/login'
 
 export const routesMap = {
@@ -25,8 +25,8 @@ export const routesMap = {
       const { location: { payload: { program_id } }, programs } = getState()
       dispatch({ type: "CHANGE_PAGE", payload: { page: 'Programs' } })
       dispatch({ type: "INITIAL_CURRENT_STEP" })
-      dispatch({ type: "CHARGING_STEPS" })
-      dispatch(fetchSteps(program_id))
+      dispatch({ type: "CHARGING_PROGRAM" })
+      dispatch(fetchProgram(program_id))
     }
   },
   RUN_PROGRAM: {

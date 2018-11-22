@@ -3,8 +3,7 @@ import uuidv4 from 'uuid/v4'
 import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
-import { Modal_NewExercise } from './modal'
-import ModalExercise from './modalExercise'
+import { fetchCreateStep } from '../actions/step'
 
 class ExerciseList extends React.Component{
   constructor(props){
@@ -18,8 +17,8 @@ class ExerciseList extends React.Component{
   editExercise(exercise, e){
     this.setState({ mode: "edit", currentExercise: exercise.id })
   }
-  modalModeAdd(){
-    this.setState({ mode: "add", currentExercise: 0 })
+  createStep(exercise, e){
+    this.props.createStep(this.props.program.id, exercise.id)
   }
   render(){
     const { location, exercises } = this.props
@@ -28,11 +27,21 @@ class ExerciseList extends React.Component{
       <React.Fragment>
         <h4 className='text-center text-light bg-info p-2 col-12'>{location.type === "CHOOSE_EXERCISE"?"Choose an exercise" : "Edit an exercise"}</h4>
         <div className='btn-group-vertical d-block mt-2 col-12' id='exercises'>
-          {
+          {location.type === "EXERCISES" &&
+            exercises.filter(exercise => exercise.visibility === "PRIVATE").map(exercise => (
+              <Link
+              to={`/exercises/exercise/${exercise.id}`}
+                key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
+                <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
+                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={exercise.image} />:''}
+              </Link>
+            ))
+          }
+          {location.type === "CHOOSE_EXERCISE" &&
             exercises.map(exercise => (
-              <Link to={
-                location.type === "CHOOSE_EXERCISE"? `/programs/program/${location.payload.program_id}/exercise/${exercise.id}` : `/exercises/exercise/${exercise.id}`
-              } key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' >
+              <Link
+              to={`/programs/program/${location.payload.program_id}`}
+                key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
                 {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={exercise.image} />:''}
               </Link>
@@ -50,8 +59,14 @@ class ExerciseList extends React.Component{
 const mapStateToProps = state => {
   return {
     location: state.location,
-    exercises: state.exercises
+    exercises: state.exercises,
+    program: state.currentProgram
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    createStep: (program_id, exercise_id) => dispatch(fetchCreateStep(program_id, exercise_id))
   }
 }
 
-export default connect(mapStateToProps)(ExerciseList)
+export default connect(mapStateToProps, mapDispatchToProps)(ExerciseList)

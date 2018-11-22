@@ -4,7 +4,7 @@ import Link from 'redux-first-router-link'
 
 import { fetchCreateExercise, fetchEditExercise, fetchDeleteExercise } from '../actions/exercise'
 
-class Exercise extends React.Component{
+class FormExercise extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -67,13 +67,6 @@ class Exercise extends React.Component{
           }
           <input type="url" value={image} name="image" onChange={this.inputChange.bind(this)} className="form-control col-12" />
           </div>
-          <div className='form-group'>
-            <label>Visibility</label>
-            <select value={visibility} name='visibility' className="form-control" onChange={this.inputChange.bind(this)}>
-              <option value='PRIVATE'>PRIVATE</option>
-              <option value='PUBLIC'>PUBLIC</option>
-            </select>
-          </div>
           <button onClick={this.saveExercise.bind(this)} className="btn btn-info float-left" type="submit">Save Exercise</button>
           <Link to="/exercises" className="btn btn-secondary float-right">Cancel</Link>
         </div>
@@ -95,4 +88,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Exercise)
+export default connect(mapStateToProps, mapDispatchToProps)(FormExercise)

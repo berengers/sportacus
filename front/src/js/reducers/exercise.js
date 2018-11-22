@@ -21,6 +21,8 @@ export function currentExercise(state=initialState, action){
     case "CURRENT_EXERCISE":
       return action.payload.exercise
     case "INITIAL_CURRENT_EXERCISE":
+    case "NEW_STEP":
+    case "NEW_EXERCISE":
       return initialState
     default:
       return state

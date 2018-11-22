@@ -4,7 +4,7 @@ from datetime import datetime
 from .token import auth
 from sport_programs import app, db
 from sport_programs.models import *
-from sport_programs.schemas import program_schema, programs_schema, simple_programs_schema, simple_program_schema
+from sport_programs.schemas import program_schema, programs_schema, simple_programs_schema, simple_program_schema, get_program_nested_schema, program_nested_schema
 
 @app.route("/programs", methods=["GET"])
 @auth
@@ -16,19 +16,33 @@ def list_programs():
 
     return simple_programs_schema.jsonify(programs)
 
-@app.route("/programs/<program_id>", methods=["GET"])
+# @app.route("/programs/<program_id>", methods=["GET"])
+# @auth
+# def get_program_nested(program_id):
+#     program = Program.query.filter_by(id=program_id).first()
+#
+#     # program = Program.query\
+#     # .join(Step, Program.id == Step.program_id )\
+#     # .filter_by(id=program_id).first()
+#
+#     if not program:
+#         return jsonify({ "error": "No program to this id" })
+#
+#     return simple_program_schema.jsonify(program)
+
+@app.route('/programs/<program_id>', methods=['GET'])
 @auth
-def get_program_nested(program_id):
+def get_program(program_id):
+
     program = Program.query.filter_by(id=program_id).first()
 
-    # program = Program.query\
-    # .join(Step, Program.id == Step.program_id )\
-    # .filter_by(id=program_id).first()
-
     if not program:
-        return jsonify({ "error": "No program to this id" })
+        return error("Not steps at this id"), 404
 
-    return simple_program_schema.jsonify(program)
+    program.steps = sorted(program.steps, key=lambda k: k.position)
+
+    return get_program_nested_schema.jsonify(program)
+
 
 @app.route("/programs", methods=["POST"])
 @auth
@@ -71,30 +85,32 @@ def delete_program(id):
 @app.route("/programs/<id>", methods=["PUT"])
 @auth
 def update_program(id):
-    program = Program.query.filter_by(id = id).first()
-    body = program_schema.load(request.json, session=db.session)
-    user_program = UserProgram.query.filter_by(program_id = id).first()
+    program = Program.query.filter_by(id=id).first()
+    userP = UserProgram.query.filter_by(program_id=id, user_id=g.user.id).first()
+    res = program_nested_schema.load(request.json)
+    #
+    # if not program or not userP:
+    #     return "Permission error", 401
+    #
+    # if len(res.errors) > 0:
+    #     return jsonify(res.errors), 404
+    #
+    # for step in res.data.steps:
+    #     if step.exercise.visibility != "PUBLIC":
+    #         userE = UserExercise.query.filter_by(exercise_id=step.exercise.id, user_id=g.user.id).first()
+    #
+    #         if not userE:
+    #             return jsonify({"No permission to use this exercise": step.exercise.id}), 403
 
-    if not program or not user_program:
-        return jsonify({ "error": "No program or user_program with this id" }), 404
 
-    if len(body.errors) > 0:
-        return jsonify(body.errors)
-
-    if user_program.user_id != g.user.id:
-        return jsonify({ "error": "You don't have permission to do that" }), 403
-
-    datas = body.data
-
-    if datas.name:
-        program.name = datas.name
-
-    if datas.visibility:
-        program.visibility = datas.visibility
-
+    program.name = res.data.name
+    program.steps = res.data.steps
     program.updated_at = datetime.utcnow()
+    #
+    # print ("res ---------------> ", res)
+    # print ("program ---------------> ", program)
 
     db.session.add(program)
     db.session.commit()
 
-    return ""
+    return program_nested_schema.jsonify(program)

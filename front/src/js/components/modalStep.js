@@ -43,7 +43,7 @@ class ModalNewExercise extends React.Component{
     let { name, image, visibility } = this.state
 
     return (
-      <div className="modal fade" id="exerciseModal" role="dialog">
+      <div className="modal fade" id="stepModal" role="dialog">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -102,4 +102,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export const Modal_NewExercise = connect(null, mapDispatchToProps)(ModalNewExercise)
+export default connect(null, mapDispatchToProps)(ModalNewExercise)

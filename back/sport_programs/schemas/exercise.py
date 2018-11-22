@@ -7,7 +7,8 @@ from sport_programs.models import Exercise
 class ExerciseSchema(ma.ModelSchema):
     class Meta:
         model = Exercise
-    visibility = fields.String(validate=lambda v: v == "PUBLIC" or v == 'PRIVATE')
+        dump_only = ('id', 'visibility')
+    # visibility = fields.String(validate=lambda v: v == "PUBLIC" or v == 'PRIVATE')
 
 exercise_schema = ExerciseSchema()
 exercises_schema = ExerciseSchema(many=True)
