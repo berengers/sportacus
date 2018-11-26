@@ -1,7 +1,15 @@
+$theme-colors: (
+  "primary": #ffc107,
+  "dark": #191c1f,
+  "dark-grey": #303131
+);
 
 // @import "./customTheme";
 @import "~bootstrap/scss/bootstrap";
 
+body{
+  background: black;
+}
 
 #circle{
   transform: rotate(-90deg);

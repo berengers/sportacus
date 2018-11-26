@@ -51,13 +51,13 @@ class FormStep extends React.Component{
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
-              className='bg-primary text-center col-12 p-4 mb-3'
+              className='bg-light text-center col-12 p-4 mb-3'
               >
                 <div onClick={this.cancelStep.bind(this)} className="btn btn-dark btn-sm col-6 col-sm-2 float-none float-sm-left">cancel</div>
                 <div onClick={this.saveStep.bind(this)} className='btn btn-success btn-sm col-6 col-sm-2 float-none float-sm-right'>ok</div>
 
                 <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{exercise.name}</p>
-                {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}} src={exercise.image}/></div>:''}
+                {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}} src={"http://localhost:2015/images/exercises/" + exercise.image}/></div>:''}
 
                 <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
                   <div className="col-6 col-md">Series

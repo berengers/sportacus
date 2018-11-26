@@ -23,38 +23,45 @@ class Step extends React.Component{
     // console.log ("this.props ---> ", this.props)
     // console.log ("id ---> ", id)
     // console.log ("editStep ---> ", editingStep)
+    console.log ("this.props.mode ---> ", this.props.mode)
 
     return (
       <Draggable draggableId={id} index={this.props.index} isDragDisabled={dragDisabled}>
         {
           (provided, snapshot) => {
-            const getStyle = {
-              background : snapshot.isDragging? "#15d6ff" : "#009eb7",
-              ...provided.draggableProps.style,
-            }
+            console.log ("snapshot.isDragging ---> ", snapshot.isDragging)
+            const bg = snapshot.isDragging ? "bg-dark-grey" : "bg-dark"
 
             return (
               <div
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
-              className={'text-center col-12 p-4 mb-3 rounded ' +
-              (snapshot.isDragging? "bg-warning" : "bg-info")}
+              className={'text-center text-light col-12 p-4 mb-3 rounded ' + bg}
               >
                 {!dragDisabled &&
                   <div className="position-absolute" style={{ top: "50%", right: "1%", opacity: ".7" }}>
                     <img src="http://localhost:2015/icons/baseline-drag_indicator-24px.svg" />
                   </div>
                 }
-                <div style={mode === "wait"? {opacity: ".7"}:{}}>
+
+                {program.visibility === "PRIVATE" && mode === "edit" &&
+                  <React.Fragment>
+                  <div onClick={this.deleteStep.bind(this, id)} className="btn btn-danger btn-sm col-6 col-sm-2 float-none float-sm-left rounded-0">delete</div>
+                  <div onClick={this.props.editStep.bind(this, id)} className='btn btn-dark-grey btn-sm col-6 col-sm-2 float-none float-sm-right rounded-0'>edit</div>
+                  </React.Fragment>
+                }
+
+                <div style={mode === "wait"? {opacity: ".4"}:{}}>
                   <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{exercise.name}</p>
-                  {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}} src={exercise.image}/></div>:''}
+                  {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}}
+                  src={"http://localhost:2015/images/exercises/" + exercise.image}/></div>:''}
                   <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
-                    <div className="col-6 col-md">Series <span className="d-block badge badge-secondary p-1">{series}</span></div>
-                    <div className="col-6 col-md">Reps <span className="d-block badge badge-secondary">{repetitions}</span></div>
-                    <div className="col-6 col-md">Weight  <span className="d-block badge badge-secondary p-1">{weight}kg</span></div>
-                    <div className="col-6 col-md">Rest  <span className="d-block badge badge-secondary p-1">{rest}s</span></div>
-                    <div className="col-12 col-md">Rest end  <span className="d-block badge badge-secondary p-1">{rest_end}s</span></div>
+                    <div className="col-6 col-md">Series <span className="d-block badge bg-dark-grey">{series}</span></div>
+                    <div className="col-6 col-md px-0">Reps <span className="d-block badge bg-dark-grey">{repetitions}</span></div>
+                    <div className="col-6 col-md">Weight  <span className="d-block badge bg-dark-grey">{weight}kg</span></div>
+                    <div className="col-6 col-md">Rest  <span className="d-block badge bg-dark-grey">{rest}s</span></div>
+                    <div className="col-12 col-md pl-0">Rest end  <span className="d-block badge bg-dark-grey">{rest_end}s</span></div>
                   </div>
                 </div>
               </div>

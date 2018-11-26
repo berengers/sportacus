@@ -34,7 +34,7 @@ class Login extends React.Component{
     return (
       <div className='mx-auto' style={{maxWidth: "450px"}}>
         <div className='container-fluid mt-5'>
-          <form className={'border rounded bg-light p-3 ' + this.state.validate} noValidate>
+          <form className={'bg-dark-grey text-light rounded p-3 ' + this.state.validate} noValidate>
             <div className='form-group'>
               <label>Email Adress</label>
               <div className="input-group">

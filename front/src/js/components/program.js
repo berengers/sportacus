@@ -41,13 +41,13 @@ class Program extends React.Component{
     return (
       <div className="col-12">
         <div className='row no-gutters'>
-          <Link to="/programs" className='btn btn-info mb-3 col-sm-4'> {'← back to programs'} </Link>
-          <Link to={`/programs/program/${program.id}/run`} className='btn btn-success mb-3 col-sm-4 offset-sm-4'> {'Run Programs' + '  ' + '►'} </Link>
+          <Link to="/programs" className='btn btn-dark-grey mb-3 col-sm-4'> {'← back to programs'} </Link>
+          <Link to={`/programs/program/${program.id}/run`} className='btn btn-info mb-3 col-sm-4 offset-sm-4'> {'Run Programs' + '  ' + '►'} </Link>
         </div>
 
-        <h4 className='text-center text-light bg-dark p-2 text-capitalize'>{program.name}</h4>
-          {!dif &&
-            <a className={"btn btn-primary col-12 text-light" + (editStep > -1?" disabled":"")} onClick={this.saveProgram.bind(this)}>SAVE CHANGES</a>
+        <h4 className='text-center text-dark font-weight-bold bg-primary p-2 text-capitalize'>{program.name}</h4>
+          {dif &&
+            <a className={"btn btn-info col-12 text-light" + (editStep > -1?" disabled":"")} onClick={this.saveProgram.bind(this)}>SAVE CHANGES</a>
           }
           {charging?
             <img

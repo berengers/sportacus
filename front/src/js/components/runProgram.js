@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 import Link from 'redux-first-router-link'
 
+const medias = "http://localhost:2015/"
+
 class RunProgram extends React.Component{
   constructor(props){
     super(props)
     this.state = { level: 0, subLevel: 1, totalCountDown: 5, countDown: 5, endProgram: false }
-    this.beep = new Audio('http://localhost:2015/beep.mp3')
-    this.finalBeep = new Audio('http://localhost:2015/finalBeep.mp3')
-    this.ovation = new Audio('http://localhost:2015/ovation.mp3')
+    this.beep = new Audio( medias + 'sounds/' + 'beep.mp3')
+    this.finalBeep = new Audio( medias + 'sounds/' + 'finalBeep.mp3')
+    this.ovation = new Audio( medias + 'sounds/' + 'ovation.mp3')
 
     // console.log ("this.state.level ---> ", this.state.level)
     // console.log ("this.state.subLevel ---> ", this.state.subLevel)
@@ -99,17 +101,21 @@ class RunProgram extends React.Component{
 
     return(
       <div className="col-12">
-        <Link to={`/programs/program/${program.id}`} className="btn btn-info mb-3 col-sm-4" >← back to program</Link>
-        <div onClick={this.playProgram.bind(this)} className='btn btn-success mb-3 col-sm-4 offset-sm-4'>Play Program  ►</div>
+        <Link to={`/programs/program/${program.id}`} className="btn btn-dark mb-3 col-sm-4" >← back to program</Link>
+        <div onClick={this.playProgram.bind(this)} className='btn btn-info mb-3 col-sm-4 offset-sm-4'>Play Program  ►</div>
         <div className="row no-gutters mb-2 position-relative">
-          <h2 className="bg-dark mx-auto text-center text-light py-2 col-12">{program.name}</h2>
+          <h2 className="bg-primary mx-auto text-center text-dark py-2 col-12">{program.name}</h2>
         </div>
         {steps.length > 0 &&
           <React.Fragment>
-            <div key={uuidv4()} className='bg-info text-center col-12 mb-4 p-4'>
+            <div key={uuidv4()} className='bg-dark text-light text-center col-12 mb-4 p-4'>
               <p>{subLevel}/{steps[level].series}</p>
               <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{step.exercise.name}</p>
-              {step.exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "20rem"}} src={step.exercise.image}/></div>:''}
+              {step.exercise.image?
+                <div><img className='item_steps mw-100' style={{maxHeight: "20rem"}}
+                src={medias + 'images/exercises/' + step.exercise.image}/></div>
+                :''
+              }
               <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
                 <div className="col-6 col-md">Series <span className="d-block badge badge-secondary p-1">{step.series}</span></div>
                   <div className="col-6 col-md">Reps <span className="d-block badge badge-secondary">{step.repetitions}</span></div>
@@ -134,7 +140,7 @@ class RunProgram extends React.Component{
                   </div>
                 }
                 {countDown == 0 && !endProgram &&
-                  <button onClick={this.nextSet.bind(this)} className="btn btn-dark col-6 mx-auto">SET FINISHED</button>
+                  <button onClick={this.nextSet.bind(this)} className="btn btn-info px-5 mx-auto mw-100">SET FINISHED</button>
                 }
                 {endProgram &&
                   <div className="bg-dark col-6 mx-auto p-3 text-light font-weight-bold">You were finish your program!</div>

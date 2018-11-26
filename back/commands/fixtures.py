@@ -9,7 +9,15 @@ from sport_programs.models import *
 tokens = [
     Token(
         user_id = 1,
-        token = 123456789
+        token = "token_public"
+    ),
+    Token(
+        user_id = 2,
+        token = "token_robert"
+    ),
+    Token(
+        user_id = 3,
+        token = "token_tom"
     )
 ]
 
@@ -42,6 +50,14 @@ programs = [
     ),
     Program(
         name = 'Biceps - Dos',
+        visibility = 'PUBLIC'
+    ),
+    Program(
+        name = 'Abdos --robert',
+        visibility = 'PRIVATE'
+    ),
+    Program(
+        name = 'Bras pecs --tom',
         visibility = 'PRIVATE'
     )
 ]
@@ -56,19 +72,29 @@ user_programs = [
         program_id = 2
     ),
     UserProgram(
-        user_id = 2,
+        user_id = 1,
         program_id = 3
+    ),
+    UserProgram(
+        user_id = 2,
+        program_id = 4
+    ),
+    UserProgram(
+        user_id = 3,
+        program_id = 5
     )
 ]
 
 exercises = [
     Exercise(
         name = 'Developpe couche',
-        image = 'https://www.affairesdegars.com/webroot/usr_img/97554958/Flat-Barbell-Bench-Press1.jpg',
+        image = 'Flat-Barbell-Bench-Press1.jpg',
+        visibility = 'PUBLIC'
     ),
     Exercise(
         name = 'Ecarte incline avec halteres',
-        image = 'https://julienquaglierini.com/wp-content/uploads/2017/07/exercise-296-1-300x400.png'
+        image = 'ecarte-incline-halteres.png',
+        visibility = 'PUBLIC'
     ),
     Exercise(
         name = 'dips pour pecs',
@@ -81,13 +107,18 @@ exercises = [
         visibility = 'PUBLIC',
     ),
     Exercise(
+        name = 'Pompes triceps',
+        image = 'pompes-triceps.jpg',
+        visibility = 'PUBLIC',
+    ),
+    Exercise(
         name = 'Pompes',
-        image = 'https://www.complementsetproteines.com/img/cms/blog/2015/pompes-triceps-2.jpg',
+        image = 'pompe.jpg',
         visibility = 'PUBLIC',
     ),
     Exercise(
         name = 'Squats',
-        image = 'https://img-4.linternaute.com/lmnzTepR8kztnMRrVsGj1c3bXX0=/1240x/smart/6cb68a39a9e04f249f5f07494f722e96/ccmcms-linternaute/10763352.jpg',
+        image = '10763352.jpg',
         visibility = 'PUBLIC',
     ),
     Exercise(
@@ -99,6 +130,31 @@ exercises = [
         name = 'Fentes avant halteres unilaterale',
         image = '',
         visibility = 'PUBLIC',
+    ),
+    Exercise(
+        name = 'Crunch',
+        image = 'crunch.jpg',
+        visibility = 'PRIVATE',
+    ),
+    Exercise(
+        name = 'Abdo Ventre',
+        image = 'abdo-ventre.png',
+        visibility = 'PRIVATE',
+    ),
+    Exercise(
+        name = 'Planche',
+        image = 'exercice-abdo-gainage.jpg',
+        visibility = 'PRIVATE',
+    ),
+    Exercise(
+        name = 'pec-deck',
+        image = 'pec-deck.jpg',
+        visibility = 'PRIVATE',
+    ),
+    Exercise(
+        name = 'traction',
+        image = 'traction.jpg',
+        visibility = 'PRIVATE',
     )
 ]
 
@@ -134,6 +190,30 @@ user_exercises = [
     UserExercise(
         user_id = 1,
         exercise_id = 8
+    ),
+    UserExercise(
+        user_id = 1,
+        exercise_id = 9
+    ),
+    UserExercise(
+        user_id = 2,
+        exercise_id = 10
+    ),
+    UserExercise(
+        user_id = 2,
+        exercise_id = 11
+    ),
+    UserExercise(
+        user_id = 2,
+        exercise_id = 12
+    ),
+    UserExercise(
+        user_id = 3,
+        exercise_id = 13
+    ),
+    UserExercise(
+        user_id = 3,
+        exercise_id = 14
     )
 ]
 
@@ -247,6 +327,76 @@ steps = [
         rest = 45,
         rest_end = 90,
         position = 1
+    ),
+    Step(
+        program_id = 4,
+        exercise_id = 10,
+        series = 4,
+        repetitions = 11,
+        weight = 0,
+        rest = 30,
+        rest_end = 60,
+        position = 1
+    ),
+    Step(
+        program_id = 4,
+        exercise_id = 11,
+        series = 4,
+        repetitions = 11,
+        weight = 0,
+        rest = 30,
+        rest_end = 60,
+        position = 2
+    ),
+    Step(
+        program_id = 4,
+        exercise_id = 12,
+        series = 4,
+        repetitions = 11,
+        weight = 0,
+        rest = 30,
+        rest_end = 60,
+        position = 3
+    ),
+    Step(
+        program_id = 5,
+        exercise_id = 13,
+        series = 4,
+        repetitions = 11,
+        weight = 0,
+        rest = 30,
+        rest_end = 60,
+        position = 1
+    ),
+    Step(
+        program_id = 5,
+        exercise_id = 14,
+        series = 4,
+        repetitions = 11,
+        weight = 0,
+        rest = 30,
+        rest_end = 60,
+        position = 2
+    ),
+    Step(
+        program_id = 5,
+        exercise_id = 1,
+        series = 4,
+        repetitions = 11,
+        weight = 50,
+        rest = 30,
+        rest_end = 60,
+        position = 3
+    ),
+    Step(
+        program_id = 5,
+        exercise_id = 3,
+        series = 3,
+        repetitions = 10,
+        weight = 0,
+        rest = 30,
+        rest_end = 60,
+        position = 4
     )
 ]
 

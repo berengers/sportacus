@@ -5,6 +5,8 @@ import Link from 'redux-first-router-link'
 
 import { fetchCreateStep } from '../actions/step'
 
+const medias = "http://localhost:2015/"
+
 class ExerciseList extends React.Component{
   constructor(props){
     super(props)
@@ -22,10 +24,11 @@ class ExerciseList extends React.Component{
   }
   render(){
     const { location, exercises } = this.props
+    const pathImage = `${medias}/images/exercises/`
 
     return (
       <React.Fragment>
-        <h4 className='text-center text-light bg-info p-2 col-12'>{location.type === "CHOOSE_EXERCISE"?"Choose an exercise" : "Edit an exercise"}</h4>
+        <h4 className='text-center text-dark bg-primary p-2 col-12'>{location.type === "CHOOSE_EXERCISE"?"Choose an exercise" : "Edit an exercise"}</h4>
         <div className='btn-group-vertical d-block mt-2 col-12' id='exercises'>
           {location.type === "EXERCISES" &&
             exercises.filter(exercise => exercise.visibility === "PRIVATE").map(exercise => (
@@ -33,7 +36,10 @@ class ExerciseList extends React.Component{
               to={`/exercises/exercise/${exercise.id}`}
                 key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
-                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={exercise.image} />:''}
+                {exercise.image?
+                  <img className='item-exercise mw-100' style={{maxHeight: "10rem"}} src={pathImage + exercise.image} />
+                  :''
+                }
               </Link>
             ))
           }
@@ -43,11 +49,11 @@ class ExerciseList extends React.Component{
               to={`/programs/program/${location.payload.program_id}`}
                 key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
-                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={exercise.image} />:''}
+                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={pathImage + exercise.image} />:''}
               </Link>
             ))
           }
-          <Link to="/exercises/new_exercise" type="button" className="btn btn-success rounded" >
+          <Link to="/exercises/new_exercise" type="button" className="btn btn-info rounded" >
             NEW Exercise
           </Link>
         </div>

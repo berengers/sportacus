@@ -33,7 +33,7 @@ export const routesMap = {
     path: '/programs/program/:program_id/run',
     thunk: async (dispatch, getState) => {
       const { location: { payload: { program_id } }, programs } = getState()
-      dispatch(fetchSteps(program_id))
+      dispatch(fetchProgram(program_id))
     }
   },
   FORM_STEP: {
