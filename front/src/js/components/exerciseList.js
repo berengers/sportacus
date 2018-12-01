@@ -5,8 +5,6 @@ import Link from 'redux-first-router-link'
 
 import { fetchCreateStep } from '../actions/step'
 
-const medias = "http://localhost:2015/"
-
 class ExerciseList extends React.Component{
   constructor(props){
     super(props)
@@ -24,7 +22,6 @@ class ExerciseList extends React.Component{
   }
   render(){
     const { location, exercises } = this.props
-    const pathImage = `${medias}/images/exercises/`
 
     return (
       <React.Fragment>
@@ -37,7 +34,7 @@ class ExerciseList extends React.Component{
                 key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
                 {exercise.image?
-                  <img className='item-exercise mw-100' style={{maxHeight: "10rem"}} src={pathImage + exercise.image} />
+                  <img className='item-exercise mw-100' style={{maxHeight: "10rem"}} src={exercise.image} />
                   :''
                 }
               </Link>
@@ -49,7 +46,7 @@ class ExerciseList extends React.Component{
               to={`/programs/program/${location.payload.program_id}`}
                 key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
-                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={pathImage + exercise.image} />:''}
+                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={exercise.image} />:''}
               </Link>
             ))
           }

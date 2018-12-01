@@ -78,7 +78,7 @@ class DB{
   }
   fetchUpdateProgram(program){
     return fetch(
-      this.url + '/programs',
+      this.url + '/programs/' + program.id,
       {
         method: "PUT",
         headers: this._headers(),

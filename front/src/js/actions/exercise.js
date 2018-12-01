@@ -50,7 +50,7 @@ export function fetchDeleteExercise(id){
     authorized(dispatch, db.fetchDeleteExercise(id))
     .then((resp) => {
       console.log ("--- DELETE EXERCISE ---")
-      dispatch({ type: type.DELETE_EXERCISE, payload: { id } }),
+      dispatch({ type: type.DELETE_EXERCISE, payload: { id } })
       dispatch({ type: type.EXERCISES })
     })
   }

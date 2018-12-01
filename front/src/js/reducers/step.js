@@ -27,6 +27,10 @@ export function editStep(state=-1, action){
   switch (action.type) {
     case type.ID_STEP:
       return action.payload.id
+    case type.PROGRAMS:
+    case type.PROGRAM:
+    case type.EXERCISES:
+      return -1
     default:
       return state
   }
@@ -45,6 +49,10 @@ export function steps(state=[], action){
       return [...state, action.payload.step]
     case type.DELETE_STEP:
       return state.filter(step => step.id != action.payload.id)
+        .map((step, index) => {
+          step.position = index+1
+          return step
+        })
     case type.EDIT_STEP:
       return state.map(step => {
         if (step.id == action.payload.step.id) {

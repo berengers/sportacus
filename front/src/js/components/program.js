@@ -7,6 +7,8 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import Step from './step'
 import FormStep from './formStep'
 import * as type from '../actions/const'
+import { fetchUpdateProgram } from '../actions/program'
+
 
 class Program extends React.Component{
   constructor(props){
@@ -23,9 +25,12 @@ class Program extends React.Component{
     const orderedSteps = this.order(steps, result.source.index, result.destination.index)
     changePosition(orderedSteps)
   }
-  saveProgram(){
-    const { program, steps } = this.props
+  updateProgram(){
+    const { program, steps, updateProgram } = this.props
     program.steps = steps
+    console.log ("program ---> ", program)
+    console.log ("this.props ---> ", this.props)
+    updateProgram(program)
   }
   componentDidUpdate(prevProps){
     if (prevProps.steps.length === 0 && this.props.steps.length > 0) {
@@ -34,7 +39,7 @@ class Program extends React.Component{
     }
   }
   render(){
-    const { location, program, steps, charging, editStep } = this.props
+    const { location, program, steps, charging, editStep, programChanged } = this.props
     const mode = program.visibility === "PUBLIC"? "read":"edit"
     const dif =  JSON.stringify(this.initialSteps) === JSON.stringify(this.props.steps)
 
@@ -46,8 +51,8 @@ class Program extends React.Component{
         </div>
 
         <h4 className='text-center text-dark font-weight-bold bg-primary p-2 text-capitalize'>{program.name}</h4>
-          {dif &&
-            <a className={"btn btn-info col-12 text-light" + (editStep > -1?" disabled":"")} onClick={this.saveProgram.bind(this)}>SAVE CHANGES</a>
+          {programChanged &&
+            <a className={"btn btn-info col-12 text-light" + (editStep > -1?" disabled":"")} onClick={this.updateProgram.bind(this)}>SAVE CHANGES</a>
           }
           {charging?
             <img
@@ -98,7 +103,8 @@ class Program extends React.Component{
 }
 const mapDispatchToProps = dispatch => {
   return {
-    changePosition: (steps) => dispatch({ type: type.CHANGE_POSITION, payload: { steps } })
+    changePosition: (steps) => dispatch({ type: type.CHANGE_POSITION, payload: { steps } }),
+    updateProgram: (program) => dispatch(fetchUpdateProgram(program))
   }
 }
 const mapStateToProps = state => {
@@ -107,7 +113,8 @@ const mapStateToProps = state => {
     program: state.currentProgram,
     steps: state.steps,
     charging: state.charging,
-    editStep: state.editStep
+    editStep: state.editStep,
+    programChanged: state.programChanged
   }
 }
 

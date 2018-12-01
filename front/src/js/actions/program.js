@@ -41,10 +41,11 @@ export function fetchCreateProgram(name, visibility) {
 }
 
 export function fetchUpdateProgram(program){
-  return disabled => {
+  return dispatch => {
     authorized(dispatch, db.fetchUpdateProgram(program))
     .then((resp) => {
       console.log ("--- UPDATE PROGRAM ---")
+      dispatch({ type: type.UPDATE_PROGRAM })
     })
   }
 }

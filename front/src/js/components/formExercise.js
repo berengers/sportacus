@@ -49,9 +49,9 @@ class FormExercise extends React.Component{
     return (
       <React.Fragment>
         <Link to="/exercises" className="btn btn-info btn-sm mb-3">← Back to Exercises</Link>
-        <div className="col-12 border p-3">
+        <div className="col-12 bg-dark text-light p-3 border">
           {mode === "edit" &&
-            <div onClick={this.deleteExercice.bind(this)} className="btn btn-outline-danger btn-sm float-right">delete</div>
+            <div onClick={this.deleteExercice.bind(this)} className="btn btn-danger btn-sm float-right">delete</div>
           }
           <div className="form-group">
             <label>Name</label>
@@ -61,7 +61,7 @@ class FormExercise extends React.Component{
           <label className="d-block">Image (url)</label>
           {
             image.length > 0?
-                <img name="image" src={image} className="border mw-100" style={{maxHeight: "25rem"}} />
+                <img name="image" src={image} className="border mw-100 mb-3" style={{maxHeight: "25rem"}} />
               :
               ""
           }

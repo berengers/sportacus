@@ -50,7 +50,7 @@ class Step extends React.Component{
                 <div style={mode === "wait"? {opacity: ".4"}:{}}>
                   <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{exercise.name}</p>
                   {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}}
-                  src={"http://localhost:2015/images/exercises/" + exercise.image}/></div>:''}
+                  src={exercise.image}/></div>:''}
                   <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
                     <div className="col-6 col-md">Series <span className="d-block badge bg-dark-grey">{series}</span></div>
                     <div className="col-6 col-md px-0">Reps <span className="d-block badge bg-dark-grey">{repetitions}</span></div>
@@ -78,7 +78,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteStep: (id) => dispatch(fetchDeleteStep(id)),
+    deleteStep: (id) => dispatch({ type: type.DELETE_STEP, payload: { id } }),
     editStep: (id) => dispatch({ type: type.ID_STEP, payload: { id } })
   }
 }
