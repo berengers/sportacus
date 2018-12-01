@@ -1,4 +1,3 @@
-import 'bootstrap'
 import React from "react";
 import ReactDOM from "react-dom";
 import { combineReducers, applyMiddleware, createStore, compose } from 'redux'
@@ -7,6 +6,7 @@ import { Route, Switch } from 'react-router'
 import createHashHistory from 'history/createHashHistory'
 import thunkMiddleware from 'redux-thunk'
 import { connectRoutes } from 'redux-first-router'
+import 'bootstrap'
 
 import Login from './components/login'
 import App from './components/app'

@@ -39,14 +39,6 @@ def create_exercise():
     user = User.query.filter_by(id = g.user.id).first()
     exercise = req.data
 
-    for k, v in dif.data.items():
-        if k == 'name':
-            exercise.name = v
-        if k == 'image':
-            exercise.image = v
-        if k == 'visibility':
-            exercise.visibility = v
-
     user.exercises.append(exercise)
 
     db.session.add(exercise)

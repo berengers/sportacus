@@ -2,10 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 
-import '../../css/app.scss'
 import Program from './program'
 import ProgramList from './programList'
-import FormStep from './formStep'
 import ExerciseList from './exerciseList'
 import RunProgram from './runProgram'
 
@@ -16,9 +14,7 @@ class Programs extends React.Component{
     this.scenes = {
       'PROGRAMS':   <ProgramList />,
       'PROGRAM':    <Program />,
-      'FORM_STEP':  <FormStep mode="edit" />,
       'CHOOSE_EXERCISE':   <ExerciseList />,
-      'NEW_STEP':   <FormStep mode="add" />,
       'RUN_PROGRAM':<RunProgram />
     }
   }

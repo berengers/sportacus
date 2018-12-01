@@ -31,6 +31,9 @@ class DB{
     return resp.json()
   }
   _status(resp){
+    // console.log ("resp ---> ", resp)
+    // console.log ("resp.status ---> ", resp.status)
+    // console.log ("resp.statusText ---> ", resp.statusText)
     if (resp.status >= 200 && resp.status < 300) {
       return Promise.resolve(resp)
     } else if (resp.status == 401 || resp.status == 403) {
@@ -50,6 +53,17 @@ class DB{
     .then(this._status)
     .then(this._json)
   }
+  fetchProgram(program_id){
+    return fetch(
+      this.url + '/programs/' + program_id,
+      {
+        method: 'GET',
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
   fetchCreateProgram(name, visibility){
     return fetch(
       this.url + '/programs',
@@ -62,16 +76,16 @@ class DB{
     .then(this._status)
     .then(this._json)
   }
-  fetchSteps(program_id){
+  fetchUpdateProgram(program){
     return fetch(
-      this.url + '/programs/' + program_id + '/steps',
+      this.url + '/programs/' + program.id,
       {
-        method: 'GET',
-        headers: this._headers()
+        method: "PUT",
+        headers: this._headers(),
+        body: JSON.stringify(program)
       }
     )
     .then(this._status)
-    .then(this._json)
   }
   fetchStep(id){
     return fetch(
@@ -84,18 +98,13 @@ class DB{
     .then(this._status)
     .then(this._json)
   }
-  fetchCreateStep(repetitions, series, weight, rest_bs, rest_be, program_id, exercise_id){
+  fetchCreateStep(program_id, exercise_id){
     return fetch(
       this.url + '/steps',
       {
         method: 'POST',
         headers: this._headers(),
         body: JSON.stringify({
-          'repetitions': repetitions,
-          'series': series,
-          'weight': weight,
-          'rest_duration_between_series': rest_bs,
-          'rest_end_duration': rest_be,
           'program_id': program_id,
           'exercise_id': exercise_id
         })
@@ -114,7 +123,7 @@ class DB{
     )
     .then(this._status)
   }
-  fetchEditStep(id, repetitions, series, weight, rest_bs, rest_be, program_id, exercise_id){
+  fetchEditStep(id, repetitions, series, weight, rest, rest_end, program_id, exercise_id){
     return fetch(
       this.url + '/steps/' + id,
       {
@@ -124,25 +133,10 @@ class DB{
           'repetitions': repetitions,
           'series': series,
           'weight': weight,
-          'rest_duration_between_series': rest_bs,
-          'rest_end_duration': rest_be,
+          'rest': rest,
+          'rest_end': rest_end,
           'program_id': program_id,
           'exercise_id': exercise_id
-        })
-      }
-    )
-    .then(this._status)
-    .then(this._json)
-  }
-  fetchToken(email, password){
-    return fetch(
-      this.url + '/login',
-      {
-        method: 'POST',
-        headers: this._headers(),
-        body: JSON.stringify({
-          'email': email,
-          'password': password
         })
       }
     )
@@ -207,6 +201,21 @@ class DB{
           "name": name,
           "image": image,
           "visibility": visibility
+        })
+      }
+    )
+    .then(this._status)
+    .then(this._json)
+  }
+  fetchToken(email, password){
+    return fetch(
+      this.url + '/login',
+      {
+        method: 'POST',
+        headers: this._headers(),
+        body: JSON.stringify({
+          'email': email,
+          'password': password
         })
       }
     )

@@ -20,13 +20,10 @@ class ModalNewExercise extends React.Component{
     const { name, image, visibility } = this.state
 
     if (this.props.mode === "edit") {
-      console.log ("editExercise")
       const id = this.props.exercise.id
-      console.log ("id ---> ", id)
       this.props.editExercise(id, name, image, visibility)
     }
     else if (this.props.mode === "add") {
-      console.log ("addExercise")
       this.props.newExercise(name, image, visibility)
     }
 
@@ -38,12 +35,11 @@ class ModalNewExercise extends React.Component{
     this.setState({ name: '', image: '', visibility: 'PRIVATE' })
   }
   render(){
-    console.log ("this.state ---> ", this.state)
     const currentExercise = this.props.exercise
     let { name, image, visibility } = this.state
 
     return (
-      <div className="modal fade" id="exerciseModal" role="dialog">
+      <div className="modal fade" id="stepModal" role="dialog">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -89,11 +85,6 @@ class ModalNewExercise extends React.Component{
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//
-//   }
-// }
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -102,4 +93,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export const Modal_NewExercise = connect(null, mapDispatchToProps)(ModalNewExercise)
+export default connect(null, mapDispatchToProps)(ModalNewExercise)
