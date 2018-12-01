@@ -1,9 +1,9 @@
 import * as type from '../actions/const'
 
-export function error(state='', action){
+export function programChanged(state = false, action){
   switch (action.type) {
-    case type.ERROR_LOGIN:
-      return "error login"
+    case expression:
+
     default:
       return state
   }

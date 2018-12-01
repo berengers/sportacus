@@ -1,10 +1,12 @@
+import * as type from '../actions/const'
+
 export function charging(state=false, action){
   switch (action.type) {
-    case "CHARGING_STEPS":
-    case "CHARGING_PROGRAM":
+    case type.CHARGING_STEPS:
+    case type.CHARGING_PROGRAM:
       return true
-    case "CHARGED":
-    case "CURRENT_PROGRAM":
+    case type.CHARGED:
+    case type.CURRENT_PROGRAM:
       return false
     default:
       return state

@@ -31,9 +31,9 @@ class DB{
     return resp.json()
   }
   _status(resp){
-    console.log ("resp ---> ", resp)
-    console.log ("resp.status ---> ", resp.status)
-    console.log ("resp.statusText ---> ", resp.statusText)
+    // console.log ("resp ---> ", resp)
+    // console.log ("resp.status ---> ", resp.status)
+    // console.log ("resp.statusText ---> ", resp.statusText)
     if (resp.status >= 200 && resp.status < 300) {
       return Promise.resolve(resp)
     } else if (resp.status == 401 || resp.status == 403) {

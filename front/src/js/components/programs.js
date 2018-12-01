@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 
-// import '../../css/app.scss'
 import Program from './program'
 import ProgramList from './programList'
 import ExerciseList from './exerciseList'

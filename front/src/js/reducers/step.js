@@ -1,4 +1,4 @@
-import { RECEIVE_STEPS } from '../actions/step'
+import * as type from '../actions/const'
 
 const initialStep = {
   id: 0,
@@ -14,9 +14,9 @@ const initialStep = {
 
 export function currentStep(state=initialStep, action){
   switch (action.type) {
-    case "CURRENT_STEP":
+    case type.CURRENT_STEP:
       return action.payload.step
-    case "INITIAL_CURRENT_STEP":
+    case type.INITIAL_CURRENT_STEP:
       return initialStep
     default:
       return state
@@ -25,7 +25,7 @@ export function currentStep(state=initialStep, action){
 
 export function editStep(state=-1, action){
   switch (action.type) {
-    case "ID_STEP":
+    case type.ID_STEP:
       return action.payload.id
     default:
       return state
@@ -34,18 +34,18 @@ export function editStep(state=-1, action){
 
 export function steps(state=[], action){
   switch (action.type) {
-    case "CURRENT_PROGRAM":
+    case type.CURRENT_PROGRAM:
       return action.payload.program.steps
-    case "CHANGE_POSITION":
+    case type.CHANGE_POSITION:
       return action.payload.steps.map((step, index) => {
         step.position = index+1
         return step
       })
-    case "ADD_STEP":
+    case type.ADD_STEP:
       return [...state, action.payload.step]
-    case "DELETE_STEP":
+    case type.DELETE_STEP:
       return state.filter(step => step.id != action.payload.id)
-    case "EDIT_STEP":
+    case type.EDIT_STEP:
       return state.map(step => {
         if (step.id == action.payload.step.id) {
           step = action.payload.step

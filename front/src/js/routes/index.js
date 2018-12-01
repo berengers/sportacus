@@ -1,5 +1,6 @@
 import { redirect, NOT_FOUND } from 'redux-first-router'
 
+import * as type from '../actions/const'
 import { authorized } from '../actions/tools'
 import { db } from '../actions/db'
 import { fetchPrograms } from '../actions/program'
@@ -12,7 +13,7 @@ export const routesMap = {
   HOME: {
     path: '/',
     thunk: async (dispatch) => {
-      dispatch(redirect({ type: "PROGRAMS" }))
+      dispatch(redirect({ type: type.PROGRAMS }))
     }
   },
   PROGRAMS: {
@@ -23,9 +24,9 @@ export const routesMap = {
     path: '/programs/program/:program_id',
     thunk: async (dispatch, getState) => {
       const { location: { payload: { program_id } }, programs } = getState()
-      dispatch({ type: "CHANGE_PAGE", payload: { page: 'Programs' } })
-      dispatch({ type: "INITIAL_CURRENT_STEP" })
-      dispatch({ type: "CHARGING_PROGRAM" })
+      dispatch({ type: type.CHANGE_PAGE, payload: { page: 'Programs' } })
+      dispatch({ type: type.INITIAL_CURRENT_STEP })
+      dispatch({ type: type.CHARGING_PROGRAM })
       dispatch(fetchProgram(program_id))
     }
   },
@@ -57,7 +58,7 @@ export const routesMap = {
   EXERCISES: {
     path: '/exercises',
     thunk: async (dispatch) => {
-      dispatch({ type: "INITIAL_CURRENT_EXERCISE" })
+      dispatch({ type: type.INITIAL_CURRENT_EXERCISE })
       dispatch(fetchExercises())
     }
   },
@@ -67,7 +68,7 @@ export const routesMap = {
       const { location: { payload: { id } }, exercises } = getState()
       const exercise = (exercises.filter(exercise => exercise.id == id))[0]
       if (exercises.length > 0) {
-        dispatch({ type: "CURRENT_EXERCISE", payload: { exercise } })
+        dispatch({ type: type.CURRENT_EXERCISE, payload: { exercise } })
       } else {
         dispatch(fetchExercise(id))
       }
@@ -76,18 +77,17 @@ export const routesMap = {
   NEW_EXERCISE: '/exercises/new_exercise',
   PROGRAM_EDITOR: '/program_editor',
   USER: '/user/:id',
-  SELECT_PROGRAM: '/program/:program_id',
   LOGIN: {
     path: '/login',
     thunk: async (dispatch) => {
-      dispatch({ type: "CHANGE_PAGE", payload: { page: 'Login' } })
+      dispatch({ type: type.CHANGE_PAGE, payload: { page: 'Login' } })
     }
   },
   LOGOUT: {
     path: '/logout',
     thunk: async (dispatch) => {
       dispatch(logout())
-      dispatch(redirect({ type: "LOGIN" }))
+      dispatch(redirect({ type: type.LOGIN }))
     }
   }
 }

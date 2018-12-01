@@ -1,14 +1,14 @@
-import { RECEIVE_EXERCISES, ADD_EXERCISE, fetchCreateExercise } from '../actions/exercise'
+import * as type from '../actions/const'
 import { authorized } from '../actions/tools'
 import { db } from '../actions/db'
 
 export function exercises(state=[], action){
   switch (action.type) {
-    case "RECEIVE_EXERCISES":
+    case type.RECEIVE_EXERCISES:
       return action.payload.exercises
-    case "ADD_EXERCISE":
+    case type.ADD_EXERCISE:
       return [...state, action.payload.exercise]
-    case "DELETE_EXERCISE":
+    case type.DELETE_EXERCISE:
       return state.filter(exercise => exercise.id != action.payload.id)
     default:
       return state
@@ -18,11 +18,11 @@ export function exercises(state=[], action){
 const initialState = { id:0, name:"", image:"", visibility:"PRIVATE" }
 export function currentExercise(state=initialState, action){
   switch (action.type) {
-    case "CURRENT_EXERCISE":
+    case type.CURRENT_EXERCISE:
       return action.payload.exercise
-    case "INITIAL_CURRENT_EXERCISE":
-    case "NEW_STEP":
-    case "NEW_EXERCISE":
+    case type.INITIAL_CURRENT_EXERCISE:
+    case type.NEW_STEP:
+    case type.NEW_EXERCISE:
       return initialState
     default:
       return state

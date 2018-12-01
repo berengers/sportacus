@@ -6,6 +6,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 import Step from './step'
 import FormStep from './formStep'
+import * as type from '../actions/const'
 
 class Program extends React.Component{
   constructor(props){
@@ -25,7 +26,6 @@ class Program extends React.Component{
   saveProgram(){
     const { program, steps } = this.props
     program.steps = steps
-    console.log ("program ---> ", program)
   }
   componentDidUpdate(prevProps){
     if (prevProps.steps.length === 0 && this.props.steps.length > 0) {
@@ -98,7 +98,7 @@ class Program extends React.Component{
 }
 const mapDispatchToProps = dispatch => {
   return {
-    changePosition: (steps) => dispatch({ type: "CHANGE_POSITION", payload: { steps } })
+    changePosition: (steps) => dispatch({ type: type.CHANGE_POSITION, payload: { steps } })
   }
 }
 const mapStateToProps = state => {

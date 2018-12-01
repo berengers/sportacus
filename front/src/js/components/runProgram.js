@@ -12,10 +12,6 @@ class RunProgram extends React.Component{
     this.beep = new Audio( medias + 'sounds/' + 'beep.mp3')
     this.finalBeep = new Audio( medias + 'sounds/' + 'finalBeep.mp3')
     this.ovation = new Audio( medias + 'sounds/' + 'ovation.mp3')
-
-    // console.log ("this.state.level ---> ", this.state.level)
-    // console.log ("this.state.subLevel ---> ", this.state.subLevel)
-    // console.log ("this.state.countDown ---> ", this.state.countDown)
   }
   playProgram(e){
     this.countDown(this.state.countDown)
@@ -28,7 +24,6 @@ class RunProgram extends React.Component{
     }, 1000)
 
     let countDown = count
-    // this.setState({ countDown: --countDown })
 
     let sportCounter = (function () {
       this.setState({ countDown: --countDown })
@@ -38,7 +33,6 @@ class RunProgram extends React.Component{
       } else if (countDown == 0) {
         this.finalBeep.play()
       }
-      // countDown--
 
       if (countDown == 0) {
         console.log ("count finish !!!")
@@ -58,32 +52,20 @@ class RunProgram extends React.Component{
     }
 
     this.setState({ countDown: count, totalCountDown: count })
-    // console.log ("level ---> ", level)
-    // console.log ("this.props.steps.length ---> ", this.props.steps.length)
     if (level == steps.length -1 && subLevel == steps[level].series) {
       this.setState({ endProgram: true })
       this.ovation.play()
-      console.log("FINISH")
     } else if (this.state.subLevel < steps[level].series) {
-      console.log('SUBLEVEL AGAIN')
-      // console.log ("this.state.subLevel ---> ", subLevel)
       this.setState({ subLevel: this.state.subLevel + 1 })
       if (count != 0) {
         this.countDown(count)
       }
     } else {
-      console.log("NEXT STEP")
       this.setState({ level: level + 1, subLevel: 1 })
       if (count != 0) {
         this.countDown(count)
       }
     }
-  }
-  componentDidUpdate(prevProps){
-    // if (prevProps.steps.length == 0 && this.props.steps.length > 0) {
-    //   const firstStep = this.props.steps[0]
-    //   this.setState({ countDown: firstStep.rest })
-    // }
   }
   componentWillUnmount(){
     clearInterval(this.intervalId)
@@ -92,12 +74,8 @@ class RunProgram extends React.Component{
     const { steps, program } = this.props
     const { level, subLevel, countDown, totalCountDown, endProgram } = this.state
 
-    // let dashoffset = 376.991 / ((totalCountDown - countDown)+0.001)
     let dashoffset = totalCountDown > 0?(376.991 / totalCountDown) * (totalCountDown - countDown):0
-    // MATH FLOOR
-    console.log ("dashoffset ---> ", dashoffset)
     let step = steps[this.state.level]
-    console.log ("this.state ---> ", this.state)
 
     return(
       <div className="col-12">

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Draggable } from 'react-beautiful-dnd'
 
 import { fetchDeleteStep, editStep } from '../actions/step'
+import * as type from '../actions/const'
 
 class Step extends React.Component{
   constructor(props){
@@ -19,17 +20,11 @@ class Step extends React.Component{
     const { id, exercise, repetitions, rest, rest_end, series, weight } = this.props.step
     const { location, step, mode, editStep, editingStep, program } = this.props
     const dragDisabled = editingStep > -1 || program.visibility === "PUBLIC" ? true : false
-    // console.log ("step ---> ", step)
-    // console.log ("this.props ---> ", this.props)
-    // console.log ("id ---> ", id)
-    // console.log ("editStep ---> ", editingStep)
-    console.log ("this.props.mode ---> ", this.props.mode)
 
     return (
       <Draggable draggableId={id} index={this.props.index} isDragDisabled={dragDisabled}>
         {
           (provided, snapshot) => {
-            console.log ("snapshot.isDragging ---> ", snapshot.isDragging)
             const bg = snapshot.isDragging ? "bg-dark-grey" : "bg-dark"
 
             return (
@@ -84,7 +79,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteStep: (id) => dispatch(fetchDeleteStep(id)),
-    editStep: (id) => dispatch({ type: "ID_STEP", payload: { id } })
+    editStep: (id) => dispatch({ type: type.ID_STEP, payload: { id } })
   }
 }
 

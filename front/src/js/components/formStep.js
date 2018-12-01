@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Draggable } from 'react-beautiful-dnd'
 
 import { fetchDeleteStep } from '../actions/step'
+import * as type from '../actions/const'
 
 
 class FormStep extends React.Component{
@@ -93,8 +94,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteStep: (id) => dispatch(fetchDeleteStep(id)),
-    cancelStep: () => dispatch({ type: "ID_STEP", payload: { id: -1 } }),
-    editStep: (step) => dispatch({ type: "EDIT_STEP", payload: { step } })
+    cancelStep: () => dispatch({ type: type.ID_STEP, payload: { id: -1 } }),
+    editStep: (step) => dispatch({ type: type.EDIT_STEP, payload: { step } })
   }
 }
 
