@@ -2,49 +2,120 @@ import React from 'react'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 import Link from 'redux-first-router-link'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 import Step from './step'
+import FormStep from './formStep'
+import * as type from '../actions/const'
+import { fetchUpdateProgram } from '../actions/program'
+
 
 class Program extends React.Component{
   constructor(props){
     super(props)
+    this.initialSteps = []
+  }
+  order(list, indexSource, indexDestinatioin) {
+    const [itemMoved] = list.splice(indexSource, 1)
+    list.splice(indexDestinatioin, 0, itemMoved)
+    return list
+  }
+  onDragEnd(result){
+    const { steps, changePosition } = this.props
+    const orderedSteps = this.order(steps, result.source.index, result.destination.index)
+    changePosition(orderedSteps)
+  }
+  updateProgram(){
+    const { program, steps, updateProgram } = this.props
+    program.steps = steps
+    console.log ("program ---> ", program)
+    console.log ("this.props ---> ", this.props)
+    updateProgram(program)
+  }
+  componentDidUpdate(prevProps){
+    if (prevProps.steps.length === 0 && this.props.steps.length > 0) {
+      this.initialSteps = this.props.steps
+      this.setState({})
+    }
   }
   render(){
-    const { location, program, steps, charging } = this.props
-    // console.log ("this.props ---> ", this.props)
-    // console.log ("program ---> ", program)
+    const { location, program, steps, charging, editStep, programChanged } = this.props
+    const mode = program.visibility === "PUBLIC"? "read":"edit"
+    const dif =  JSON.stringify(this.initialSteps) === JSON.stringify(this.props.steps)
 
     return (
       <div className="col-12">
         <div className='row no-gutters'>
-          <Link to="/programs" className='btn btn-info mb-3 col-sm-4'> {'← back to programs'} </Link>
-          <div className="col-sm-4"></div>
-          <Link to={`/programs/program/${program.id}/run`} className='btn btn-success mb-3 col-sm-4'> {'Run Programs' + '  ' + '►'} </Link>
+          <Link to="/programs" className='btn btn-dark-grey mb-3 col-sm-4'> {'← back to programs'} </Link>
+          <Link to={`/programs/program/${program.id}/run`} className='btn btn-info mb-3 col-sm-4 offset-sm-4'> {'Run Programs' + '  ' + '►'} </Link>
         </div>
-        <h4 className='text-center text-light bg-dark p-2 text-capitalize' data-toggle='collapse' data-target='#programs'>{program.name}</h4>
-        <div className='row no-gutters w-100 mt-2' id='programs'>
-          {charging &&
-            <h2 className="col-12 text-center p-3">Charging...</h2>
+
+        <h4 className='text-center text-dark font-weight-bold bg-primary p-2 text-capitalize'>{program.name}</h4>
+          {programChanged &&
+            <a className={"btn btn-info col-12 text-light" + (editStep > -1?" disabled":"")} onClick={this.updateProgram.bind(this)}>SAVE CHANGES</a>
           }
-          {
-            steps.map( step => (
-              <Step key={uuidv4()} step={step}/>
-            ))
+          {charging?
+            <img
+            className="d-block mx-auto mt-5" width="100px"
+            src="http://localhost:2015/icons/loading.gif" />
+            :
+            <React.Fragment>
+            <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
+              <Droppable droppableId="droppable-1">
+              {
+                (provided, snapshot) => {
+                  return (
+                    <div
+                    ref={provided.innerRef}
+                    style={{backgroundColor: ""}}{...provided.droppableProps}
+                    className='row no-gutters w-100 mt-2'
+                    >
+                    {
+                      steps.map( (step, index) => {
+                        if (editStep === step.id) {
+                          return <FormStep key={step.id} step={step} index={index} mode={mode}/>
+                        }
+                        if (editStep > -1) {
+                          return <Step key={step.id} step={step} index={index} mode={"wait"}/>
+                        }
+                        return <Step key={step.id} step={step} index={index} mode={mode}/>
+                      })
+                    }
+                    {provided.placeholder}
+                    </div>
+                  )
+                }
+              }
+              </Droppable>
+            </DragDropContext>
+            {program.visibility === "PRIVATE" &&
+              <Link
+              to={`/programs/program/${program.id}/choose_exercise`}
+              className={'btn btn-warning text-center col-12 p-2' + (editStep>-1?' disabled':'')}
+              >+</Link>
+            }
+            </React.Fragment>
           }
-          <Link to={`/programs/program/${program.id}/choose_exercise`} className='btn btn-warning text-center col-12 p-3' >+</Link>
-        </div>
+
       </div>
     )
   }
 }
-
-const mapStateToprops = state => {
+const mapDispatchToProps = dispatch => {
+  return {
+    changePosition: (steps) => dispatch({ type: type.CHANGE_POSITION, payload: { steps } }),
+    updateProgram: (program) => dispatch(fetchUpdateProgram(program))
+  }
+}
+const mapStateToProps = state => {
   return {
     location: state.location,
     program: state.currentProgram,
     steps: state.steps,
-    charging: state.charging
+    charging: state.charging,
+    editStep: state.editStep,
+    programChanged: state.programChanged
   }
 }
 
-export default connect(mapStateToprops)(Program)
+export default connect(mapStateToProps, mapDispatchToProps)(Program)

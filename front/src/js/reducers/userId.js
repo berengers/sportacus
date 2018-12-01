@@ -1,16 +1,14 @@
+import * as type from '../actions/const'
 import { NOT_FOUND } from 'redux-first-router'
 
 export default function userIdReducer(state = null, action = {}){
   switch (action.type) {
-    case 'LOGIN':
-      console.log ("2222 ---> ", 2222)
+    case type.LOGIN:
       return 5
-    case 'PROGRAM_EDITOR':
-      console.log ("4444444 ---> ", 4444444)
+    case type.PROGRAM_EDITOR:
     case NOT_FOUND:
       return null
-    case 'USER':
-      console.log ("45454 ---> ", 45454)
+    case type.USER:
       return action.payload.id
     default:
       return state

@@ -4,7 +4,7 @@ import Link from 'redux-first-router-link'
 
 import { fetchCreateExercise, fetchEditExercise, fetchDeleteExercise } from '../actions/exercise'
 
-class Exercise extends React.Component{
+class FormExercise extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -49,9 +49,9 @@ class Exercise extends React.Component{
     return (
       <React.Fragment>
         <Link to="/exercises" className="btn btn-info btn-sm mb-3">← Back to Exercises</Link>
-        <div className="col-12 border p-3">
+        <div className="col-12 bg-dark text-light p-3 border">
           {mode === "edit" &&
-            <div onClick={this.deleteExercice.bind(this)} className="btn btn-outline-danger btn-sm float-right">delete</div>
+            <div onClick={this.deleteExercice.bind(this)} className="btn btn-danger btn-sm float-right">delete</div>
           }
           <div className="form-group">
             <label>Name</label>
@@ -61,18 +61,11 @@ class Exercise extends React.Component{
           <label className="d-block">Image (url)</label>
           {
             image.length > 0?
-                <img name="image" src={image} className="border mw-100" style={{maxHeight: "25rem"}} />
+                <img name="image" src={image} className="border mw-100 mb-3" style={{maxHeight: "25rem"}} />
               :
               ""
           }
           <input type="url" value={image} name="image" onChange={this.inputChange.bind(this)} className="form-control col-12" />
-          </div>
-          <div className='form-group'>
-            <label>Visibility</label>
-            <select value={visibility} name='visibility' className="form-control" onChange={this.inputChange.bind(this)}>
-              <option value='PRIVATE'>PRIVATE</option>
-              <option value='PUBLIC'>PUBLIC</option>
-            </select>
           </div>
           <button onClick={this.saveExercise.bind(this)} className="btn btn-info float-left" type="submit">Save Exercise</button>
           <Link to="/exercises" className="btn btn-secondary float-right">Cancel</Link>
@@ -95,4 +88,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Exercise)
+export default connect(mapStateToProps, mapDispatchToProps)(FormExercise)

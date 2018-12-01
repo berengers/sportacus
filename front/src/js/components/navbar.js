@@ -12,8 +12,8 @@ export default class NavBar extends React.Component{
     const { pathname } = this.props
 
     return (
-      <nav className='navbar navbar-expand-sm navbar-dark bg-dark'>
-        <a className='navbar-brand text-info' href='#'>SportPrograms</a>
+      <nav className='navbar navbar-expand-sm navbar-light bg-primary'>
+        <a className='navbar-brand text-dark font-weight-bold' href='#'>SportPrograms</a>
         <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navBarSupportedContent'>
           <span className='navbar-toggler-icon'></span>
         </button>
@@ -27,7 +27,7 @@ export default class NavBar extends React.Component{
               <NavLink activeClassName='active' className='nav-link' to='/exercises'>EXERCISES</NavLink>
             </li>
           </ul>
-          <Link to='/logout' className='btn btn-info mr-3'>Logout</Link>
+          <Link to='/logout' className='btn btn-outline-dark mr-3'>Logout</Link>
         </div>
       </nav>
     )

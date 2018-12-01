@@ -8,6 +8,7 @@ from .tools import error
 def auth(fn):
     def f(**kwargs):
         t_string = request.headers.get("X-Authenticate", "")
+        print ("t_string ---------------> ", t_string)
         t = Token.query.filter(Token.token == t_string).first()
 
         if not t:

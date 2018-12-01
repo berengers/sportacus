@@ -1,52 +1,29 @@
+$theme-colors: (
+  "primary": #ffc107,
+  "dark": #191c1f,
+  "dark-grey": #303131
+);
 
-@import "./customTheme";
+// @import "./customTheme";
 @import "~bootstrap/scss/bootstrap";
 
-// #countDown{
-//   position: relative;
-//   height: 200px;
-// }
+body{
+  background: black;
+}
+
+#circle{
+  transform: rotate(-90deg);
+}
 
 #countDown figure{
-  margin: auto;
-  fill: transparent;
-  stroke: var(--dark);
-  stroke-width: 10px;
-  stroke-dasharray: 534;
-  transition: stroke-dashoffset 1s;
-  -webkit-animation-play-state: running;
-
-  /* firefox bug fix - won't rotate at 90deg angles */
-  -moz-transform: rotate(-89deg) translateX(-190px);
-
   position: relative;
-  width: 150px;
-  height: 150px;
 }
-
 #countDown figcaption{
-  font-size: 2.6em;
-  padding-top: 50px;
+  position: absolute;
+  z-index: 100;
+  top: 44px;
+  width: 132px;
+  text-align: center;
+  font-size: 60px;
   line-height: 50px;
 }
-
-#countDown .outer{
-  stroke-dashoffset:0;
-  -webkit-animation: show100 5s;
-  animation: stroke-dashoffset 1s;
-}
-
-#countDown svg{
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-// @keyframes show100{
-//   from {
-//     stroke-dashoffset: 537;
-//   }
-//   to {
-//     stroke-dashoffset: 0;
-//   }
-// }

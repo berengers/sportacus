@@ -1,3 +1,4 @@
+import * as type from '../actions/const'
 
 const initialState = {
   id: "",
@@ -7,7 +8,7 @@ const initialState = {
 
 export function currentProgram(state=initialState, action){
   switch (action.type) {
-    case "CURRENT_PROGRAM":
+    case type.CURRENT_PROGRAM:
       const program = {
         id: action.payload.program.id,
         name: action.payload.program.name,
@@ -21,9 +22,9 @@ export function currentProgram(state=initialState, action){
 
 export function programs(state=[], action){
   switch (action.type) {
-    case "RECEIVE_PROGRAMS":
+    case type.RECEIVE_PROGRAMS:
       return action.payload.programs
-    case "ADD_PROGRAM":
+    case type.ADD_PROGRAM:
       return [...state, action.payload.program]
     default:
       return state
