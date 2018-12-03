@@ -5,6 +5,8 @@ import { Draggable } from 'react-beautiful-dnd'
 
 import { fetchDeleteStep, editStep } from '../actions/step'
 import * as type from '../actions/const'
+import dragIcon from '../../../../back/medias/icons/baseline-drag_indicator-24px.svg'
+console.log ("dragIcon ---> ", dragIcon)
 
 class Step extends React.Component{
   constructor(props){
@@ -36,7 +38,7 @@ class Step extends React.Component{
               >
                 {!dragDisabled &&
                   <div className="position-absolute" style={{ top: "50%", right: "1%", opacity: ".7" }}>
-                    <img src="http://localhost:2015/icons/baseline-drag_indicator-24px.svg" />
+                    <img src={dragIcon} />
                   </div>
                 }
 
@@ -52,11 +54,11 @@ class Step extends React.Component{
                   {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}}
                   src={exercise.image}/></div>:''}
                   <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
-                    <div className="col-6 col-md">Series <span className="d-block badge bg-dark-grey">{series}</span></div>
-                    <div className="col-6 col-md px-0">Reps <span className="d-block badge bg-dark-grey">{repetitions}</span></div>
-                    <div className="col-6 col-md">Weight  <span className="d-block badge bg-dark-grey">{weight}kg</span></div>
-                    <div className="col-6 col-md">Rest  <span className="d-block badge bg-dark-grey">{rest}s</span></div>
-                    <div className="col-12 col-md pl-0">Rest end  <span className="d-block badge bg-dark-grey">{rest_end}s</span></div>
+                    <div className="col-6 col-md px-0">Series <span className="d-block badge bg-dark-grey col-10 mx-auto">{series}</span></div>
+                    <div className="col-6 col-md px-0">Reps <span className="d-block badge bg-dark-grey col-10 mx-auto">{repetitions}</span></div>
+                    <div className="col-6 col-md px-0">Weight  <span className="d-block badge bg-dark-grey col-10 mx-auto">{weight}kg</span></div>
+                    <div className="col-6 col-md px-0">Rest  <span className="d-block badge bg-dark-grey col-10 mx-auto">{rest}s</span></div>
+                    <div className="col-12 col-md px-0">Rest end  <span className="d-block badge bg-dark-grey col-11 col-md-10 mx-auto">{rest_end}s</span></div>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,7 @@
 import 'whatwg-fetch'
 
+import * as type from './const'
+
 function ExtendableBuiltin(cls){
     function ExtendableBuiltin(){
         cls.apply(this, arguments);
@@ -15,7 +17,7 @@ export class AuthorizationError extends ExtendableBuiltin(Error){
 
 class DB{
   constructor(){
-    this.url = 'http://localhost:5000'
+    this.url = '/api'
     this.contentType = { 'Content-Type' : 'application/json' }
   }
   token(){
@@ -31,9 +33,6 @@ class DB{
     return resp.json()
   }
   _status(resp){
-    // console.log ("resp ---> ", resp)
-    // console.log ("resp.status ---> ", resp.status)
-    // console.log ("resp.statusText ---> ", resp.statusText)
     if (resp.status >= 200 && resp.status < 300) {
       return Promise.resolve(resp)
     } else if (resp.status == 401 || resp.status == 403) {
@@ -41,6 +40,37 @@ class DB{
     } else {
       return Promise.reject(new Error(resp.statusText))
     }
+  }
+  fetchToken(email, password, dispatch){
+    return fetch(
+      this.url + '/login',
+      {
+        method: 'POST',
+        headers: this._headers(),
+        body: JSON.stringify({
+          'email': email,
+          'password': password
+        })
+      }
+    )
+    .then((resp) => {
+      if (resp.status === 401) {
+        dispatch({ type: type.ERROR_LOGIN })
+      }
+      return resp
+    })
+    .then(this._status)
+    .then(this._json)
+  }
+  logout(){
+    return fetch(
+      this.url + '/logout',
+      {
+        method: "DELETE",
+        headers: this._headers()
+      }
+    )
+    .then(this._status)
   }
   fetchPrograms(){
     return fetch(
@@ -206,31 +236,6 @@ class DB{
     )
     .then(this._status)
     .then(this._json)
-  }
-  fetchToken(email, password){
-    return fetch(
-      this.url + '/login',
-      {
-        method: 'POST',
-        headers: this._headers(),
-        body: JSON.stringify({
-          'email': email,
-          'password': password
-        })
-      }
-    )
-    .then(this._status)
-    .then(this._json)
-  }
-  logout(){
-    return fetch(
-      this.url + '/logout',
-      {
-        method: "DELETE",
-        headers: this._headers()
-      }
-    )
-    .then(this._status)
   }
 }
 

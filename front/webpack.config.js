@@ -9,6 +9,9 @@ module.exports = {
   devServer: {
         watchOptions: {
             poll: true
+        },
+        proxy: {
+          '/api': 'http://localhost:5000'
         }
   },
   devtool : 'source-map',
@@ -64,6 +67,15 @@ module.exports = {
               sourceMap: true,
               minimize: true
             }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif|svg|mp3)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {}
           }
         ]
       }

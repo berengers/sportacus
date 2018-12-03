@@ -29,7 +29,6 @@ class Login extends React.Component{
   }
   render(){
     const { error } = this.props
-    console.log ("error ---> ", error)
 
     return (
       <div className='mx-auto' style={{maxWidth: "450px"}}>

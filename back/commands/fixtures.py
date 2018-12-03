@@ -1,4 +1,4 @@
-from flask_script import Command
+from flask_script import Command, Option
 
 from sport_programs import db, app
 from sport_programs.models import *
@@ -401,7 +401,12 @@ steps = [
 ]
 
 class FixturesCommand(Command):
-    def run(self):
+
+    option_list = (
+        Option('--url', '-url', dest='url'),
+    )
+
+    def run(self, url):
 
         with app.app_context():
 
@@ -422,6 +427,8 @@ class FixturesCommand(Command):
             db.session.commit()
 
             for exercise in exercises:
+                if len(exercise.image) > 0:
+                    exercise.image = url + exercise.image
                 db.session.add(exercise)
             db.session.commit()
 

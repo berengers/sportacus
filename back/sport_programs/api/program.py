@@ -6,7 +6,7 @@ from sport_programs import app, db
 from sport_programs.models import *
 from sport_programs.schemas import program_schema, programs_schema, simple_programs_schema, simple_program_schema, get_program_nested_schema, program_nested_schema
 
-@app.route("/programs", methods=["GET"])
+@app.route("/api/programs", methods=["GET"])
 @auth
 def list_programs():
     programs = Program.query\
@@ -30,7 +30,7 @@ def list_programs():
 #
 #     return simple_program_schema.jsonify(program)
 
-@app.route('/programs/<program_id>', methods=['GET'])
+@app.route('/api/programs/<program_id>', methods=['GET'])
 @auth
 def get_program(program_id):
 
@@ -44,7 +44,7 @@ def get_program(program_id):
     return get_program_nested_schema.jsonify(program)
 
 
-@app.route("/programs", methods=["POST"])
+@app.route("/api/programs", methods=["POST"])
 @auth
 def new_program():
     res = program_schema.load(request.json, session=db.session)
@@ -60,7 +60,7 @@ def new_program():
 
     return simple_program_schema.jsonify(res.data)
 
-@app.route("/programs/<id>", methods=["DELETE"])
+@app.route("/api/programs/<id>", methods=["DELETE"])
 @auth
 def delete_program(id):
     program = Program.query.filter_by(id = id).first()
@@ -82,7 +82,7 @@ def delete_program(id):
     return ""
 
 
-@app.route("/programs/<id>", methods=["PUT"])
+@app.route("/api/programs/<id>", methods=["PUT"])
 @auth
 def update_program(id):
     program = Program.query.filter_by(id=id).first()

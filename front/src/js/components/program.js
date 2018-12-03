@@ -8,7 +8,7 @@ import Step from './step'
 import FormStep from './formStep'
 import * as type from '../actions/const'
 import { fetchUpdateProgram } from '../actions/program'
-
+import loading from '../../../../back/medias/icons/loading.gif'
 
 class Program extends React.Component{
   constructor(props){
@@ -28,8 +28,6 @@ class Program extends React.Component{
   updateProgram(){
     const { program, steps, updateProgram } = this.props
     program.steps = steps
-    console.log ("program ---> ", program)
-    console.log ("this.props ---> ", this.props)
     updateProgram(program)
   }
   componentDidUpdate(prevProps){
@@ -52,12 +50,12 @@ class Program extends React.Component{
 
         <h4 className='text-center text-dark font-weight-bold bg-primary p-2 text-capitalize'>{program.name}</h4>
           {programChanged &&
-            <a className={"btn btn-info col-12 text-light" + (editStep > -1?" disabled":"")} onClick={this.updateProgram.bind(this)}>SAVE CHANGES</a>
+            <a className={"btn btn-success col-12 text-light" + (editStep > -1?" disabled":"")} onClick={this.updateProgram.bind(this)}>SAVE CHANGES</a>
           }
           {charging?
             <img
             className="d-block mx-auto mt-5" width="100px"
-            src="http://localhost:2015/icons/loading.gif" />
+            src={loading} />
             :
             <React.Fragment>
             <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>

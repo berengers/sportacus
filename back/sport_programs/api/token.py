@@ -21,7 +21,7 @@ def auth(fn):
 
     return f
 
-@app.route("/login", methods=["POST"])
+@app.route("/api/login", methods=["POST"])
 def log_user():
     datas = request.json
     user = User.query.filter_by(email = datas['email']).first()
@@ -42,7 +42,7 @@ def log_user():
     return jsonify(newToken)
 
 
-@app.route("/logout", methods=["DELETE"])
+@app.route("/api/logout", methods=["DELETE"])
 @auth
 def logout_user():
     token = Token.query.filter(Token.user_id == g.user.id).first()

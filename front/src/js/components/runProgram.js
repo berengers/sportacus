@@ -2,16 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 import Link from 'redux-first-router-link'
+import beep from '../../../../back/medias/sounds/beep.mp3'
+import finalBeep from '../../../../back/medias/sounds/finalBeep.mp3'
+import ovation from '../../../../back/medias/sounds/ovation.mp3'
 
-const medias = "http://localhost:2015/"
 
 class RunProgram extends React.Component{
   constructor(props){
     super(props)
     this.state = { level: 0, subLevel: 1, totalCountDown: 5, countDown: 5, endProgram: false }
-    this.beep = new Audio( medias + 'sounds/' + 'beep.mp3')
-    this.finalBeep = new Audio( medias + 'sounds/' + 'finalBeep.mp3')
-    this.ovation = new Audio( medias + 'sounds/' + 'ovation.mp3')
+    this.beep = new Audio(beep)
+    this.finalBeep = new Audio(finalBeep)
+    this.ovation = new Audio(ovation)
   }
   playProgram(e){
     this.countDown(this.state.countDown)
@@ -35,7 +37,6 @@ class RunProgram extends React.Component{
       }
 
       if (countDown == 0) {
-        console.log ("count finish !!!")
         clearInterval(this.intervalId)
       }
     }).bind(this)
@@ -91,7 +92,7 @@ class RunProgram extends React.Component{
               <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{step.exercise.name}</p>
               {step.exercise.image?
                 <div><img className='item_steps mw-100' style={{maxHeight: "20rem"}}
-                src={medias + 'images/exercises/' + step.exercise.image}/></div>
+                src={step.exercise.image}/></div>
                 :''
               }
               <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
@@ -102,7 +103,7 @@ class RunProgram extends React.Component{
                   <div className="col-12 col-md">Rest end  <span className="d-block badge badge-secondary p-1">{step.rest_end}s</span></div>
                 </div>
 
-                <div className="row mt-4">
+                <div className="row mt-4 p-3">
                 {!endProgram && countDown > 0 &&
                   <div id="countDown" className="mx-auto">
                     <figure>
@@ -118,10 +119,10 @@ class RunProgram extends React.Component{
                   </div>
                 }
                 {countDown == 0 && !endProgram &&
-                  <button onClick={this.nextSet.bind(this)} className="btn btn-info px-5 mx-auto mw-100">SET FINISHED</button>
+                  <button onClick={this.nextSet.bind(this)} className="btn btn-info col-sm-6 px-5 mx-auto mw-100">SET FINISHED</button>
                 }
                 {endProgram &&
-                  <div className="bg-dark col-6 mx-auto p-3 text-light font-weight-bold">You were finish your program!</div>
+                  <div className="bg-primary col-sm-6 mx-auto p-3 text-dark font-weight-bold">WORKOUT OVER !</div>
                 }
                 </div>
             </div>

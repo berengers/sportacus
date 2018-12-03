@@ -7,7 +7,7 @@ from sport_programs.models import Program, Step, UserProgram, UserExercise
 from sport_programs.schemas import steps_schema, step_schema, simple_steps_schema, simple_step_schema
 from tools import error
 
-@app.route('/steps/<id>', methods=['GET'])
+@app.route('/api/steps/<id>', methods=['GET'])
 @auth
 def get_step(id):
     step = Step.query.filter_by(id=id).first()
@@ -18,7 +18,7 @@ def get_step(id):
     return simple_step_schema.jsonify(step)
 
 
-@app.route('/steps', methods=['POST'])
+@app.route('/api/steps', methods=['POST'])
 @auth
 def add_step():
     req = step_schema.load(request.json, session=db.session, partial=True)
@@ -44,7 +44,7 @@ def add_step():
     return simple_step_schema.jsonify(req.data)
 
 
-@app.route('/steps/<id>', methods=['DELETE'])
+@app.route('/api/steps/<id>', methods=['DELETE'])
 @auth
 def delete_step(id):
     req = Step.query.filter_by(id = id).first()
@@ -63,7 +63,7 @@ def delete_step(id):
     return ''
 
 
-@app.route('/steps/<id>', methods=['PUT'])
+@app.route('/api/steps/<id>', methods=['PUT'])
 @auth
 def update_step(id):
     program = Step.query.filter_by(id = id).first()

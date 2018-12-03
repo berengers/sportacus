@@ -6,13 +6,12 @@ import * as type from './const'
 
 export function fetchToken(email, password){
   return dispatch => {
-    authorized(dispatch, db.fetchToken(email, password))
+    db.fetchToken(email, password, dispatch)
     .then((token) => {
       console.log ("--- GET TOKEN ---")
       localStorage.setItem('token', token)
       dispatch({ type: type.HOME })
     })
-    .catch((error) => console.log ("error ---> ", error))
   }
 }
 

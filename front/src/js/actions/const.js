@@ -1,26 +1,41 @@
 
-export const PROGRAM = "PROGRAM"
+// ROUTES
+export const HOME = "HOME"
 export const PROGRAMS = "PROGRAMS"
+export const PROGRAM = "PROGRAM"
+export const RUN_PROGRAM = "RUN_PROGRAM"
+export const FORM_STEP = "FORM_STEP"
+export const CHOOSE_EXERCISE = "CHOOSE_EXERCISE"
+export const NEW_STEP = "NEW_STEP"
+export const EXERCISES = "EXERCISES"
+export const EXERCISE = "EXERCISE"
+export const NEW_EXERCISE = "NEW_EXERCISE"
+export const PROGRAM_EDITOR = "PROGRAM_EDITOR"
+export const USER = "USER"
+export const LOGIN = "LOGIN"
+export const LOGOUT = "LOGOUT"
+
+
+// ACTIONS PROGRAM
 export const CURRENT_PROGRAM = "CURRENT_PROGRAM"
 export const RECEIVE_PROGRAMS = "RECEIVE_PROGRAMS"
 export const ADD_PROGRAM = "ADD_PROGRAM"
-export const PROGRAM_EDITOR = "PROGRAM_EDITOR"
 export const SELECT_PROGRAM = 'SELECT_PROGRAM'
 export const CHARGING_PROGRAM = "CHARGING_PROGRAM"
 export const UPDATE_PROGRAM = "UPDATE_PROGRAM"
 
+
+// ACTIONS EXERCISE
 export const INITIAL_CURRENT_EXERCISE = "INITIAL_CURRENT_STEP"
-export const EXERCISES = "EXERCISES"
-export const EXERCISE = "EXERCISE"
 export const EDIT_EXERCISE = "EDIT_EXERCISE"
-export const NEW_EXERCISE = "NEW_EXERCISE"
 export const ADD_EXERCISE = "ADD_EXERCISE"
 export const RECEIVE_EXERCISES = "RECEIVE_EXERCISES"
 export const DELETE_EXERCISE = "DELETE_EXERCISE"
 export const CURRENT_EXERCISE = "CURRENT_EXERCISE"
 
+
+// ACTIONS STEP
 export const INITIAL_CURRENT_STEP = "INITIAL_CURRENT_STEP"
-export const NEW_STEP = "NEW_STEP"
 export const CURRENT_STEP = "CURRENT_STEP"
 export const ADD_STEP = "ADD_STEP"
 export const DELETE_STEP = "DELETE_STEP"
@@ -29,12 +44,7 @@ export const CHANGE_POSITION = "CHANGE_POSITION"
 export const CHARGING_STEPS = "CHARGING_STEPS"
 export const ID_STEP = "ID_STEP"
 
+//OTHERS ACTIONS
 export const CHANGE_PAGE = "CHANGE_PAGE"
-
-export const LOGIN = "LOGIN"
-
-export const USER = "USER"
-
 export const CHARGED = "CHARGED"
-
 export const ERROR_LOGIN = "ERROR_LOGIN"

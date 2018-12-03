@@ -7,7 +7,7 @@ from sport_programs import app, db
 from sport_programs.models import Exercise, User, UserExercise
 from sport_programs.schemas import exercise_schema, newExercise_schema, exercises_schema, simple_exercise_schema, simple_exercises_schema
 
-@app.route("/exercises", methods=["GET"])
+@app.route("/api/exercises", methods=["GET"])
 @auth
 def list_exercises():
     exercises = Exercise.query\
@@ -17,7 +17,7 @@ def list_exercises():
 
     return simple_exercises_schema.jsonify(exercises)
 
-@app.route("/exercises/<id>", methods=["GET"])
+@app.route("/api/exercises/<id>", methods=["GET"])
 @auth
 def get_exercise(id):
     exercise = Exercise.query.filter_by(id=id).first()
@@ -27,7 +27,7 @@ def get_exercise(id):
 
     return simple_exercise_schema.jsonify(exercise)
 
-@app.route("/exercises", methods=["POST"])
+@app.route("/api/exercises", methods=["POST"])
 @auth
 def create_exercise():
     req = exercise_schema.load(request.json, session=db.session)
@@ -47,7 +47,7 @@ def create_exercise():
     return simple_exercise_schema.jsonify(req.data)
 
 
-@app.route("/exercises/<id>", methods=["DELETE"])
+@app.route("/api/exercises/<id>", methods=["DELETE"])
 @auth
 def delete_exercise(id):
     exercise = Exercise.query.filter_by(id = id).first()
@@ -69,7 +69,7 @@ def delete_exercise(id):
     return ""
 
 
-@app.route("/exercises/<id>", methods=["PUT"])
+@app.route("/api/exercises/<id>", methods=["PUT"])
 @auth
 def update_exercise(id):
     exercise = Exercise.query.filter_by(id = id).first()
