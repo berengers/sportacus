@@ -38,10 +38,6 @@ class FormStep extends React.Component{
     const { series, repetitions, rest, rest_end, weight } = this.state.step
     const { location, step, mode } = this.props
     const styleForm = "d-block form-control col-10 mx-auto text-center"
-    // const { series } = this.state
-    // console.log ("step ---> ", step)
-    // console.log ("this.props.mode ---> ", this.props.mode)
-    // console.log ("this.state ---> ", this.state)
 
     return (
       <Draggable draggableId={id} index={this.props.index} isDragDisabled={true}>
@@ -54,11 +50,11 @@ class FormStep extends React.Component{
               {...provided.dragHandleProps}
               className='bg-light text-center col-12 p-4 mb-3'
               >
-                <div onClick={this.cancelStep.bind(this)} className="btn btn-dark btn-sm col-6 col-sm-2 float-none float-sm-left">cancel</div>
-                <div onClick={this.saveStep.bind(this)} className='btn btn-success btn-sm col-6 col-sm-2 float-none float-sm-right'>ok</div>
+                <div onClick={this.cancelStep.bind(this)} className="btn btn-dark btn-sm col-6 col-sm-2 float-none float-sm-left rounded-0">cancel</div>
+                <div onClick={this.saveStep.bind(this)} className='btn btn-success btn-sm col-6 col-sm-2 float-none float-sm-right rounded-0'>ok</div>
 
                 <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{exercise.name}</p>
-                {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}} src={"http://localhost:2015/images/exercises/" + exercise.image}/></div>:''}
+                {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}} src={exercise.image}/></div>:''}
 
                 <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
                   <div className="col-6 col-md">Series

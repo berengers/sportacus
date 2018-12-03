@@ -6,14 +6,14 @@ from sport_programs.models import User, UserProgram, Program, UserExercise
 from sport_programs.schemas import user_schema, validate_user_schema, user_update_schema
 from .tools import error
 
-@app.route("/user", methods=["GET"])
+@app.route("/api/user", methods=["GET"])
 @auth
 def list_users():
     user = User.query.filter_by(id = g.user.id).first()
 
     return user_schema.jsonify(user)
 
-@app.route("/user", methods=["POST"])
+@app.route("/api/user", methods=["POST"])
 def create_user():
     user = validate_user_schema.load(request.json, session=db.session)
 
@@ -30,7 +30,7 @@ def create_user():
 
     return user_schema.jsonify(user.data)
 
-@app.route("/user", methods=["DELETE"])
+@app.route("/api/user", methods=["DELETE"])
 @auth
 def delete_user():
     id = g.user.id
@@ -53,7 +53,7 @@ def delete_user():
     return ""
 
 
-@app.route("/user/password", methods=["PUT"])
+@app.route("/api/user/password", methods=["PUT"])
 @auth
 def update_password():
     user = User.query.filter_by(id = g.user.id).first()
@@ -67,7 +67,7 @@ def update_password():
         return error("Wrong password")
 
     user.password = req.data['new_password']
-    
+
     db.session.add(user)
     db.session.commit()
 

@@ -28,7 +28,7 @@ export function fetchEditStep(id, repetitions, series, weight, rest, rest_end, p
   return dispatch => {
     authorized(dispatch, db.fetchEditStep(id, repetitions, series, weight, rest, rest_end, program_id, exercise_id))
     .then((step) => {
-      console.log ("--- EDIT STEP ---> ")
+      console.log ("--- EDIT STEP ---")
       dispatch({ type: type.EDIT_STEP, payload: { step } })
       dispatch({ type: type.PROGRAM, payload: { program_id } })
     })

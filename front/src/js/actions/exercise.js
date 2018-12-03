@@ -23,7 +23,6 @@ export function fetchExercise(id){
 }
 
 export function fetchCreateExercise(name, image, visibility){
-  console.log ("name, image, visibility ---> ", name, image, visibility)
   return dispatch => {
     authorized(dispatch, db.fetchCreateExercise(name, image, visibility))
     .then((exercise) => {
