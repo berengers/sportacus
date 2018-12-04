@@ -2,9 +2,9 @@ from flask import request, g, jsonify
 from datetime import datetime
 
 from .token import auth
-from sport_programs import app, db
-from sport_programs.models import *
-from sport_programs.schemas import program_schema, programs_schema, simple_programs_schema, simple_program_schema, get_program_nested_schema, program_nested_schema
+from sportacus import app, db
+from sportacus.models import *
+from sportacus.schemas import program_schema, programs_schema, simple_programs_schema, simple_program_schema, get_program_nested_schema, program_nested_schema
 
 @app.route("/api/programs", methods=["GET"])
 @auth

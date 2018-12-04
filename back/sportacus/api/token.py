@@ -1,8 +1,8 @@
 from flask import request, g, jsonify
 import uuid
 
-from sport_programs import app, db
-from sport_programs.models import *
+from sportacus import app, db
+from sportacus.models import *
 from .tools import error
 
 def auth(fn):

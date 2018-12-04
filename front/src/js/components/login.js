@@ -64,6 +64,19 @@ class Login extends React.Component{
             </div>
           }
         </div>
+
+        <div className="container-fluid mt-4">
+          <div className="card">
+            <div className="card-header">
+              Sportacus Login
+            </div>
+            <div className="card-body">
+              <h5 className="card-title">Email & Password</h5>
+              <p className="card-text"><strong>admin@gmail.com</strong> & <strong>admin</strong></p>
+              <a href="https://gitlab.com/berenger.salmon/sport_programs" target="_blank" className="btn btn-primary">Access to my Gitlab</a>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

@@ -18,6 +18,12 @@ class FormStep extends React.Component{
   }
   inputChange(e){
     const { name, value } = e.target
+
+    if (!Number.isInteger(parseInt(value))) {
+      alert("Use a number please")
+      return
+    }
+    
     this.setState(prevState => ({
       step: {
         ...prevState.step,
@@ -56,22 +62,27 @@ class FormStep extends React.Component{
                 <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{exercise.name}</p>
                 {exercise.image?<div><img className='item_steps mw-100' style={{maxHeight: "9rem"}} src={exercise.image}/></div>:''}
 
+                <form noValidate>
                 <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
-                  <div className="col-6 col-md">Series
+                  <div className="col-6 col-md px-0">Series
                     <input type="number" value={series} name="series" min="1" onChange={this.inputChange} className={styleForm}/>
+                    <div className="invalid-feedback">
+                      e-mail adress valid is required
+                    </div>
                   </div>
-                  <div className="col-6 col-md">Reps
+                  <div className="col-6 col-md px-0">Reps
                     <input type="number" value={repetitions} name="repetitions" min="0" onChange={this.inputChange} className={styleForm}/>
                   </div>
-                  <div className="col-6 col-md">Weight
+                  <div className="col-6 col-md px-0">Weight
                     <input type="number" value={weight} name="weight" min="0" onChange={this.inputChange} className={styleForm}/>
                   </div>
-                  <div className="col-6 col-md">Rest
+                  <div className="col-6 col-md px-0">Rest
                     <input type="number" value={rest} name="rest" min="0" onChange={this.inputChange} className={styleForm}/></div>
-                  <div className="col-12 col-md">Rest end
-                    <input type="number" value={rest_end} name="rest_end" min="0" onChange={this.inputChange} className={styleForm}/>
+                  <div className="col-12 col-md px-0">Rest end
+                    <input type="number" value={rest_end} name="rest_end" min="0" onChange={this.inputChange} className={styleForm + " col-11 "}/>
                   </div>
                 </div>
+                </form>
               </div>
             )
           }

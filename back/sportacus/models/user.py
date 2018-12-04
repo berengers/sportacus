@@ -1,7 +1,7 @@
-from sport_programs import db, ma
+from sportacus import db, ma
 from datetime import datetime
 
-from sport_programs.models import *
+from sportacus.models import *
 
 class User(db.Model):
     __tablename__ = 'user'

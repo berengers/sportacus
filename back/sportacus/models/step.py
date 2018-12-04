@@ -1,4 +1,4 @@
-from sport_programs import db, ma
+from sportacus import db, ma
 
 class Step(db.Model):
     __tablename__ = 'step'

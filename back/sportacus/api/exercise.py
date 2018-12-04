@@ -3,9 +3,9 @@ from sqlalchemy import outerjoin
 from datetime import datetime
 
 from .token import auth
-from sport_programs import app, db
-from sport_programs.models import Exercise, User, UserExercise
-from sport_programs.schemas import exercise_schema, newExercise_schema, exercises_schema, simple_exercise_schema, simple_exercises_schema
+from sportacus import app, db
+from sportacus.models import Exercise, User, UserExercise
+from sportacus.schemas import exercise_schema, newExercise_schema, exercises_schema, simple_exercise_schema, simple_exercises_schema
 
 @app.route("/api/exercises", methods=["GET"])
 @auth

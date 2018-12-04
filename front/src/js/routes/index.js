@@ -23,11 +23,16 @@ export const routesMap = {
   PROGRAM: {
     path: '/programs/program/:program_id',
     thunk: async (dispatch, getState) => {
-      const { location: { payload: { program_id } }, programs } = getState()
+      const { location: { payload: { program_id } }, programs, currentProgram } = getState()
       dispatch({ type: type.CHANGE_PAGE, payload: { page: 'Programs' } })
       dispatch({ type: type.INITIAL_CURRENT_STEP })
-      dispatch({ type: type.CHARGING_PROGRAM })
-      dispatch(fetchProgram(program_id))
+      console.log ("program_id ---> ", program_id)
+      console.log ("currentProgram.id ---> ", currentProgram.id)
+      if (parseInt(currentProgram.id) !== parseInt(program_id)) {
+        console.log("executed!!!!")
+        dispatch({ type: type.CHARGING_PROGRAM })
+        dispatch(fetchProgram(program_id))
+      }
     }
   },
   RUN_PROGRAM: {

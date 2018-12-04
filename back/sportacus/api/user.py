@@ -1,9 +1,9 @@
 from flask import request, g, jsonify
 
-from sport_programs import app, db
+from sportacus import app, db
 from .token import auth
-from sport_programs.models import User, UserProgram, Program, UserExercise
-from sport_programs.schemas import user_schema, validate_user_schema, user_update_schema
+from sportacus.models import User, UserProgram, Program, UserExercise
+from sportacus.schemas import user_schema, validate_user_schema, user_update_schema
 from .tools import error
 
 @app.route("/api/user", methods=["GET"])

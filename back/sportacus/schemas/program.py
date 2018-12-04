@@ -1,8 +1,8 @@
-from sport_programs import db, ma
+from sportacus import db, ma
 from datetime import datetime
 from marshmallow import fields
 
-from sport_programs.models import Program, Step
+from sportacus.models import Program, Step
 from .step import SimpleStepschema, ProgramStepsSchema
 
 class ProgramSchema(ma.ModelSchema):

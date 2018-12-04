@@ -1,7 +1,7 @@
-from sport_programs import db, ma
+from sportacus import db, ma
 from marshmallow import fields, Schema
 
-from sport_programs.models import Step
+from sportacus.models import Step
 from .exercise import ExerciseSchema, GetExerciseSchema
 # from .program import ProgramSchema
 

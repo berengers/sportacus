@@ -2,10 +2,10 @@ from flask import request, g, jsonify
 from sqlalchemy import desc
 
 from .token import auth
-from sport_programs import app, db
-from sport_programs.models import Program, Step, UserProgram, UserExercise
-from sport_programs.schemas import steps_schema, step_schema, simple_steps_schema, simple_step_schema
-from tools import error
+from sportacus import app, db
+from sportacus.models import Program, Step, UserProgram, UserExercise
+from sportacus.schemas import steps_schema, step_schema, simple_steps_schema, simple_step_schema
+from .tools import error
 
 @app.route('/api/steps/<id>', methods=['GET'])
 @auth

@@ -6,7 +6,6 @@ import { Draggable } from 'react-beautiful-dnd'
 import { fetchDeleteStep, editStep } from '../actions/step'
 import * as type from '../actions/const'
 import dragIcon from '../../../../back/medias/icons/baseline-drag_indicator-24px.svg'
-console.log ("dragIcon ---> ", dragIcon)
 
 class Step extends React.Component{
   constructor(props){

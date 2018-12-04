@@ -1,4 +1,4 @@
-from sport_programs import db, ma
+from sportacus import db, ma
 
 from .user import *
 from .exercise import *

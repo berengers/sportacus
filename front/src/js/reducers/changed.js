@@ -5,7 +5,7 @@ export function programChanged(state = false, action){
     case type.EDIT_STEP:
     case type.CHANGE_POSITION:
       return true
-    case type.PROGRAM:
+    case type.PROGRAMS:
     case type.UPDATE_PROGRAM:
       return false
     default:

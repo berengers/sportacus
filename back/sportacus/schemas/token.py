@@ -1,6 +1,6 @@
-from sport_programs import db, ma
+from sportacus import db, ma
 
-from sport_programs.models import Token
+from sportacus.models import Token
 
 class TokenSchema(ma.ModelSchema):
     class Meta:

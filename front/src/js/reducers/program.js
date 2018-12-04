@@ -9,12 +9,11 @@ const initialState = {
 export function currentProgram(state=initialState, action){
   switch (action.type) {
     case type.CURRENT_PROGRAM:
-      const program = {
+      return {
         id: action.payload.program.id,
         name: action.payload.program.name,
         visibility: action.payload.program.visibility
       }
-      return program
     default:
       return state
   }

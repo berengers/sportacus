@@ -1,8 +1,8 @@
-from sport_programs import db, ma
+from sportacus import db, ma
 from datetime import datetime
 from marshmallow import fields, Schema
 
-from sport_programs.models import User
+from sportacus.models import User
 
 class UserShema(ma.ModelSchema):
     class Meta:

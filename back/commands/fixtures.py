@@ -1,7 +1,7 @@
 from flask_script import Command, Option
 
-from sport_programs import db, app
-from sport_programs.models import *
+from sportacus import db, app
+from sportacus.models import *
 
 # db.reflect()
 # db.drop_all()
@@ -13,7 +13,7 @@ tokens = [
     ),
     Token(
         user_id = 2,
-        token = "token_robert"
+        token = "admin"
     ),
     Token(
         user_id = 3,
@@ -28,9 +28,9 @@ users = [
         password = 'public_pass'
     ),
     User(
-        email = 'robert@gmail.com',
-        username = 'robert',
-        password = 'robert_pass'
+        email = 'admin@gmail.com',
+        username = 'admin',
+        password = 'admin'
     ),
     User(
         email = 'tom@gmail.com',
@@ -403,7 +403,7 @@ steps = [
 class FixturesCommand(Command):
 
     option_list = (
-        Option('--url', '-url', dest='url'),
+        Option('--url', '-url', dest='url', default='http://localhost:2015/images/exercises/'),
     )
 
     def run(self, url):
