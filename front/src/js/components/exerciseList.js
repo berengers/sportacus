@@ -30,13 +30,21 @@ class ExerciseList extends React.Component{
           {location.type === "EXERCISES" &&
             exercises.filter(exercise => exercise.visibility === "PRIVATE").map(exercise => (
               <Link
-              to={`/exercises/exercise/${exercise.id}`}
+                to={`/exercises/exercise/${exercise.id}`}
                 key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
-                <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
-                {exercise.image?
-                  <img className='item-exercise mw-100' style={{maxHeight: "7rem"}} src={exercise.image} />
-                  :''
-                }
+
+                <div className="d-flex align-items-center">
+                  <div className="col-sm-8 mx-auto">
+                      <h3 className="h3 text-uppercase font-weight-bold text-truncate">{exercise.name}</h3>
+                      <small className="d-none d-sm-block text-muted text-truncate">{exercise.description}</small>
+                  </div>
+
+                  <div className="col-sm-4 d-none d-sm-flex justify-content-center" style={{overflow: "hidden"}}>
+                  {exercise.image &&
+                    <img className='' style={{height: "100px"}} src={exercise.image} />
+                  }
+                  </div>
+                </div>
               </Link>
             ))
           }
