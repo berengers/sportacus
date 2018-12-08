@@ -34,7 +34,7 @@ class ExerciseList extends React.Component{
                 key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
                 {exercise.image?
-                  <img className='item-exercise mw-100' style={{maxHeight: "10rem"}} src={exercise.image} />
+                  <img className='item-exercise mw-100' style={{maxHeight: "7rem"}} src={exercise.image} />
                   :''
                 }
               </Link>
@@ -46,11 +46,11 @@ class ExerciseList extends React.Component{
               to={`/programs/program/${location.payload.program_id}`}
                 key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
-                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "12rem"}} src={exercise.image} />:''}
+                {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "7rem"}} src={exercise.image} />:''}
               </Link>
             ))
           }
-          <Link to="/exercises/new_exercise" type="button" className="btn btn-info rounded" >
+          <Link to="/exercises/new_exercise" type="button" className="btn bg-primary text-dark text-center rounded-0 py-2" >
             NEW Exercise
           </Link>
         </div>

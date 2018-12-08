@@ -1,7 +1,7 @@
 import * as type from '../actions/const'
 
 const initialState = {
-  id: "",
+  id: 0,
   name: "",
   visibility: ""
 }

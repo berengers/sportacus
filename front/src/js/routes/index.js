@@ -31,10 +31,8 @@ export const routesMap = {
       const { location: { payload: { program_id } }, programs, currentProgram } = getState()
       dispatch({ type: type.CHANGE_PAGE, payload: { page: 'Programs' } })
       dispatch({ type: type.INITIAL_CURRENT_STEP })
-      console.log ("program_id ---> ", program_id)
-      console.log ("currentProgram.id ---> ", currentProgram.id)
-      if (parseInt(currentProgram.id) !== parseInt(program_id)) {
-        console.log("executed!!!!")
+      
+      if (currentProgram.id !== parseInt(program_id)) {
         dispatch({ type: type.CHARGING_PROGRAM })
         dispatch(fetchProgram(program_id))
       }
