@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router'
 import createHashHistory from 'history/createHashHistory'
 import thunkMiddleware from 'redux-thunk'
 import { connectRoutes } from 'redux-first-router'
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly"
 import 'bootstrap'
 
 import Login from './components/login'
@@ -28,11 +29,10 @@ const rootReducer = (state, action) => {
   return appReducer(state, action)
 }
 
-const middlewares = applyMiddleware(middleware, thunkMiddleware)
+const middlewares = composeWithDevTools(applyMiddleware(middleware, thunkMiddleware))
 const enhancers = compose(
   enhancer,
-  middlewares,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  middlewares
 )
 
 export const store = createStore(rootReducer, {}, enhancers)
