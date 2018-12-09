@@ -22,9 +22,10 @@ export function fetchExercise(id){
   }
 }
 
-export function fetchCreateExercise(name, image, visibility){
+export function fetchCreateExercise(name, image, description, visibility){
   return dispatch => {
-    authorized(dispatch, db.fetchCreateExercise(name, image, visibility))
+    console.log ("description fetch ---> ", description)
+    authorized(dispatch, db.fetchCreateExercise(name, image, description, visibility))
     .then((exercise) => {
       console.log ("--- CREATE EXERCISE ---")
       dispatch({ type: type.ADD_EXERCISE, payload: { exercise } })
@@ -33,11 +34,13 @@ export function fetchCreateExercise(name, image, visibility){
   }
 }
 
-export function fetchEditExercise(id, name, image, visibility){
+export function fetchEditExercise(id, name, image, description, visibility){
+  console.log ("description ---> ", description)
   return dispatch => {
-    authorized(dispatch, db.fetchEditExercise(id, name, image, visibility))
+    authorized(dispatch, db.fetchEditExercise(id, name, image, description, visibility))
     .then((exercise) => {
       console.log ("--- EDIT EXERCISE ---")
+      console.log ("exercise ---> ", exercise)
       dispatch({ type: type.EDIT_EXERCISE, payload: { exercise } })
       dispatch({ type: type.EXERCISES })
     })

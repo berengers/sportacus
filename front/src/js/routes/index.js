@@ -31,10 +31,15 @@ export const routesMap = {
       const { location: { payload: { program_id } }, programs, currentProgram } = getState()
       dispatch({ type: type.CHANGE_PAGE, payload: { page: 'Programs' } })
       dispatch({ type: type.INITIAL_CURRENT_STEP })
-      
+
       if (currentProgram.id !== parseInt(program_id)) {
         dispatch({ type: type.CHARGING_PROGRAM })
         dispatch(fetchProgram(program_id))
+      }
+    },
+    confirmLeave: (state, action) => {
+      if (state.programChanged) {
+        return 'Your changes are not saved, are you sure ?'
       }
     }
   },

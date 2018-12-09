@@ -29,7 +29,7 @@ class SimpleStepschema(ma.ModelSchema):
     class Meta:
         model = Step
         fields = ('id', 'series', 'repetitions', 'weight', 'rest', 'rest_end', 'position', 'exercise')
-    exercise = fields.Nested(ExerciseSchema, many=False, only=('id', 'name', 'image'))
+    exercise = fields.Nested(ExerciseSchema, many=False, only=('id', 'name', 'image', 'description'))
 
 simple_step_schema = SimpleStepschema()
 simple_steps_schema = SimpleStepschema(many=True)

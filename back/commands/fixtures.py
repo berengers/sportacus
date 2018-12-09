@@ -9,15 +9,15 @@ from sportacus.models import *
 tokens = [
     Token(
         user_id = 1,
-        token = "token_public"
+        token = "public_token"
     ),
     Token(
         user_id = 2,
-        token = "admin"
+        token = "admin_token"
     ),
     Token(
         user_id = 3,
-        token = "token_tom"
+        token = "tom_token"
     )
 ]
 
@@ -53,7 +53,7 @@ programs = [
         visibility = 'PUBLIC'
     ),
     Program(
-        name = 'Abdos --robert',
+        name = 'Abdos --admin',
         visibility = 'PRIVATE'
     ),
     Program(

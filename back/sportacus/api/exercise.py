@@ -93,6 +93,9 @@ def update_exercise(id):
     if datas.image:
         exercise.image = datas.image
 
+    if datas.description:
+        exercise.description = datas.description
+
     if datas.visibility:
         exercise.visibility = datas.visibility
 

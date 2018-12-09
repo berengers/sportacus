@@ -90,11 +90,16 @@ class RunProgram extends React.Component{
             <div key={uuidv4()} className='bg-dark text-light text-center col-12 mb-4 p-4'>
               <p>{subLevel}/{steps[level].series}</p>
               <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{step.exercise.name}</p>
-              {step.exercise.image?
-                <div><img className='item_steps mw-100' style={{maxHeight: "20rem"}}
-                src={step.exercise.image}/></div>
-                :''
-              }
+              <div className="row d-flex align-items-center text-left">
+                {step.exercise.image &&
+                  <div className="col text-center">
+                    <img className='item_steps mw-100' style={{maxHeight: "15rem"}} src={step.exercise.image}/>
+                  </div>
+                }
+                {step.exercise.description &&
+                  <div className="d-none d-sm-block col-6">{step.exercise.description}</div>
+                }
+              </div>
               <div className="row mt-4 font-weight-bold" style={{fontSize: '1.3rem'}}>
                 <div className="col-6 col-md">Series <span className="d-block badge badge-secondary p-1">{step.series}</span></div>
                   <div className="col-6 col-md">Reps <span className="d-block badge badge-secondary">{step.repetitions}</span></div>

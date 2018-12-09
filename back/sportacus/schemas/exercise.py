@@ -16,7 +16,7 @@ exercises_schema = ExerciseSchema(many=True)
 class GetExerciseSchema(ma.ModelSchema):
     class Meta:
         model = Exercise
-        fields = ('id', 'name', 'image', 'visibility')
+        fields = ('id', 'name', 'image', 'description', 'visibility')
 
 simple_exercise_schema = GetExerciseSchema()
 simple_exercises_schema = GetExerciseSchema(many=True)
@@ -24,6 +24,7 @@ simple_exercises_schema = GetExerciseSchema(many=True)
 class NewExerciseSchema(Schema):
     name = fields.String(required=True)
     image = fields.String(required=False)
+    description = fields.String(required=False)
     visibility = fields.String(required=False)
 
 newExercise_schema = NewExerciseSchema()

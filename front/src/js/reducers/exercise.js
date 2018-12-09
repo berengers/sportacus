@@ -15,7 +15,8 @@ export function exercises(state=[], action){
   }
 }
 
-const initialState = { id:0, name:"", image:"", visibility:"PRIVATE" }
+const initialState = { id:0, name:"", image:"", description:"", visibility:"PRIVATE" }
+
 export function currentExercise(state=initialState, action){
   switch (action.type) {
     case type.CURRENT_EXERCISE:
