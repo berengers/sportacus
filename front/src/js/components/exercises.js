@@ -6,33 +6,24 @@ import uuidv4 from 'uuid/v4'
 import ExerciseList from './exerciseList'
 import FormExercise from './formExercise'
 
-class Exercises extends React.Component{
-  constructor(props){
-    super(props)
-
-    this.scenes = {
-      'EXERCISES':    <ExerciseList />,
-      'EXERCISE':     <FormExercise mode="edit"/>,
-      'NEW_EXERCISE': <FormExercise mode="add"/>
-    }
-  }
-  render(){
-    const { location } = this.props
-
-    return(
-      <div className='row no-gutters p-3 col-md-10 col-xl-8 mx-auto'>
-        {
-          this.scenes[location.type]
-        }
-      </div>
-    )
-  }
+const scenes = {
+  'EXERCISES': <ExerciseList />,
+  'EXERCISE': <FormExercise mode="edit" />,
+  'NEW_EXERCISE': <FormExercise mode="add" />
 }
 
-const mapStateToProps = (state) => {
-  return {
-    location: state.location
-  }
+
+const Exercises = ({ location }) => {
+
+  return(
+    <div className='row no-gutters p-3 col-md-10 col-xl-8 mx-auto'>
+      {
+        scenes[location.type]
+      }
+    </div>
+  )
 }
+
+const mapStateToProps = ({ location }) => ({ location })
 
 export default connect(mapStateToProps)(Exercises)
