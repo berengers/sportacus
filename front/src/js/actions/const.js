@@ -13,6 +13,7 @@ export const NEW_EXERCISE = "NEW_EXERCISE"
 export const PROGRAM_EDITOR = "PROGRAM_EDITOR"
 export const USER = "USER"
 export const LOGIN = "LOGIN"
+export const REGISTER = "REGISTER"
 export const LOGOUT = "LOGOUT"
 
 
@@ -44,7 +45,10 @@ export const CHANGE_POSITION = "CHANGE_POSITION"
 export const CHARGING_STEPS = "CHARGING_STEPS"
 export const ID_STEP = "ID_STEP"
 
+// ERRORS
+export const ERROR_LOGIN = "ERROR_LOGIN"
+export const ERROR_REGISTER = "ERROR_REGISTER"
+
 //OTHERS ACTIONS
 export const CHANGE_PAGE = "CHANGE_PAGE"
 export const CHARGED = "CHARGED"
-export const ERROR_LOGIN = "ERROR_LOGIN"

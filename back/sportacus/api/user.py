@@ -20,10 +20,14 @@ def create_user():
     if len(user.errors) > 0 :
         return jsonify(user.errors), 404
 
-    user_exist = User.query.filter((User.email == user.data.email) | (User.username == user.data.username)).first()
+    email_exist = User.query.filter(User.email == user.data.email).first()
+    username_exist = User.query.filter(User.username == user.data.username).first()
 
-    if user_exist:
-        return error("User already exist"), 403
+    if email_exist:
+        return error("Email already exist"), 403
+
+    if username_exist:
+        return error("Username already exist"), 403
 
     db.session.add(user.data)
     db.session.commit()

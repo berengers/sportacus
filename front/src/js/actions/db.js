@@ -72,6 +72,20 @@ class DB{
     )
     .then(this._status)
   }
+  fetchCreateUser(email, username, password){
+    return fetch(
+      this.url + '/user',
+      {
+        method: "POST",
+        headers: this._headers(),
+        body: JSON.stringify({
+          "email": email,
+          "username": username,
+          "password": password
+        })
+      }
+    )
+  }
   fetchPrograms(){
     return fetch(
       this.url + '/programs',

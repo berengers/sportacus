@@ -96,6 +96,7 @@ export const routesMap = {
       dispatch({ type: type.CHANGE_PAGE, payload: { page: 'Login' } })
     }
   },
+  REGISTER: '/register',
   LOGOUT: {
     path: '/logout',
     thunk: (dispatch) => {
