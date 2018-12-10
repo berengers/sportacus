@@ -15,7 +15,9 @@ users_schema = UserShema(many=True)
 class ValidateUserSchema(ma.ModelSchema):
     class Meta:
         model = User
-    email = fields.Email()
+    email = fields.Email(required=True)
+    username = fields.String(required=True, validate=lambda n:1 <= len(n) <= 80)
+    password = fields.String(required=True, validate=lambda n:7 <= len(n) <= 80)
 
 validate_user_schema = ValidateUserSchema()
 

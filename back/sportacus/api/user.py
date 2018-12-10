@@ -38,8 +38,6 @@ def delete_user():
     programss = UserProgram.query.filter_by(user_id = id).all()
     exercisess = UserExercise.query.filter_by(user_id = id).all()
 
-    # if not user:
-    #     return error("This user don't exist"), 404
 
     for exercise in exercisess:
         db.session.delete(exercise)
