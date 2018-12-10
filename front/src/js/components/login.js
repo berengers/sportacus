@@ -3,13 +3,18 @@ import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
 import { fetchToken } from '../actions/login'
+import * as type from '../actions/const'
 
 
 class Login extends React.Component{
   constructor(props){
     super(props)
 
-    this.state = { email : '', password : '', validate: '' }
+    this.state = {
+      email : this.props.user.email,
+      password : '',
+      validate: ''
+    }
     this.handleClick = this.handleClick.bind(this)
   }
   changeInput(e){
@@ -28,11 +33,15 @@ class Login extends React.Component{
     this.props.login(email, password)
   }
   render(){
-    const { error } = this.props
+    const { user, error } = this.props
+    const { email, password } = this.state
 
     return (
       <div className='mx-auto' style={{maxWidth: "450px"}}>
         <div className='container-fluid mt-5'>
+          {user.email.length > 0 &&
+            <div className="alert alert-success">Your account was created</div>
+          }
           <form className={'bg-dark-grey text-light rounded p-3 ' + this.state.validate} noValidate>
             <div className='form-group'>
               <label>Email Adress</label>
@@ -40,18 +49,15 @@ class Login extends React.Component{
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="inputGroupPrepend">@</span>
                 </div>
-                <input onChange={this.changeInput.bind(this)} name='email' type='email' className='form-control' placeholder='email' autoFocus required/>
+                <input onChange={this.changeInput.bind(this)} value={email} name='email' type='email' className='form-control' placeholder='email' autoFocus required/>
                 <div className="invalid-feedback">
                   e-mail adress valid is required
                 </div>
               </div>
-              <div className='valid-feedback'>
-                Looks good
-              </div>
             </div>
             <div className='form-group'>
               <label>Password</label>
-              <input onChange={this.changeInput.bind(this)} name='password' className='form-control' placeholder='password' required/>
+              <input onChange={this.changeInput.bind(this)} value={password} name='password' className='form-control' placeholder='password' required/>
               <div className="invalid-feedback">
                 password is required
               </div>
@@ -63,19 +69,9 @@ class Login extends React.Component{
               Wrong email or password
             </div>
           }
-        </div>
-
-        <div className="container-fluid mt-4">
-          <div className="card">
-            <div className="card-header">
-              Sportacus Login
-            </div>
-            <div className="card-body">
-              <h5 className="card-title">Email & Password</h5>
-              <p className="card-text"><strong>admin@gmail.com</strong> & <strong>admin</strong></p>
-              <a href="https://gitlab.com/berenger.salmon/sport_programs" target="_blank" className="btn btn-primary">Access to my Gitlab</a>
-            </div>
-          </div>
+          <Link to="/register" className="btn btn-primary btn-sm col-12 mt-3">
+            Create an account
+          </Link>
         </div>
       </div>
     )
@@ -83,12 +79,13 @@ class Login extends React.Component{
 }
 const mapStateToProps = state => {
   return {
+    user: state.user,
     error: state.error
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    login : (username, password) => {dispatch(fetchToken(username, password))}
+    login : (username, password) => { dispatch(fetchToken(username, password)) }
   }
 }
 

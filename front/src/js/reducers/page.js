@@ -3,11 +3,12 @@ import { NOT_FOUND } from 'redux-first-router'
 import * as type from '../actions/const'
 
 const components = {
+  LOGIN:          'Login',
+  REGISTER:       'Register',
   PROGRAMS:       'Programs',
   EXERCISES:      'Exercises',
   EXERCISE:       'Exercises',
   NEW_EXERCISE:   'Exercises',
-  LOGIN:          'Login',
   [NOT_FOUND]:    'NotFound'
 }
 
@@ -19,6 +20,8 @@ export default function(state = 'Programs', action = {}){
       return 'Not-Found'
     case type.CHANGE_PAGE:
       return action.payload.page
+    case type.LOGIN:
+    case type.REGISTER:
     case type.PROGRAMS:
     case type.EXERCISES:
     case type.EXERCISE:
