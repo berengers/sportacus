@@ -1,5 +1,9 @@
-node_modules
-/dist
-env
-front/dist
+
+# BACK
+env/
 *.pyc
+
+#FRONT
+front/node_modules/
+front/dist/
+front/package-lock.json
