@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 import Link from 'redux-first-router-link'
@@ -71,11 +72,12 @@ class ProgramList extends React.Component{
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    programs : state.programs
-  }
+ProgramList.propTypes = {
+  programs: PropTypes.array.isRequired
 }
+
+const mapStateToProps = ({ programs }) => ({ programs })
+
 const mapDispatchToProps = dispatch => {
   return {
     createProgram: (name, visibility) => { dispatch(fetchCreateProgram(name, visibility)) }

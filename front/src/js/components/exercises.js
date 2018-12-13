@@ -1,8 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
 
-// import '../../css/app.scss'
 import ExerciseList from './exerciseList'
 import FormExercise from './formExercise'
 
@@ -22,6 +22,10 @@ const Exercises = ({ location }) => {
       }
     </div>
   )
+}
+
+Exercises.propTypes = {
+  location: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ location }) => ({ location })

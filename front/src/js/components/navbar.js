@@ -1,10 +1,7 @@
 import React from 'react'
 import Link, { NavLink } from 'redux-first-router-link'
-import { connect } from 'react-redux'
 
-import { logout } from '../actions/login'
-
-const NavBar = ({ pathname }) => {
+const NavBar = () => {
  
   return (
     <nav className='navbar navbar-expand-sm navbar-light bg-primary'>
@@ -15,10 +12,10 @@ const NavBar = ({ pathname }) => {
 
       <div className='collapse navbar-collapse' id='navBarSupportedContent'>
         <ul className='navbar-nav mr-auto'>
-          <li className={'nav-item' + ' ' + (pathname=='/'|| pathname=='/'?'active':'')}>
+          <li className='nav-item'>
             <NavLink activeClassName='active' className='nav-link' to='/programs'>PROGRAMS</NavLink>
           </li>
-          <li className={'nav-item' + ' ' + (pathname=='/program_editor'?'active':'')}>
+          <li className='nav-item'>
             <NavLink activeClassName='active' className='nav-link' to='/exercises'>EXERCISES</NavLink>
           </li>
         </ul>

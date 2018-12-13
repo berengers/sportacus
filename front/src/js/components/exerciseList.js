@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import uuidv4 from 'uuid/v4'
 import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
@@ -67,13 +68,14 @@ class ExerciseList extends React.Component{
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    location: state.location,
-    exercises: state.exercises,
-    program: state.currentProgram
-  }
+ExerciseList.propTypes = {
+  location: PropTypes.object.isRequired,
+  exercises: PropTypes.array.isRequired,
+  program: PropTypes.object.isRequired
 }
+
+const mapStateToProps = ({ location, exercises, currentProgram }) => ({ location, exercises, program: currentProgram })
+
 const mapDispatchToProps = dispatch => {
   return {
     createStep: (program_id, exercise_id) => dispatch(fetchCreateStep(program_id, exercise_id))

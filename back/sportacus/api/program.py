@@ -2,6 +2,7 @@ from flask import request, g, jsonify
 from datetime import datetime
 
 from .token import auth
+from .tools import error
 from sportacus import app, db
 from sportacus.models import *
 from sportacus.schemas import program_schema, programs_schema, simple_programs_schema, simple_program_schema, get_program_nested_schema, program_nested_schema
@@ -16,19 +17,6 @@ def list_programs():
 
     return simple_programs_schema.jsonify(programs)
 
-# @app.route("/programs/<program_id>", methods=["GET"])
-# @auth
-# def get_program_nested(program_id):
-#     program = Program.query.filter_by(id=program_id).first()
-#
-#     # program = Program.query\
-#     # .join(Step, Program.id == Step.program_id )\
-#     # .filter_by(id=program_id).first()
-#
-#     if not program:
-#         return jsonify({ "error": "No program to this id" })
-#
-#     return simple_program_schema.jsonify(program)
 
 @app.route('/api/programs/<program_id>', methods=['GET'])
 @auth
@@ -37,7 +25,7 @@ def get_program(program_id):
     program = Program.query.filter_by(id=program_id).first()
 
     if not program:
-        return error("Not steps at this id"), 404
+        return error("Not program at this id"), 404
 
     program.steps = sorted(program.steps, key=lambda k: k.position)
 

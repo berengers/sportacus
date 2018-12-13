@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
@@ -29,7 +30,11 @@ const App = ({ page }) => {
     </React.Fragment>
     )
 }
-  
+
+App.propTypes = {
+  page: PropTypes.string.isRequired
+}
+
 
 const mapStateToProps = ({ page }) => ({ page })
 

@@ -1,6 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import uuidv4 from 'uuid/v4'
 import Link from 'redux-first-router-link'
 import beep from '../../../../back/medias/sounds/beep.mp3'
 import finalBeep from '../../../../back/medias/sounds/finalBeep.mp3'
@@ -87,7 +87,7 @@ class RunProgram extends React.Component{
         </div>
         {steps.length > 0 &&
           <React.Fragment>
-            <div key={uuidv4()} className='bg-dark text-light text-center col-12 mb-4 p-4'>
+            <div className='bg-dark text-light text-center col-12 mb-4 p-4'>
               <p>{subLevel}/{steps[level].series}</p>
               <p className="text-capitalize font-weight-bold" style={{fontSize: "1.8em"}}>{step.exercise.name}</p>
               <div className="row d-flex align-items-center text-left">
@@ -138,11 +138,15 @@ class RunProgram extends React.Component{
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    program: state.currentProgram,
-    steps: state.steps
-  }
+RunProgram.propTypes = {
+  program: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    visibility: PropTypes.string.isRequired
+  }),
+  steps: PropTypes.array.isRequired
 }
+
+const mapStateToProps = ({ currentProgram, steps }) => ({ program: currentProgram, steps })
 
 export default connect(mapStateToProps)(RunProgram)

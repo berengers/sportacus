@@ -1,6 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import uuidv4 from 'uuid/v4'
 
 import Program from './program'
 import ProgramList from './programList'
@@ -23,6 +23,10 @@ const Programs = ({ location }) => {
       }
     </div>
   )
+}
+
+Programs.propTypes = {
+  location: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ location }) => ({ location })

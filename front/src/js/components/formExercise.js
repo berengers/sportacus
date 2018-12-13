@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
@@ -78,11 +79,18 @@ class FormExercise extends React.Component{
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    exercise: state.currentExercise
-  }
+FormExercise.propTypes = {
+  exercise: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    visibility: PropTypes.string.isRequired
+  })
 }
+
+const mapStateToProps = ({ currentExercise }) => ({ exercise: currentExercise })
+
 const mapDispatchToProps = dispatch => {
   return {
     createExercise: (...args) => { dispatch(fetchCreateExercise(...args)) },

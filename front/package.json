@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
+    "tests": "jest",
     "mobile": "webpack-dev-server --mode development --disable-host-check --host 0.0.0.0",
     "build": "webpack --mode production"
   },
@@ -23,6 +24,7 @@
     "css-loader": "^0.28.11",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
     "style-loader": "^0.20.3",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.0",
@@ -38,6 +40,7 @@
     "popper.js": "^1.14.4",
     "postcss-loader": "^3.0.0",
     "precss": "^3.1.2",
+    "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-beautiful-dnd": "^10.0.0",
     "react-dom": "^16.5.2",

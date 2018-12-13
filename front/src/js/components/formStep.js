@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'redux-first-router-link'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Draggable } from 'react-beautiful-dnd'
 
@@ -92,11 +92,11 @@ class FormStep extends React.Component{
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    location: state.location
-  }
+FormStep.propTypes = {
+  location: PropTypes.object.isRequired
 }
+
+const mapStateToProps = ({ location }) => ({ location })
 
 const mapDispatchToProps = dispatch => {
   return {
