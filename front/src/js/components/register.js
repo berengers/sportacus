@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import  Link from 'redux-first-router-link'
 
@@ -84,6 +85,10 @@ class Register extends React.Component{
       </div>
     )
   }
+}
+
+Register.propTypes = {
+  error: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ error }) => ({ error })

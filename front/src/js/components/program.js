@@ -1,6 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import uuidv4 from 'uuid/v4'
 import Link from 'redux-first-router-link'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
@@ -86,6 +86,19 @@ const Program = (props) => {
 
     </div>
   )
+}
+
+Program.propTypes = {
+  location: PropTypes.object,
+  program: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    visibility: PropTypes.string.isRequired
+  }),
+  steps: PropTypes.array.isRequired,
+  charging: PropTypes.bool.isRequired,
+  editStep: PropTypes.number.isRequired,
+  programChanged: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => {

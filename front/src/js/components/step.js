@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'redux-first-router-link'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Draggable } from 'react-beautiful-dnd'
 
@@ -60,6 +60,16 @@ const Step = (props) => {
       }
     </Draggable>
   )
+}
+
+Step.propType = {
+  location: PropTypes.object.isRequired,
+  editingStep: PropTypes.string.isRequired,
+  program: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    visibility: PropTypes.string.isRequired
+  })
 }
 
 const mapStateToProps = ({ location, editStep, currentProgram }) => ({ location, editingStep: editStep, program: currentProgram })

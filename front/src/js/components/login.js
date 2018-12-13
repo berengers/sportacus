@@ -1,9 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
 import { fetchToken } from '../actions/login'
-import * as type from '../actions/const'
 
 
 class Login extends React.Component{
@@ -77,12 +77,17 @@ class Login extends React.Component{
     )
   }
 }
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-    error: state.error
-  }
+
+Login.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired
+  }),
+  error: PropTypes.string.isRequired
 }
+
+const mapStateToProps = ({ user, error }) => ({ user, error })
+
 const mapDispatchToProps = dispatch => {
   return {
     login : (username, password) => { dispatch(fetchToken(username, password)) }
