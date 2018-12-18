@@ -57,7 +57,7 @@ class Login extends React.Component{
             </div>
             <div className='form-group'>
               <label>Password</label>
-              <input onChange={this.changeInput.bind(this)} value={password} name='password' className='form-control' placeholder='password' required/>
+              <input onChange={this.changeInput.bind(this)} value={password} name='password' type='password' className='form-control' placeholder='password' required/>
               <div className="invalid-feedback">
                 password is required
               </div>
@@ -73,6 +73,18 @@ class Login extends React.Component{
             Create an account
           </Link>
         </div>
+
+        <div className="container-fluid mt-4">
+          <div className="card">
+            <div className="card-header">
+              Sportacus Project
+            </div>
+            <div className="card-body">
+              <a href="https://gitlab.com/berenger.salmon/sport_programs" target="_blank" className="btn btn-primary">Access to my Gitlab</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     )
   }
