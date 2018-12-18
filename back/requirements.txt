@@ -7,3 +7,4 @@ flask_cors
 flask_env
 marshmallow-sqlalchemy
 psycopg2
+psycopg2-binary
