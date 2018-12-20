@@ -32,7 +32,7 @@ class ExerciseList extends React.Component{
             exercises.filter(exercise => exercise.visibility === "PRIVATE").map(exercise => (
               <Link
                 to={`/exercises/exercise/${exercise.id}`}
-                key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
+                key={uuidv4()} className='btn btn-dark rounded mb-2 p-2'>
 
                 <div className="d-flex align-items-center">
                   <div className="col-sm-8 mx-auto">

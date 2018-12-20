@@ -18,12 +18,10 @@ export function fetchPrograms() {
 
 export function fetchProgram(program_id){
   return dispatch => {
-    // dispatch({ type: "SELECT_PROGRAM", payload: { program_id } })
     authorized(dispatch, db.fetchProgram(program_id))
     .then((program) => {
       console.log ("--- GOT PROGRAM ---")
       dispatch({ type: type.CURRENT_PROGRAM, payload: { program } })
-      dispatch({ type: type.CHARGED })
     })
   }
 }

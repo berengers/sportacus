@@ -22,7 +22,7 @@ export const CURRENT_PROGRAM = "CURRENT_PROGRAM"
 export const RECEIVE_PROGRAMS = "RECEIVE_PROGRAMS"
 export const ADD_PROGRAM = "ADD_PROGRAM"
 export const SELECT_PROGRAM = 'SELECT_PROGRAM'
-export const CHARGING_PROGRAM = "CHARGING_PROGRAM"
+export const LOADING_PROGRAM = "LOADING_PROGRAM"
 export const UPDATE_PROGRAM = "UPDATE_PROGRAM"
 
 
@@ -42,7 +42,7 @@ export const ADD_STEP = "ADD_STEP"
 export const DELETE_STEP = "DELETE_STEP"
 export const EDIT_STEP = "EDIT_STEP"
 export const CHANGE_POSITION = "CHANGE_POSITION"
-export const CHARGING_STEPS = "CHARGING_STEPS"
+export const LOADING_STEPS = "LOADING_STEPS"
 export const ID_STEP = "ID_STEP"
 
 // ERRORS
@@ -51,4 +51,5 @@ export const ERROR_REGISTER = "ERROR_REGISTER"
 
 //OTHERS ACTIONS
 export const CHANGE_PAGE = "CHANGE_PAGE"
+export const LOADING = "LOADING"
 export const CHARGED = "CHARGED"

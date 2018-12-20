@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Link from 'redux-first-router-link'
 
 import { fetchCreateExercise, fetchEditExercise, fetchDeleteExercise } from '../actions/exercise'
+import loadingGif from '../../../../back/medias/icons/loading.gif'
 
 class FormExercise extends React.Component{
   constructor(props){
@@ -32,27 +33,49 @@ class FormExercise extends React.Component{
   deleteExercice(){
     this.props.deleteExercice(this.props.exercise.id)
   }
-  componentDidUpdate(prevProps, prevState){
-    const prevExercise = prevProps.exercise
-    const { exercise } = this.props
-    if (prevExercise.name.length == 0 && exercise.name.length > 0) {
-      this.setState({
-        id: exercise.id,
-        name: exercise.name,
-        image: exercise.image,
-        description: exercise.description,
-        visibility: exercise.visibility
-      })
+  static getDerivedStateFromProps(props, state){
+    const { id, name, image, description, visibility } = props.exercise
+
+    if (props.exercise.id != state.id) {
+      return {
+        name: name,
+        image: image,
+        description: description,
+        visibility: visibility
+      }
     }
+
+    return null
   }
+  // componentDidUpdate(prevProps, prevState){
+  //   const prevExercise = prevProps.exercise
+  //   const { exercise } = this.props
+  //   if (prevExercise.name.length == 0 && exercise.name.length > 0) {
+  //     this.setState({
+  //       id: exercise.id,
+  //       name: exercise.name,
+  //       image: exercise.image,
+  //       description: exercise.description,
+  //       visibility: exercise.visibility
+  //     })
+  //   }
+  // }
   render(){
     const { name, image, description, visibility } = this.state
-    const { mode } = this.props
+    const { mode, loading } = this.props
 
     return (
       <React.Fragment>
         <Link to="/exercises" className="btn btn-info btn-sm mb-3">← Back to Exercises</Link>
         <div className="col-12 bg-dark text-light p-3 border">
+        {loading?
+          <div>
+            <img className="d-block mx-auto my-5" width="100px" src={loadingGif} />
+          </div>
+
+          :
+
+          <React.Fragment>
           {mode === "edit" &&
             <div onClick={this.deleteExercice.bind(this)} className="btn btn-danger btn-sm float-right">delete</div>
           }
@@ -73,6 +96,8 @@ class FormExercise extends React.Component{
           </div>
           <button onClick={this.saveExercise.bind(this)} className="btn btn-info float-left" type="submit">Save Exercise</button>
           <Link to="/exercises" className="btn btn-secondary float-right">Cancel</Link>
+          </React.Fragment>
+        }
         </div>
       </React.Fragment>
     )
@@ -89,7 +114,7 @@ FormExercise.propTypes = {
   })
 }
 
-const mapStateToProps = ({ currentExercise }) => ({ exercise: currentExercise })
+const mapStateToProps = ({ currentExercise, loading }) => ({ exercise: currentExercise, loading })
 
 const mapDispatchToProps = dispatch => {
   return {

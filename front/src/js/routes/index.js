@@ -23,7 +23,10 @@ export const routesMap = {
   },
   PROGRAMS: {
     path: '/programs',
-    thunk: fetchPrograms()
+    thunk: (dispatch) => {
+      dispatch({ type: type.LOADING })
+      dispatch(fetchPrograms())
+    }
   },
   PROGRAM: {
     path: '/programs/program/:program_id',
@@ -33,7 +36,7 @@ export const routesMap = {
       dispatch({ type: type.INITIAL_CURRENT_STEP })
 
       if (currentProgram.id !== parseInt(program_id)) {
-        dispatch({ type: type.CHARGING_PROGRAM })
+        dispatch({ type: type.LOADING })
         dispatch(fetchProgram(program_id))
       }
     },
@@ -83,6 +86,7 @@ export const routesMap = {
       if (exercises.length > 0) {
         dispatch({ type: type.CURRENT_EXERCISE, payload: { exercise } })
       } else {
+        dispatch({ type: type.LOADING })
         dispatch(fetchExercise(id))
       }
     }

@@ -8,12 +8,12 @@ import Step from './step'
 import FormStep from './formStep'
 import * as type from '../actions/const'
 import { fetchUpdateProgram } from '../actions/program'
-import loading from '../../../../back/medias/icons/loading.gif'
+import loadingGif from '../../../../back/medias/icons/loading.gif'
 
 
 
 const Program = (props) => {
-  const { dispatch, location, program, steps, charging, editStep, programChanged } = props
+  const { dispatch, program, steps, loading, editStep, programChanged } = props
   const mode = program.visibility === "PUBLIC"? "read":"edit"
   
   const order = (list, indexSource, indexDestinatioin) => {
@@ -41,10 +41,10 @@ const Program = (props) => {
         {programChanged &&
           <a className={"btn btn-success col-12 text-light" + (editStep > -1?" disabled":"")} onClick={ () => updateProgram()}>SAVE CHANGES</a>
         }
-        {charging?
+        {loading?
           <img
           className="d-block mx-auto mt-5" width="100px"
-          src={loading} />
+          src={loadingGif} />
           :
           <React.Fragment>
           <DragDropContext onDragEnd={ (r) => {onDragEnd(r)} }>
@@ -89,24 +89,22 @@ const Program = (props) => {
 }
 
 Program.propTypes = {
-  location: PropTypes.object,
   program: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     visibility: PropTypes.string.isRequired
   }),
   steps: PropTypes.array.isRequired,
-  charging: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   editStep: PropTypes.number.isRequired,
   programChanged: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    location: state.location,
     program: state.currentProgram,
     steps: state.steps,
-    charging: state.charging,
+    loading: state.loading,
     editStep: state.editStep,
     programChanged: state.programChanged
   }
