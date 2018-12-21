@@ -16,9 +16,9 @@ const Program = (props) => {
   const { dispatch, program, steps, loading, editStep, programChanged } = props
   const mode = program.visibility === "PUBLIC"? "read":"edit"
   
-  const order = (list, indexSource, indexDestinatioin) => {
+  const order = (list, indexSource, indexDestination) => {
     const [itemMoved] = list.splice(indexSource, 1)
-    list.splice(indexDestinatioin, 0, itemMoved)
+    list.splice(indexDestination, 0, itemMoved)
     return list
   }
   const onDragEnd = (result) => {
