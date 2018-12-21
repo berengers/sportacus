@@ -47,19 +47,6 @@ class FormExercise extends React.Component{
 
     return null
   }
-  // componentDidUpdate(prevProps, prevState){
-  //   const prevExercise = prevProps.exercise
-  //   const { exercise } = this.props
-  //   if (prevExercise.name.length == 0 && exercise.name.length > 0) {
-  //     this.setState({
-  //       id: exercise.id,
-  //       name: exercise.name,
-  //       image: exercise.image,
-  //       description: exercise.description,
-  //       visibility: exercise.visibility
-  //     })
-  //   }
-  // }
   render(){
     const { name, image, description, visibility } = this.state
     const { mode, loading } = this.props
