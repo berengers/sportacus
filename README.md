@@ -8,7 +8,7 @@ To install this application on your desktop, you will need to have npm, pip, vir
 
 Start by cloning the project:
 ```
-git clone git@gitlab.com:berenger.salmon/sport_programs.git
+git clone git@github.com:berengers/sportacus.git
 ```
 
 
@@ -23,7 +23,7 @@ docker run -d --net host -e POSTGRES_PASSWORD=GREATPASS postgres
 You need to create a dev env folder in back to make it work :
 
 ```
-cd sport_programs/back/
+cd sportacus/back/
 virtualenv env -p python3
 ```
 
