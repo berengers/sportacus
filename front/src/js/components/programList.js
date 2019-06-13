@@ -34,26 +34,26 @@ class ProgramList extends React.Component{
          <React.Fragment>
           {programs.filter(p => p.visibility === 'PRIVATE').length > 0 &&
             <React.Fragment>
-            <h4 className="text-light">PRIVATE</h4>
-            <div className="list-group mb-3">
-              {
-                programs.filter(p => p.visibility === "PRIVATE").map(program => (
-                  <Link to={`/programs/program/${program.id}`} key={uuidv4()}
-                  className="btn btn-dark-grey py-2 font-weight-bold text-left pl-4 text-truncate rounded-0 mb-1"
-                  style={{fontSize: "1.5rem"}}
-                  >
-                    {program.name}
-                  </Link>
-                ))
-              }
-            </div>
+              <h4 className="text-light">PRIVATE</h4>
+              <div className="list-group mb-3">
+                {
+                  programs.filter(p => p.visibility === "PRIVATE").map(program => (
+                    <Link to={`/programs/program/${program.id}`} key={program.id}
+                    className="btn btn-dark-grey py-2 font-weight-bold text-left pl-4 text-truncate rounded-0 mb-1"
+                    style={{fontSize: "1.5rem"}}
+                    >
+                      {program.name}
+                    </Link>
+                  ))
+                }
+              </div>
             </React.Fragment>
           }
           <h4 className="text-light">PUBLIC</h4>
           <div className="list-group mb-3">
           {
             programs.filter(p => p.visibility === "PUBLIC").map( program => (
-              <Link to={`/programs/program/${program.id}`} key={uuidv4()}
+              <Link to={`/programs/program/${program.id}`} key={program.id}
               className="btn btn-dark-grey py-2 font-weight-bold text-left pl-4 text-truncate rounded-0 mb-1"
               style={{fontSize: "1.5rem"}}
               >

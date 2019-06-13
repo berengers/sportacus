@@ -32,7 +32,7 @@ class ExerciseList extends React.Component{
             exercises.filter(exercise => exercise.visibility === "PRIVATE").map(exercise => (
               <Link
                 to={`/exercises/exercise/${exercise.id}`}
-                key={uuidv4()} className='btn btn-dark rounded mb-2 p-2'>
+                key={exercise.id} className='btn btn-dark rounded mb-2 p-2'>
 
                 <div className="d-flex align-items-center">
                   <div className="col-sm-8 mx-auto">
@@ -53,7 +53,7 @@ class ExerciseList extends React.Component{
             exercises.map(exercise => (
               <Link
               to={`/programs/program/${location.payload.program_id}`}
-                key={uuidv4()} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
+                key={exercise.id} className='btn btn-dark rounded mb-2 p-2' onClick={this.createStep.bind(this, exercise)}>
                 <div className='text-uppercase text-center text-truncate w-100 mb-2 font-weight-bold'>{exercise.name}</div>
                 {exercise.image? <img className='item-exercise mw-100' style={{maxHeight: "7rem"}} src={exercise.image} />:''}
               </Link>
