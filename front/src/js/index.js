@@ -2,14 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { combineReducers, applyMiddleware, createStore, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { Route, Switch } from 'react-router'
-import createHashHistory from 'history/createHashHistory'
+import { createHashHistory } from 'history'
 import thunkMiddleware from 'redux-thunk'
 import { connectRoutes } from 'redux-first-router'
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly"
 import 'bootstrap'
 
-import Login from './components/login'
 import App from './components/app'
 import * as reducers from './reducers'
 import { routesMap } from './routes'
