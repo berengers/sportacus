@@ -80,7 +80,7 @@ class Login extends React.Component{
               Sportacus Project
             </div>
             <div className="card-body">
-              <a href="https://gitlab.com/berenger.salmon/sport_programs" target="_blank" className="btn btn-primary">Access to my Gitlab</a>
+              <a href="https://github.com/berengers/sportacus" target="_blank" className="btn btn-primary">Access to my Github</a>
             </div>
           </div>
         </div>
